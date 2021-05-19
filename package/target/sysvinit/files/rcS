@@ -26,6 +26,12 @@ export PATH runlevel prevlevel
 #
 trap ":" INT QUIT TSTP
 
+
+# automatic restore
+if [ -e /var/backup_flash.tar.gz ]; then
+	/usr/bin/restore_flash.sh
+fi
+
 #
 #	Call all parts in order.
 #
