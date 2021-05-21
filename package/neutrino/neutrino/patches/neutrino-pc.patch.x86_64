@@ -1,0 +1,72 @@
+diff --git a/data/control/movieplayer.end b/data/control/movieplayer.end
+index db808d1a9..878009464 100755
+--- a/data/control/movieplayer.end
++++ b/data/control/movieplayer.end
+@@ -2,7 +2,5 @@
+ 
+ echo "Movieplayer wird beendet"
+ 
+-service tuxcald start
+-service tuxmaild start
+ 
+ exit 0
+diff --git a/data/control/movieplayer.start b/data/control/movieplayer.start
+index 2058541dc..9642fc212 100755
+--- a/data/control/movieplayer.start
++++ b/data/control/movieplayer.start
+@@ -2,7 +2,5 @@
+ 
+ echo "Movieplayer wird gestartet"
+ 
+-service tuxcald stop
+-service tuxmaild stop
+ 
+ exit 0
+diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
+index 859942701..af6504741 100644
+--- a/src/eitd/sectionsd.cpp
++++ b/src/eitd/sectionsd.cpp
+@@ -1505,7 +1505,7 @@ void CTimeThread::run()
+ 		dvb_time = 0;
+ 		timediff = 0;
+ 
+-		if (ntpenable && system( ntp_system_cmd.c_str() ) == 0) {
++		if (ntpenable /*&& system( ntp_system_cmd.c_str() ) == 0*/) {
+ 			time_ntp = true;
+ 			success = true;
+ 		} else if (dvb_time_update) {
+diff --git a/src/neutrino.cpp b/src/neutrino.cpp
+index 692fda09e..dc313d9fb 100644
+--- a/src/neutrino.cpp
++++ b/src/neutrino.cpp
+@@ -753,7 +753,7 @@ int CNeutrinoApp::loadSetup(const char * fname)
+ 	std::string timeshiftDir;
+ 	if(g_settings.timeshiftdir.empty()) {
+ 		timeshiftDir = g_settings.network_nfs_recordingdir + "/.timeshift";
+-		safe_mkdir(timeshiftDir.c_str());
++		//safe_mkdir(timeshiftDir.c_str());
+ 	} else {
+ 		if(g_settings.timeshiftdir != g_settings.network_nfs_recordingdir)
+ 			timeshiftDir = g_settings.timeshiftdir;
+@@ -3024,9 +3024,9 @@ TIMER_START();
+ 
+ 	InitZapper();
+ 
+-	CHDDDestExec * hdd = new CHDDDestExec();
+-	hdd->exec(NULL, "");
+-	delete hdd;
++	//CHDDDestExec * hdd = new CHDDDestExec();
++	//hdd->exec(NULL, "");
++	//delete hdd;
+ 
+ 	hintBox->hide(); // InitZapper also displays a hintbox
+ 	delete hintBox;
+@@ -5367,7 +5367,7 @@ void stop_daemons(bool stopall, bool for_flash)
+ 		delete InfoClock;
+ 	if(FileTimeOSD)
+ 		delete FileTimeOSD;
+-	delete &CMoviePlayerGui::getInstance();
++//	delete &CMoviePlayerGui::getInstance();
+ 
+ 	CZapit::getInstance()->Stop();
+ 	printf("zapit shutdown done\n");

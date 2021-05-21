@@ -1,7 +1,7 @@
 #
 # libsigc
 #
-LIBSIGC_VERSION = 2.10.2
+LIBSIGC_VERSION = 2.10.6
 LIBSIGC_DIR     = libsigc++-$(LIBSIGC_VERSION)
 LIBSIGC_SOURCE  = libsigc++-$(LIBSIGC_VERSION).tar.xz
 LIBSIGC_SITE    = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VERSION))

@@ -9,6 +9,7 @@ LIBASS_DEPENDS = bootstrap freetype fribidi
 
 LIBASS_CONF_OPTS = \
 	--disable-static \
+	--disable-asm \
 	--disable-test \
 	--disable-fontconfig \
 	--disable-harfbuzz \

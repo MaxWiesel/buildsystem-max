@@ -10,7 +10,8 @@ CROSSTOOL_NG_DEPENDS = directories host-ccache kernel.do_prepare
 CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)
 CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VERSION)-backup.tar.gz
 
-CROSSTOOL_NG_CHECKOUT = dd20ee55
+CROSSTOOL_NG_CHECKOUT = 8a96209b
+
 # -----------------------------------------------------------------------------
 
 ifeq ($(wildcard $(CROSS_DIR)/build.log.bz2),)
@@ -28,6 +29,7 @@ crosstool-ng:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
+	ulimit -n 2048; \
 	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		$(SED) "s|^CT_PARALLEL_JOBS=.*|CT_PARALLEL_JOBS=$(PARALLEL_JOBS)|" .config; \

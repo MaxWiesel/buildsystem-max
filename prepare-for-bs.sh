@@ -114,9 +114,11 @@ PACKAGES="\
 	                                                             ${FEDORA:+byacc}                                 \
 	${UBUNTU:+libssl-dev}           ${SUSE:+libopenssl-devel}    ${FEDORA:+openssl-devel}                         \
 	${UBUNTU:+libmount-dev}                                      ${FEDORA:+help2man}                              \
-	${UBUNTU:+mtools}                                                                                             \
+	${UBUNTU:+mtools}                                            ${FEDORA:+rpcgen}                                \
 	${UBUNTU:+u-boot-tools}                                                                                       \
 	${UBUNTU:+curl}                                                                                               \
+	${UBUNTU:+mm-common}            ${SUSE:+mm-common}           ${FEDORA:+mm-common}     ${GENTOO:+mm-common}    \
+	${UBUNTU:+autoconf-archive}
 	${UBUNTU:+libcap-dev}                                                                                         \
 	${UBUNTU:+libseccomp-dev}                                                                                     \
 	${UBUNTU:+libexpat1-dev}                                                                                      \

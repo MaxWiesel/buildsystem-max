@@ -58,7 +58,7 @@ $(D)/directories:
 	mkdir -p $(HOST_DIR)
 	mkdir -p $(IMAGE_DIR)
 	mkdir -p $(SOURCE_DIR)
-	mkdir -p $(HOST_DIR)/{ccache-bin,bin,lib,share}
+	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,boot,etc,lib,sbin,usr,var}
 	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}
 	mkdir -p $(TARGET_DIR)/etc/default/volatiles
@@ -78,8 +78,8 @@ CROSS_LIBS_VERSION = 2021-03-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
-	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
-		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
+	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib; then \
+		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/*so* $(TARGET_DIR)/lib; \
 		cd $(TARGET_LIB_DIR); ln -sf ../../lib/libgcc_s.so.1 libgcc_s.so.1; \
 	fi; \
 	if [ "$(TARGET_ARCH)" = "aarch64" ]; then \
@@ -91,10 +91,15 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 #
 # bootstrap
 #
-BOOTSTRAP  = $(CROSSTOOL)
+BOOTSTRAP  =
+ifneq ($(BOXMODEL),generic)
+BOOTSTRAP += $(CROSSTOOL)
+endif
 BOOTSTRAP += directories
 BOOTSTRAP += host-ccache
+ifneq ($(BOXMODEL),generic)
 BOOTSTRAP += cross-libs
+endif
 BOOTSTRAP += host-pkgconf
 
 $(D)/bootstrap: $(BOOTSTRAP)
@@ -133,14 +138,6 @@ IMAGE_DEPENDS += fbshot
 IMAGE_DEPENDS += aio-grab
 IMAGE_DEPENDS += dvbsnoop
 IMAGE_DEPENDS += libusb
-IMAGE_DEPENDS += lua
-IMAGE_DEPENDS += luaposix
-IMAGE_DEPENDS += luaexpat
-IMAGE_DEPENDS += luacurl
-IMAGE_DEPENDS += luasocket
-IMAGE_DEPENDS += lua-feedparser
-IMAGE_DEPENDS += luasoap
-IMAGE_DEPENDS += luajson
 IMAGE_DEPENDS += wpa-supplicant
 IMAGE_DEPENDS += wireless-tools
 IMAGE_DEPENDS += udpxy

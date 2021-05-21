@@ -9,10 +9,10 @@ Signed-off-by: Joe Slater <jslater@windriver.com>
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -874,6 +874,8 @@ AC_SUBST(PACKAGE)
+@@ -919,6 +919,8 @@ AC_SUBST(PACKAGE)
  AC_SUBST(VERSION)
  
- AM_GNU_GETTEXT
+ AM_GNU_GETTEXT([external])
 +dnl @MKDIR_P@ is expanded in AM_GNU_GETTEXT
 +AC_SUBST([mkdir_p],['$(MKDIR_P)'])
  dnl

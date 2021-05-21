@@ -7,16 +7,24 @@ NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SITE    = $(MAX-GIT-GITHUB)
 NEUTRINO_PLUGINS_DEPENDS = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
+ifneq ($(BOXMODEL),generic)
 NEUTRINO_PLUGINS_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix)
+else
+NEUTRINO_PLUGINS_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=native
+endif
+
+NEUTRINO_PLUGINS_CONF_OPTS += \
 	--host=$(GNU_TARGET_NAME) \
 	--build=$(GNU_HOST_NAME) \
-	--prefix=$(prefix) \
 	--enable-maintainer-mode \
 	--enable-silent-rules \
 	\
-	--with-target=cdk \
 	--include=/usr/include \
-	--with-targetprefix=$(prefix) \
 	--with-boxtype=$(BOXTYPE) \
 	--with-boxmodel=$(BOXMODEL) \
 	\

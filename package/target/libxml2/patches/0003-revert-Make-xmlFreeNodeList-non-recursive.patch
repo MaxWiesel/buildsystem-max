@@ -8,7 +8,7 @@ diff --git a/tree.c b/tree.c
 index 08b1a50..f2b1457 100644
 --- a/tree.c
 +++ b/tree.c
-@@ -3664,9 +3664,7 @@ xmlNextElementSibling(xmlNodePtr node) {
+@@ -3682,9 +3682,7 @@
  void
  xmlFreeNodeList(xmlNodePtr cur) {
      xmlNodePtr next;
@@ -18,7 +18,7 @@ index 08b1a50..f2b1457 100644
  
      if (cur == NULL) return;
      if (cur->type == XML_NAMESPACE_DECL) {
-@@ -3682,21 +3680,16 @@ xmlFreeNodeList(xmlNodePtr cur) {
+@@ -3700,21 +3698,16 @@
  	return;
      }
      if (cur->doc != NULL) dict = cur->doc->dict;
@@ -44,7 +44,7 @@ index 08b1a50..f2b1457 100644
  	    if (((cur->type == XML_ELEMENT_NODE) ||
  		 (cur->type == XML_XINCLUDE_START) ||
  		 (cur->type == XML_XINCLUDE_END)) &&
-@@ -3727,16 +3720,7 @@ xmlFreeNodeList(xmlNodePtr cur) {
+@@ -3750,16 +3743,7 @@
  		DICT_FREE(cur->name)
  	    xmlFree(cur);
  	}

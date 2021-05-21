@@ -1,11 +1,11 @@
 #
 # ffmpeg
 #
-FFMPEG_VERSION = 4.3.2
+FFMPEG_VERSION = 4.4
 FFMPEG_DIR     = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE  = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE    = http://www.ffmpeg.org/releases
-FFMPEG_DEPENDS = bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
+FFMPEG_DEPENDS = bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -46,6 +46,7 @@ FFMPEG_CONF_OPTS = \
 	--disable-vdpau \
 	\
 	--disable-muxers \
+	--enable-muxer=adts \
 	--enable-muxer=apng \
 	--enable-muxer=flac \
 	--enable-muxer=h261 \
@@ -87,6 +88,7 @@ FFMPEG_CONF_OPTS = \
 	\
 	--disable-encoders \
 	--enable-encoder=aac \
+	--enable-encoder=ac3 \
 	--enable-encoder=h261 \
 	--enable-encoder=h263 \
 	--enable-encoder=h263p \
@@ -292,7 +294,7 @@ FFMPEG_CONF_OPTS = \
 	--disable-libxcb-xfixes \
 	--disable-libxcb-shape \
 	\
-	--disable-runtime-cpudetect \
+	--enable-runtime-cpudetect \
 	--enable-pic \
 	--enable-pthreads \
 	--enable-small \
@@ -338,6 +340,7 @@ $(D)/ffmpeg:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
+		$(TARGET_CONFIGURE_OPTS) \
 		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

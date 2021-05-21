@@ -12,16 +12,25 @@ LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE    = $(GIT_SITE)
 LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
 
+ifneq ($(BOXMODEL),generic)
 LIBSTB_HAL_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix)
+else
+LIBSTB_HAL_CONF_OPTS = \
+	--prefix=$(TARGET_DIR)/usr \
+	--with-target=native \
+	--with-targetprefix=$(TARGET_DIR)/usr
+endif
+
+LIBSTB_HAL_CONF_OPTS += \
 	--host=$(GNU_TARGET_NAME) \
 	--build=$(GNU_HOST_NAME) \
-	--prefix=$(prefix) \
 	--enable-maintainer-mode \
 	--enable-silent-rules \
 	--enable-shared=no \
 	\
-	--with-target=cdk \
-	--with-targetprefix=$(prefix) \
 	--with-boxtype=$(BOXTYPE) \
 	--with-boxmodel=$(BOXMODEL) \
 	\
@@ -37,7 +46,6 @@ LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 $(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
@@ -58,11 +66,19 @@ ifeq ($(TINKER_OPTION),0)
 endif
 
 $(D)/libstb-hal.do_compile: libstb-hal.config.status
+ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
+else
+	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR)
+endif
 	@touch $@
 
 $(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
+ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
+else
+	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install
+endif
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)
 

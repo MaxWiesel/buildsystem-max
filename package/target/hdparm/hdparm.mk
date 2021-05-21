@@ -1,7 +1,7 @@
 #
 # hdparm
 #
-HDPARM_VERSION = 9.60
+HDPARM_VERSION = 9.62
 HDPARM_DIR     = hdparm-$(HDPARM_VERSION)
 HDPARM_SOURCE  = hdparm-$(HDPARM_VERSION).tar.gz
 HDPARM_SITE    = https://sourceforge.net/projects/hdparm/files/hdparm

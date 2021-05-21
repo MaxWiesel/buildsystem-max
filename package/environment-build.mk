@@ -34,7 +34,11 @@ MAKEFLAGS += --no-print-directory
 BASE_DIR     := ${CURDIR}
 DL_DIR       ?= $(HOME)/Archive
 BUILD_DIR     = $(BASE_DIR)/build_tmp
-RELEASE_DIR  ?= $(BASE_DIR)/release
+ifeq ($(LAYOUT),multi)
+RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
+else
+RELEASE_DIR   = $(BASE_DIR)/release
+endif
 DEPS_DIR      = $(BASE_DIR)/.deps
 D             = $(DEPS_DIR)
 TARGET_DIR    = $(BASE_DIR)/root
@@ -64,86 +68,20 @@ CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
-BOXMODEL ?= hd51
-ifeq ($(BOXMODEL),bre2ze4k)
-BOXNAME     = "WWIO BRE2ZE4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),h7)
-BOXNAME     = "Air Digital Zgemma H7S/C"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd51)
-BOXNAME     = "AX/Mut@nt HD51"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd60)
-BOXNAME     = "AX/Mut@nt HD60"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd61)
-BOXNAME     = "AX/Mut@nt HD61"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),osmio4k)
-BOXNAME     = "Edison Os mio 4k"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),osmio4kplus)
-BOXNAME     = "Edison Os mio+ 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vusolo4k)
-BOXNAME     = "VU+ Solo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo4k)
-BOXNAME     = "VU+ Duo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo4kse)
-BOXNAME     = "VU+ Duo 4K SE"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuultimo4k)
-BOXNAME     = "VU+ Ultimo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuzero4k)
-BOXNAME     = "VU+ Zero 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuuno4k)
-BOXNAME     = "VU+ Uno 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuuno4kse)
-BOXNAME     = "VU+ Uno 4K SE"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo)
-BOXNAME     = "VU+ Duo"
-BOXTYPE     = mipsbox
-TARGET_ARCH = mips
-endif
-
-BS_GCC_VERSION ?= 8.4.0
-ifeq ($(BS_GCC_VERSION),6.5.0)
+ifeq ($(GCC_VERSION),6.5.0)
 CROSSTOOL_GCC_VERSION = gcc-6.5.0
-else ifeq ($(BS_GCC_VERSION),7.5.0)
-CROSSTOOL_GCC_VERSION = gcc-7.5.0
-else ifeq ($(BS_GCC_VERSION),8.4.0)
+else ifeq ($(GCC_VERSION),8.4.0)
 CROSSTOOL_GCC_VERSION = gcc-8.4.0
-else ifeq ($(BS_GCC_VERSION),9.3.0)
-CROSSTOOL_GCC_VERSION = gcc-9.3.0
-else ifeq ($(BS_GCC_VERSION),10.2.0)
-CROSSTOOL_GCC_VERSION = gcc-10.2.0
+else ifeq ($(GCC_VERSION),10.3.0)
+CROSSTOOL_GCC_VERSION = gcc-10.3.0
+else ifeq ($(GCC_VERSION),11.1.0)
+CROSSTOOL_GCC_VERSION = gcc-11.1.0
 endif
 
 ifeq ($(TARGET_ARCH),arm)
 GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -march=$(TARGET_CPU) -mtune=cortex-a15 -mfpu=neon-vfpv4 -mcpu=cortex-a15 -mfloat-abi=hard
+TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
@@ -155,6 +93,11 @@ GNU_TARGET_NAME = mipsel-unknown-linux-gnu
 TARGET_CPU      = mips32
 TARGET_ABI      = -march=$(TARGET_CPU) -mtune=mips32
 TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),x86_64)
+GNU_TARGET_NAME = x86_64-linux-gnu
+TARGET_CPU      = generic
+TARGET_ABI      =
+TARGET_ENDIAN   =
 endif
 
 OPTIMIZATIONS ?= size
@@ -170,20 +113,6 @@ else ifeq ($(OPTIMIZATIONS),debug)
 TARGET_OPTIMIZATION  = -O0 -g
 TARGET_EXTRA_CFLAGS  =
 TARGET_EXTRA_LDFLAGS =
-endif
-
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse))
-VU_MULTIBOOT ?= multi
-endif
-
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
-LAYOUT ?= multi
-else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
-LAYOUT ?= multi
-endif
-
-ifeq ($(LAYOUT),multi)
-RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
 endif
 
 # -----------------------------------------------------------------------------
@@ -276,16 +205,12 @@ HOST_CONFIGURE_OPTS = \
 	CPPFLAGS="$(HOST_CPPFLAGS)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	CXXFLAGS="$(HOST_CXXFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)"
-
-HOST_CONFIGURE_OPTS += \
+	LDFLAGS="$(HOST_LDFLAGS)" \
 	$($(PKG)_CONF_ENV)
 
 HOST_CONFIGURE_OPTIONS = \
 	--prefix=$(HOST_DIR) \
-	--sysconfdir=$(HOST_DIR)/etc
-
-HOST_CONFIGURE_OPTIONS += \
+	--sysconfdir=$(HOST_DIR)/etc \
 	$($(PKG)_CONF_OPTS)
 
 HOST_CONFIGURE = \
@@ -336,9 +261,8 @@ TARGET_CONFIGURE_OPTS = \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
-	PKG_CONFIG_SYSROOT_DIR=$(TARGET_DIR)
-
-TARGET_CONFIGURE_OPTS += \
+	PKG_CONFIG_PATH="$(TARGET_DIR)/usr/lib/pkgconfig" \
+	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)" \
 	$($(PKG)_CONF_ENV)
 
 TARGET_CONFIGURE_OPTIONS = \
@@ -360,9 +284,7 @@ TARGET_CONFIGURE_OPTIONS = \
 	--oldincludedir=$(oldincludedir) \
 	--sbindir=$(sbindir) \
 	--sharedstatedir=$(sharedstatedir) \
-	--sysconfdir=$(sysconfdir)
-
-TARGET_CONFIGURE_OPTIONS += \
+	--sysconfdir=$(sysconfdir) \
 	$($(PKG)_CONF_OPTS)
 
 TARGET_CONFIGURE = \
@@ -383,9 +305,7 @@ TARGET_CMAKE_OPTS = \
 	$($(PKG)_CONF_ENV)
 
 TARGET_CMAKE_OPTIONS = \
-	--no-warn-unused-cli 
-
-TARGET_CMAKE_OPTIONS += \
+	--no-warn-unused-cli \
 	-DBUILD_SHARED_LIBS=ON \
 	-DENABLE_STATIC=OFF \
 	-DCMAKE_BUILD_TYPE="None" \
@@ -398,21 +318,9 @@ TARGET_CMAKE_OPTIONS += \
 	-DCMAKE_INCLUDE_PATH="$(TARGET_INCLUDE_DIR)" \
 	-DCMAKE_C_COMPILER="$(TARGET_CC)" \
 	-DCMAKE_C_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
-	-DCMAKE_CPP_COMPILER="$(TARGET_CPP)" \
-	-DCMAKE_CPP_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
 	-DCMAKE_CXX_COMPILER="$(TARGET_CXX)" \
 	-DCMAKE_CXX_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
-	-DCMAKE_LINKER="$(TARGET_LD)" \
-	-DCMAKE_AR="$(TARGET_AR)" \
-	-DCMAKE_AS="$(TARGET_AS)" \
-	-DCMAKE_NM="$(TARGET_NM)" \
-	-DCMAKE_OBJCOPY="$(TARGET_OBJCOPY)" \
-	-DCMAKE_OBJDUMP="$(TARGET_OBJDUMP)" \
-	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
-	-DCMAKE_READELF="$(TARGET_READELF)" \
-	-DCMAKE_STRIP="$(TARGET_STRIP)"
-
-TARGET_CMAKE_OPTIONS += \
+	-DCMAKE_STRIP="$(TARGET_STRIP)" \
 	$($(PKG)_CONF_OPTS)
 
 TARGET_CMAKE = \
@@ -466,7 +374,6 @@ NINJA_INSTALL = DESTDIR=$(TARGET_DIR) \
 	$(HOST_NINJA) -C $(PKG_BUILD_DIR)/build install
 
 # -----------------------------------------------------------------------------
-
 
 TUXBOX_CUSTOMIZE = [ -x support/scripts/$(notdir $@)-local.sh ] && \
 	support/scripts/$(notdir $@)-local.sh \

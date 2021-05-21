@@ -1,6 +1,6 @@
 --- a/configure
 +++ b/configure
-@@ -14485,7 +14485,7 @@ $as_echo_n "checking for system crontab
+@@ -12537,7 +12537,7 @@ $as_echo_n "checking for system crontab
  
  		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: ${crond_dir}" >&5
  $as_echo "${crond_dir}" >&6; }

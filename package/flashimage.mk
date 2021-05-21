@@ -3,7 +3,7 @@
 #
 # -----------------------------------------------------------------------------
 
-flashimage: bootstrap machine-deps image-deps neutrino
+flashimage: bootstrap machine-deps image-deps neutrino neutrino-release
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) flash-image-hd5x-multi-disk flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
@@ -26,7 +26,7 @@ endif
 
 # -----------------------------------------------------------------------------
 
-ofgimage: bootstrap machine-deps image-deps neutrino
+ofgimage: bootstrap machine-deps image-deps neutrino neutrino-release
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=ofg flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
@@ -44,7 +44,7 @@ endif
 # -----------------------------------------------------------------------------
 
 oi \
-online-image: bootstrap machine-deps image-deps neutrino
+online-image: bootstrap machine-deps image-deps neutrino neutrino-release
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=online flash-image-hd5x-online
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))

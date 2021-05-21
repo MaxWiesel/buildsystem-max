@@ -7,11 +7,14 @@ LIBXSLT_SOURCE  = libxslt-$(LIBXSLT_VERSION).tar.gz
 LIBXSLT_SITE    = ftp://xmlsoft.org/libxml2
 LIBXSLT_DEPENDS = bootstrap libxml2
 
+LIBXSLT_AUTORECONF = YES
+
 LIBXSLT_CONF_OPTS = \
 	CPPFLAGS="$(CPPFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--with-html-dir=$(REMOVE_htmldir) \
 	--enable-shared \
 	--disable-static \
+	--with-gnu-ld \
 	--without-python \
 	--without-crypto \
 	--without-debug \

@@ -13,6 +13,8 @@ else ifeq ($(TARGET_ARCH),aarch64)
 OPENSSL_TARGET_ARCH = linux-aarch64
 else ifeq ($(TARGET_ARCH),mips)
 OPENSSL_TARGET_ARCH = linux-generic32
+else ifeq ($(TARGET_ARCH),x86_64)
+OPENSSL_TARGET_ARCH = linux-generic32
 endif
 
 $(D)/openssl:

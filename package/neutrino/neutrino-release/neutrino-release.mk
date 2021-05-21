@@ -66,7 +66,12 @@ neutrino-release-base:
 	ln -sf volatile/log $(RELEASE_DIR)/var/log
 	ln -sf var/run $(RELEASE_DIR)/run
 	ln -sf ../../bin/busybox $(RELEASE_DIR)/usr/bin/ether-wake
-
+#
+# e2-multiboot
+#
+	touch $(RELEASE_DIR)/usr/bin/enigma2
+	touch $(RELEASE_DIR)/var/lib/opkg/status
+	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(RELEASE_DIR)/etc/issue
 #
 # mc
 #
@@ -82,7 +87,6 @@ neutrino-release-base:
 #
 # delete unnecessary files
 #
-	@$(call MESSAGE,"Finalizing target directory")
 	find $(RELEASE_DIR)/lib $(RELEASE_DIR)/usr/lib/ \
 		\( -name '*.a' \
 		-o -name '*.la' \
@@ -97,6 +101,7 @@ neutrino-release-base:
 	rm -f $(RELEASE_DIR)/usr/lib/libfontconfig*
 	rm -f $(RELEASE_DIR)/usr/lib/libthread_db*
 	rm -f $(RELEASE_DIR)/usr/bin/pic2m2v
+	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
 #
 # The main target depends on the model.
 # IMPORTANT: it is assumed that only one variable is set. Otherwise the target name won't be resolved.
@@ -117,9 +122,5 @@ ifneq ($(OPTIMIZATIONS),$(filter $(OPTIMIZATIONS),debug normal))
 	find $(RELEASE_DIR)/ -name '*' -exec $(TARGET_STRIP) --strip-unneeded {} &>/dev/null \;
 endif
 	$(TUXBOX_CUSTOMIZE)
-	@echo "***************************************************************"
-	@echo -e "\033[01;32m"
-	@echo " Build of Neutrino for $(BOXMODEL) successfully completed."
-	@echo -e "\033[00m"
-	@echo "***************************************************************"
+	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
 	@touch $@

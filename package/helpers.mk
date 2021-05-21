@@ -89,7 +89,7 @@ define APPLY_PATCHES_S
 	$(Q)( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
-	    $(APPLY_PATCH) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(FLAVOUR) || exit 1; \
+	    $(APPLY_PATCH) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(TARGET_ARCH) \*.patch.$(FLAVOUR) || exit 1; \
 	  fi; \
 	done; \
 	)
