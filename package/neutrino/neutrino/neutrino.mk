@@ -255,19 +255,19 @@ endif
 
 neutrino-pc: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
 	$(TARGET_DIR)/usr/bin/neutrino || true
 
 neutrino-pc-gdb: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
 	gdb -ex run $(TARGET_DIR)/usr/bin/neutrino || true
 
 neutrino-pc-valgrind: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
 	valgrind --leak-check=full --log-file="$(BUILD_TMP)/valgrind.log" -v $(TARGET_DIR)/usr/bin/neutrino || true
 
