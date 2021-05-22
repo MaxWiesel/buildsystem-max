@@ -47,7 +47,7 @@ IMAGE_DIR     = $(BASE_DIR)/release_image
 OWN_FILES    ?= $(BASE_DIR)/own-files
 CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
 HOST_DIR      = $(BASE_DIR)/host
-STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
+STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
 
 MAINTAINER   ?= $(shell whoami)
 

@@ -42,8 +42,8 @@ crosstool-ng:
 		chmod 0755 ct-ng; \
 		./ct-ng oldconfig; \
 		./ct-ng build
-	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sys-root/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
-	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/libstdc++.so.6.0.*-gdb.py
+	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
+	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/libstdc++.so.6.0.*-gdb.py
 	$(REMOVE)
 endif
 
