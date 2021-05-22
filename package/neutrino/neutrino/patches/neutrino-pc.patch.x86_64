@@ -22,6 +22,30 @@ index 2058541dc..9642fc212 100755
 -service tuxmaild stop
  
  exit 0
+diff --git a/data/control/recording.end b/data/control/recording.end
+index 7d78ef53d..df4d3157e 100755
+--- a/data/control/recording.end
++++ b/data/control/recording.end
+@@ -2,7 +2,5 @@
+ 
+ echo "Recording wird beendet"
+ 
+-service tuxcald start
+-service tuxmaild start
+ 
+ exit 0
+diff --git a/data/control/recording.start b/data/control/recording.start
+index f149ac7a4..8e6bba56e 100755
+--- a/data/control/recording.start
++++ b/data/control/recording.start
+@@ -2,7 +2,5 @@
+ 
+ echo "Recording wird gestartet"
+ 
+-service tuxcald stop
+-service tuxmaild stop
+ 
+ exit 0
 diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
 index 859942701..af6504741 100644
 --- a/src/eitd/sectionsd.cpp

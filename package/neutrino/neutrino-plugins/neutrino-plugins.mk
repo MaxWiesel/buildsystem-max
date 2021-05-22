@@ -14,7 +14,7 @@ NEUTRINO_PLUGINS_CONF_OPTS = \
 	--with-targetprefix=$(prefix)
 else
 NEUTRINO_PLUGINS_CONF_OPTS = \
-	--prefix=$(prefix) \
+	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native
 endif
 
@@ -89,12 +89,20 @@ $(D)/neutrino-plugins.config.status:
 	@touch $@
 
 $(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
+ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
+else
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)
+endif
 	@touch $@
 
 $(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	mkdir -p $(SHARE_ICONS)
+ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
+else
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
+endif
 	$(NP_RUNLEVEL_INSTALL)
 	$(TOUCH)
 
