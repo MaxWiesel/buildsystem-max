@@ -76,6 +76,8 @@ else ifeq ($(GCC_VERSION),10.3.0)
 CROSSTOOL_GCC_VERSION = gcc-10.3.0
 else ifeq ($(GCC_VERSION),11.1.0)
 CROSSTOOL_GCC_VERSION = gcc-11.1.0
+else ifeq ($(BOXMODEL),generic)
+CROSSTOOL_GCC_VERSION = gcc-$(shell gcc -dumpfullversion)
 endif
 
 ifeq ($(TARGET_ARCH),arm)
@@ -181,7 +183,7 @@ define INSTALL_EXIST # (source, dest)
 	fi
 endef
 
-UPDATE-RC.D     = support/scripts/update-rc.d -r $(TARGET_DIR)
+UPDATE-RC.D = support/scripts/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 

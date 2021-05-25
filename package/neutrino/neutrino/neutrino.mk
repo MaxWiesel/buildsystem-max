@@ -77,9 +77,24 @@ NEUTRINO_CONF_OPTS = \
 	--enable-pip
 else
 NEUTRINO_CONF_OPTS = \
-	--prefix=$(TARGET_DIR)/usr \
+	--prefix=$(TARGET_DIR)/$(prefix) \
 	--with-target=native \
-	--with-targetprefix=$(TARGET_DIR)/usr
+	--with-targetprefix=$(TARGET_DIR)/$(prefix) \
+	\
+	--with-configdir=$(TARGET_DIR)/var/tuxbox/config \
+	--with-datadir_var=$(TARGET_DIR)/var/tuxbox \
+	--with-controldir_var=$(TARGET_DIR)/var/tuxbox/control \
+	--with-fontdir_var=$(TARGET_DIR)/var/tuxbox/fonts \
+	--with-gamesdir=$(TARGET_DIR)/var/tuxbox/games \
+	--with-plugindir_var=$(TARGET_DIR)/var/tuxbox/plugins \
+	--with-luaplugindir_var=$(TARGET_DIR)/var/tuxbox/luaplugins \
+	--with-webradiodir_var=$(TARGET_DIR)/var/tuxbox/webradio \
+	--with-webtvdir_var=$(TARGET_DIR)/var/tuxbox/webtv \
+	--with-localedir_var=$(TARGET_DIR)/var/tuxbox/locale \
+	--with-themesdir_var=$(TARGET_DIR)/var/tuxbox/themes \
+	--with-iconsdir_var=$(TARGET_DIR)/var/tuxbox/icons \
+	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
+	--with-flagdir=$(TARGET_DIR)/var/etc
 endif
 
 NEUTRINO_CONF_OPTS += \
