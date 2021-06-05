@@ -22,9 +22,9 @@ if `which lsb_release > /dev/null 2>&1`; then
 		Fedora*) FEDORA=1; INSTALL="yum install -y";;
 		CentOS*) FEDORA=1; INSTALL="yum install -y";;
 		SUSE*)   SUSE=1  ; INSTALL="zypper install -y";;
-		Ubuntu*) UBUNTU=1; INSTALL="apt-get -y install";;
-		LinuxM*) UBUNTU=2; INSTALL="apt-get --force-yes install";;
-		Debian*) UBUNTU=3; INSTALL="apt-get -y install";;
+		Ubuntu*) UBUNTU=1; INSTALL="apt-get install -y";;
+		LinuxM*) UBUNTU=2; INSTALL="apt-get install -y";;
+		Debian*) UBUNTU=3; INSTALL="apt-get install -y";;
 		Gentoo)  GENTOO=1; INSTALL="emerge -uN";;
 	esac
 fi
@@ -35,7 +35,7 @@ if [ -z "$FEDORA$GENTOO$SUSE$UBUNTU" ]; then
 	elif [ -f /etc/fedora-release ]; then FEDORA=1; INSTALL="yum install -y"; 
 	elif [ -f /etc/centos-release ]; then FEDORA=1; INSTALL="yum install -y"; 
 	elif [ -f /etc/SuSE-release   ]; then SUSE=1  ; INSTALL="zypper install -n";
-	elif [ -f /etc/debian_version ]; then UBUNTU=3; INSTALL="apt-get --force-yes install";
+	elif [ -f /etc/debian_version ]; then UBUNTU=3; INSTALL="apt-get install -y";
 	elif [ -f /etc/gentoo-release ]; then GENTOO=1; INSTALL="emerge -uN"
 	fi
 fi
@@ -118,10 +118,12 @@ PACKAGES="\
 	${UBUNTU:+u-boot-tools}                                                                                       \
 	${UBUNTU:+curl}                                                                                               \
 	${UBUNTU:+mm-common}            ${SUSE:+mm-common}           ${FEDORA:+mm-common}     ${GENTOO:+mm-common}    \
-	${UBUNTU:+autoconf-archive}
+	${UBUNTU:+autoconf-archive}                                                                                   \
 	${UBUNTU:+libcap-dev}                                                                                         \
 	${UBUNTU:+libseccomp-dev}                                                                                     \
 	${UBUNTU:+libexpat1-dev}                                                                                      \
+	${UBUNTU:+libexpat1}                                                                                          \
+	${UBUNTU:+mpv}                                                                                                \
 ";
 
 if [ "$UBUNTU" == 1 ]; then
