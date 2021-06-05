@@ -1,7 +1,7 @@
 #
 # expat
 #
-EXPAT_VERSION = 2.3.0
+EXPAT_VERSION = 2.4.1
 EXPAT_DIR     = expat-$(EXPAT_VERSION)
 EXPAT_SOURCE  = expat-$(EXPAT_VERSION).tar.xz
 EXPAT_SITE    = https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(EXPAT_VERSION))

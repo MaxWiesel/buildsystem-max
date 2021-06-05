@@ -346,11 +346,16 @@ define meson-cross-config
 		echo "strip = '$(TARGET_STRIP)'"; \
 		echo "pkgconfig = '$(PKG_CONFIG)'"; \
 		echo ""; \
-		echo "[properties]"; \
-		echo "c_args = '-I$(TARGET_INCLUDE_DIR)'"; \
+		echo "[built-in options]"; \
+		echo "c_args = '$(TARGET_CFLAGS)'"; \
 		echo "c_link_args = '$(TARGET_LDFLAGS)'"; \
-		echo "cpp_args = '-I$(TARGET_INCLUDE_DIR)'"; \
+		echo "cpp_args = '$(TARGET_CXXFLAGS)'"; \
 		echo "cpp_link_args = '$(TARGET_LDFLAGS)'"; \
+		echo ""; \
+		echo "[properties]"; \
+		echo "needs_exe_wrapper = true"; \
+		echo "sys_root = '$(TARGET_DIR)'"; \
+		echo "pkg_config_libdir = '$(PKG_CONFIG_LIBDIR)'"; \
 		echo ""; \
 		echo "[host_machine]"; \
 		echo "system = 'linux'"; \
@@ -363,10 +368,13 @@ endef
 MESON_CONFIGURE = \
 	$(call meson-cross-config,$(PKG_BUILD_DIR)/build); \
 	unset CC CXX CPP LD AR NM STRIP; \
+	$($(PKG)_CONF_ENV) \
 	$(HOST_MESON) \
 		--buildtype=release \
 		--cross-file $(PKG_BUILD_DIR)/build/meson-cross.config \
+		-Db_pie=false \
 		-Dstrip=false \
+		$($(PKG)_CONF_OPTS) \
 		$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
 
 NINJA = \
