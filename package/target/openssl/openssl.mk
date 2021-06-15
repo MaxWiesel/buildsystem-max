@@ -1,7 +1,7 @@
 #
 # openssl
 #
-OPENSSL_VERSION = 1.1.1h
+OPENSSL_VERSION = 1.1.1k
 OPENSSL_DIR     = openssl-$(OPENSSL_VERSION)
 OPENSSL_SOURCE  = openssl-$(OPENSSL_VERSION).tar.gz
 OPENSSL_SITE    = https://www.openssl.org/source

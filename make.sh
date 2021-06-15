@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ##############################################
+make distclean
 clear
 
 
@@ -47,6 +48,7 @@ case $1 in
 	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 9[0-9]) REPLY=$1;;
 	*)
 		echo "Target receivers:"
+		echo "-----------------------------------"
 		echo "   1)  VU+ Duo"
 		echo "   2)  VU+ Duo 4K"
 		echo "   3)  VU+ Solo 4k"
@@ -62,7 +64,10 @@ case $1 in
 		echo "  30)  Edision OS mio 4K"
 		echo "  31)  Edision OS mio+ 4K"
 		echo "  40)  AirDigital Zgemma H7C/H7S"
+		echo "-----------------------------------"
 		echo "  99)  Neutrino PC"
+		echo "-----------------------------------"
+		echo ""
 		read -p "Select target? [21] "
 		REPLY="${REPLY:-21}";;
 esac

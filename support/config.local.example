@@ -4,8 +4,8 @@
 # -----------------------------------------------------------------------------
 
 # Neutrino API keys
-#NEUTRINO_OMDB_API_KEY =
+#NEUTRINO_OMDB_API_KEY      =
+#NEUTRINO_TMDB_DEV_KEY      =
+#NEUTRINO_YOUTUBE_DEV_KEY   =
+#NEUTRINO_WEATHER_DEV_KEY   =
 #NEUTRINO_SHOUTCAST_DEV_KEY =
-#NEUTRINO_TMDB_DEV_KEY =
-#NEUTRINO_YOUTUBE_DEV_KEY =
-#NEUTRINO_WEATHER_DEV_KEY =

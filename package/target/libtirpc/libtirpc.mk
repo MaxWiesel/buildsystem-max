@@ -9,8 +9,10 @@ LIBTIRPC_DEPENDS = bootstrap
 
 LIBTIRPC_AUTORECONF = YES
 
+LIBTIRPC_CONF_ENV = \
+	CFLAGS="$(TARGET_CFLAGS) -DGQ"
+
 LIBTIRPC_CONF_OPTS = \
-	CFLAGS="$(TARGET_CFLAGS) -DGQ" \
 	--disable-gssapi
 
 $(D)/libtirpc:

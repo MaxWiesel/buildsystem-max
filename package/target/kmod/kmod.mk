@@ -1,7 +1,7 @@
 #
 # kmod
 #
-KMOD_VERSION = 28
+KMOD_VERSION = 29
 KMOD_DIR     = kmod-$(KMOD_VERSION)
 KMOD_SOURCE  = kmod-$(KMOD_VERSION).tar.xz
 KMOD_SITE    = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
@@ -14,7 +14,7 @@ KMOD_CONF_OPTS = \
 	--disable-static \
 	--enable-shared \
 	--disable-manpages \
-	--without-zlib
+	--with-zlib
 
 $(D)/kmod:
 	$(START_BUILD)

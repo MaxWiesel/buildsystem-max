@@ -1,7 +1,7 @@
 #
 # alsa-lib
 #
-ALSA_LIB_VERSION = 1.2.4
+ALSA_LIB_VERSION = 1.2.5
 ALSA_LIB_DIR     = alsa-lib-$(ALSA_LIB_VERSION)
 ALSA_LIB_SOURCE  = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
 ALSA_LIB_SITE    = https://www.alsa-project.org/files/pub/lib
@@ -22,7 +22,6 @@ ALSA_LIB_CONF_OPTS = \
 	--disable-resmgr \
 	--disable-old-symbols \
 	--disable-alisp \
-	--disable-ucm \
 	--disable-hwdep \
 	--disable-python \
 	--disable-topology
