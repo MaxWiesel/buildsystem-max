@@ -60,19 +60,19 @@ index 859942701..af6504741 100644
  			success = true;
  		} else if (dvb_time_update) {
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index 33802db45..bce73bbc4 100644
+index 7f16c8a7a..092605d94 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
-@@ -752,7 +752,7 @@ int CNeutrinoApp::loadSetup(const char * fname)
- 	std::string timeshiftDir;
- 	if(g_settings.timeshiftdir.empty()) {
- 		timeshiftDir = g_settings.network_nfs_recordingdir + "/.timeshift";
--		safe_mkdir(timeshiftDir.c_str());
-+		//safe_mkdir(timeshiftDir.c_str());
- 	} else {
- 		if(g_settings.timeshiftdir != g_settings.network_nfs_recordingdir)
- 			timeshiftDir = g_settings.timeshiftdir;
-@@ -3023,9 +3023,9 @@ TIMER_START();
+@@ -784,7 +784,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+ 	if (g_settings.timeshiftdir.empty())
+ 	{
+ 		timeshiftdir = g_settings.network_nfs_recordingdir + "/.timeshift";
+-		safe_mkdir(timeshiftdir.c_str());
++		//safe_mkdir(timeshiftdir.c_str());
+ 	}
+ 	else
+ 	{
+@@ -3178,9 +3178,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -85,7 +85,7 @@ index 33802db45..bce73bbc4 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5370,7 +5370,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5527,7 +5527,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;

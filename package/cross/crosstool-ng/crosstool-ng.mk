@@ -10,7 +10,7 @@ CROSSTOOL_NG_DEPENDS = directories host-ccache kernel.do_prepare
 CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)
 CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VERSION)-backup.tar.gz
 
-CROSSTOOL_NG_CHECKOUT = 8a96209b
+CROSSTOOL_NG_CHECKOUT = 62e9db24
 
 # -----------------------------------------------------------------------------
 

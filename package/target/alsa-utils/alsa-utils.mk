@@ -1,7 +1,7 @@
 #
 # alsa-utils
 #
-ALSA_UTILS_VERSION = 1.2.5
+ALSA_UTILS_VERSION = 1.2.5.1
 ALSA_UTILS_DIR     = alsa-utils-$(ALSA_UTILS_VERSION)
 ALSA_UTILS_SOURCE  = alsa-utils-$(ALSA_UTILS_VERSION).tar.bz2
 ALSA_UTILS_SITE    = https://www.alsa-project.org/files/pub/utils
