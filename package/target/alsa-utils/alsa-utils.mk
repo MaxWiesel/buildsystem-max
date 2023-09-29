@@ -16,7 +16,7 @@ ALSA_UTILS_AUTORECONF = YES
 define ALSA_UTILS_POST_PATCH
 	sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" $(PKG_BUILD_DIR)/Makefile.am
 endef
-ALSA_UTILS_POST_PATCH_HOOKS = ALSA_UTILS_POST_PATCH
+ALSA_UTILS_POST_PATCH_HOOKS += ALSA_UTILS_POST_PATCH
 
 ALSA_UTILS_CONF_ENV = \
 	ac_cv_prog_ncurses5_config=$(HOST_DIR)/bin/$(NCURSES_CONFIG_SCRIPTS)

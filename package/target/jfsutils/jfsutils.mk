@@ -15,7 +15,7 @@ define JFSUTILS_POST_PATCH
 	$(SED) '/unistd.h/a#include <sys/types.h>' $(PKG_BUILD_DIR)/fscklog/extract.c
 	$(SED) '/ioctl.h/a#include <sys/sysmacros.h>' $(PKG_BUILD_DIR)/libfs/devices.c
 endef
-JFSUTILS_POST_PATCH_HOOKS = JFSUTILS_POST_PATCH
+JFSUTILS_POST_PATCH_HOOKS += JFSUTILS_POST_PATCH
 
 define JFSUTILS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,jfs_debugfs jfs_fscklog jfs_logdump)
