@@ -95,6 +95,8 @@ ifndef $(PKG)_CONFIGURE_CMDS
     else
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_MESON_CMDS_DEFAULT)
     endif
+  else ifeq ($(PKG_MODE),WAF)
+    $(PKG)_CONFIGURE_CMDS = $$(WAF_CONFIGURE_CMDS_DEFAULT)
   else
     ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_CONFIGURE_CMDS = $$(HOST_CONFIGURE_CMDS_DEFAULT)
@@ -116,6 +118,11 @@ ifndef $(PKG)_MAKE_ARGS
 endif
 ifndef $(PKG)_MAKE_OPTS
   $(PKG)_MAKE_OPTS =
+endif
+
+# waf
+ifndef $(PKG)_BUILD_OPTS
+  $(PKG)_BUILD_OPTS =
 endif
 
 # build commands
@@ -167,6 +174,11 @@ ifndef $(PKG)_MAKE_INSTALL_ARGS
 endif
 ifndef $(PKG)_MAKE_INSTALL_OPTS
   $(PKG)_MAKE_INSTALL_OPTS = $$($(PKG)_MAKE_OPTS)
+endif
+
+# waf
+ifndef $(PKG)_INSTALL_OPTS
+  $(PKG)_INSTALL_OPTS =
 endif
 
 # install commands
