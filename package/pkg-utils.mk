@@ -64,6 +64,9 @@ endif
 ifndef $(PKG)_AUTORECONF_OPTS
   $(PKG)_AUTORECONF_OPTS =
 endif
+ifndef $(PKG)_AUTORECONF_CMDS
+  $(PKG)_AUTORECONF_CMDS = $$(AUTORECONF_CMDS_DEFAULT)
+endif
 
 # cmake
 ifndef $(PKG)_CMAKE
@@ -228,6 +231,12 @@ ifeq ($(PKG_MODE),KCONFIG)
     $(PKG)_KCONFIG_FILE = .config
   endif
   $(PKG)_KCONFIG_DOTCONFIG = $$($(PKG)_KCONFIG_FILE)
+endif
+
+# auto-assign some hooks
+ifeq ($$($(PKG)_AUTORECONF),YES)
+  $(PKG)_AUTORECONF_HOOKS += AUTORECONF_CMDS_MESSAGE
+  $(PKG)_AUTORECONF_HOOKS += $(PKG)_AUTORECONF_CMDS
 endif
 
 endef # PKG_CHECK_VARIABLES
