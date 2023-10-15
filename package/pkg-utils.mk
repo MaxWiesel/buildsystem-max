@@ -14,8 +14,8 @@ PKG_PARENT = $(subst HOST_,,$(PKG))
 PKG_PACKAGE = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),HOST,TARGET)
 
 PKG_BUILD_DIR = $(BUILD_DIR)/$($(PKG)_DIR)
-PKG_FILES_DIR = $(BASE_DIR)/package/*/$(subst host-,,$(subst -driver,,$(subst -lib,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst -platform-util,,$(subst -vmlinuz-initrd,,$(pkgname)))))))))/files
-PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(subst host-,,$(subst -driver,,$(subst -lib,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst -platform-util,,$(subst -vmlinuz-initrd,,$(pkgname)))))))))/patches
+PKG_FILES_DIR = $(BASE_DIR)/package/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/files
+PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/patches
 
 # -----------------------------------------------------------------------------
 
