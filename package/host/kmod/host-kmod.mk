@@ -6,6 +6,8 @@
 
 HOST_KMOD_AUTORECONF = YES
 
+HOST_DEPMOD_BINARY = $(HOST_DIR)/sbin/depmod
+
 HOST_KMOD_CONF_OPTS = \
 	--disable-debug \
 	--disable-logging \
