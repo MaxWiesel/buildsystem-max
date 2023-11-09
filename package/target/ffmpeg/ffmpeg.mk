@@ -13,7 +13,7 @@ FFMPEG_DEPENDS = openssl zlib bzip2 freetype libvorbis rtmpdump libass libxml2
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
-	--disable-ffprobe \
+	--enable-ffprobe \
 	\
 	--disable-doc \
 	--disable-htmlpages \
