@@ -1,0 +1,16 @@
+--- a/configure.in
++++ b/configure.in
+@@ -439,7 +439,12 @@
+ 
+ dnl configure use of features
+ 
+-AM_PATH_GTK(1.2.0, HAVE_GTK="yes", HAVE_GTK="no")
++#AM_PATH_GTK(1.2.0, HAVE_GTK="yes", HAVE_GTK="no")
++HAVE_GTK="no"
++GTK_CFLAGS=""
++GTK_LIBS=""
++AC_SUBST(GTK_CFLAGS)
++AC_SUBST(GTK_LIBS)
+ 
+ dnl ElectricFence malloc debugging
+ AC_MSG_CHECKING(use of ElectricFence malloc debugging)

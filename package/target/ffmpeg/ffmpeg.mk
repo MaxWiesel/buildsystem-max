@@ -291,6 +291,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-bzlib \
 	--enable-libass \
 	--enable-libfreetype \
+	--enable-libmp3lame \
 	--enable-librtmp \
 	--enable-libxml2 \
 	--enable-libvorbis \
