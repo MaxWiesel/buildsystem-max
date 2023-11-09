@@ -10,15 +10,15 @@
 neutrino-release-python:
 	mkdir -p $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
 	cp $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)/pyconfig.h $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
-	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
+#	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
+#	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
 	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ \
 		\( -name '*.a' \
 		-o -name '*.c' \
