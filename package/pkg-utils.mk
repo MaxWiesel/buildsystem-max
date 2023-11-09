@@ -146,14 +146,10 @@ ifndef $(PKG)_BUILD_CMDS
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_NINJA_BUILD_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),PYTHON3)
-    ifeq ($(PKG_PACKAGE),HOST)
-      $(PKG)_BUILD_CMDS = $$(HOST_PYTHON3_BUILD_CMDS_DEFAULT)
-    else
-      $(PKG)_BUILD_CMDS = $$(TARGET_PYTHON3_BUILD_CMDS_DEFAULT)
-    endif
   else ifeq ($(PKG_MODE),PYTHON)
-    ifeq ($(PKG_PACKAGE),TARGET)
+    ifeq ($(PKG_PACKAGE),HOST)
+      $(PKG)_BUILD_CMDS = $$(HOST_PYTHON_BUILD_CMDS_DEFAULT)
+    else
       $(PKG)_BUILD_CMDS = $$(TARGET_PYTHON_BUILD_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
@@ -202,14 +198,10 @@ ifndef $(PKG)_INSTALL_CMDS
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_NINJA_INSTALL_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),PYTHON3)
-    ifeq ($(PKG_PACKAGE),HOST)
-      $(PKG)_INSTALL_CMDS = $$(HOST_PYTHON3_INSTALL_CMDS_DEFAULT)
-    else
-      $(PKG)_INSTALL_CMDS = $$(TARGET_PYTHON3_INSTALL_CMDS_DEFAULT)
-    endif
   else ifeq ($(PKG_MODE),PYTHON)
-    ifeq ($(PKG_PACKAGE),TARGET)
+    ifeq ($(PKG_PACKAGE),HOST)
+      $(PKG)_INSTALL_CMDS = $$(HOST_PYTHON_INSTALL_CMDS_DEFAULT)
+    else
       $(PKG)_INSTALL_CMDS = $$(TARGET_PYTHON_INSTALL_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
@@ -321,7 +313,7 @@ define DOWNLOAD # (site,source)
 	  curl) \
 	    $(call MESSAGE,"Downloading"); \
 	    $(CD) $(DL_DIR); \
-	      curl --remote-name --time-cond $${DOWNLOAD_SOURCE} $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} || true; \
+	      curl --location --remote-name --time-cond $${DOWNLOAD_SOURCE} $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} || true; \
 	  ;; \
 	  *) \
 	    if [ ! -f $(DL_DIR)/$${DOWNLOAD_SOURCE} ]; then \
@@ -504,6 +496,7 @@ define HOST_FOLLOWUP
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call CLEANUP)
+	$(foreach hook,$($(PKG)_HOST_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef
@@ -519,6 +512,7 @@ define TARGET_FOLLOWUP
 	$(Q)$(call REWRITE_CONFIG_SCRIPTS)
 	$(Q)$(call REWRITE_LIBTOOL)
 	$(Q)$(call CLEANUP)
+	$(foreach hook,$($(PKG)_TARGET_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_TARGET_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef

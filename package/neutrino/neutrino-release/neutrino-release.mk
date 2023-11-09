@@ -5,13 +5,11 @@
 ################################################################################
 
 #
-# python-iptv-install
+# neutrino-release-python
 #
-python-iptv-install:
+neutrino-release-python:
 	mkdir -p $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
 	cp $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)/pyconfig.h $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
-	cp -af $(TARGET_SHARE_DIR)/E2emulator $(RELEASE_DIR)/usr/share/
-	ln -sf /usr/share/E2emulator/Plugins/Extensions/IPTVPlayer/cmdlineIPTV.sh $(RELEASE_DIR)/usr/bin/cmdlineIPTV
 	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
@@ -21,14 +19,13 @@ python-iptv-install:
 	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
-	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
+	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ \
 		\( -name '*.a' \
 		-o -name '*.c' \
 		-o -name '*.doc' \
 		-o -name '*.egg-info' \
 		-o -name '*.la' \
 		-o -name '*.o' \
-		-o -name '*.pyc' \
 		-o -name '*.pyx' \
 		-o -name '*.txt' \
 		-o -name 'test' \
@@ -37,7 +34,6 @@ python-iptv-install:
 		-print0 | xargs --no-run-if-empty -0 rm -rf
 ifeq ($(OPTIMIZATIONS), size)
 	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ -name '*.py' -exec rm -f {} \;
-	find $(RELEASE_DIR)/usr/share/E2emulator/ -name '*.py' -exec rm -f {} \;
 endif
 
 #
@@ -86,14 +82,11 @@ neutrino-release-base:
 		cp -af $(TARGET_LIBEXEC_DIR) $(RELEASE_DIR)/usr/; \
 	fi
 #
-# E2emulator
-#
-	if [ -d $(TARGET_SHARE_DIR)/E2emulator ]; then \
-		make python-iptv-install; \
-	fi
-#
 # delete unnecessary files
 #
+	if [ -e $(RELEASE_DIR)/usr/bin/python$(basename $(PYTHON_VERSION)) ]; then \
+		make neutrino-release-python; \
+	fi
 	find $(RELEASE_DIR) \
 		\( -name '*.a' \
 		-o -name '*.la' \

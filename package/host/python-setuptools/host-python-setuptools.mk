@@ -1,10 +1,10 @@
 ################################################################################
 #
-# host-python3-setuptools
+# host-python-setuptools
 #
 ################################################################################
 
-HOST_PYTHON3_SETUPTOOLS_DEPENDS = host-python3
+HOST_PYTHON_SETUPTOOLS_DEPENDS = host-python
 
-$(D)/host-python3-setuptools: | bootstrap
-	$(call host-python3-package)
+$(D)/host-python-setuptools: | bootstrap
+	$(call host-python-package)
