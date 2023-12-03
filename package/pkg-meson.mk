@@ -4,18 +4,9 @@
 #
 ################################################################################
 
-#
-# Pass PYTHONNOUSERSITE environment variable when invoking Meson or Ninja, so
-# $(HOST_DIR)/bin/python3 will not look for Meson modules in
-# $HOME/.local/lib/python3.x/site-packages
-#
-MESON = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/meson
-NINJA = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/ninja
-NINJA_OPTS = $(if $(VERBOSE),-v)
-
-define MESON_CROSS_CONFIG_HOOK
+define MESON_CROSS_COMPILATION_CONF_HOOK # (dest dir)
 	mkdir -p $(1)
-	( \
+	$(Q)( \
 		echo "# Note: Buildsystems's and Meson's terminologies differ about the meaning"; \
 		echo "# of 'build', 'host' and 'target':"; \
 		echo "# - Buildsystems's 'host' is Meson's 'build'"; \
@@ -46,8 +37,17 @@ define MESON_CROSS_CONFIG_HOOK
 		echo "cpu_family = '$(TARGET_ARCH)'"; \
 		echo "cpu = '$(TARGET_CPU)'"; \
 		echo "endian = '$(TARGET_ENDIAN)'" \
-	) > $(1)/meson-cross.config
+	) > $(1)/cross-compilation.conf
 endef
+
+# -----------------------------------------------------------------------------
+
+# Pass PYTHONNOUSERSITE environment variable when invoking Meson or Ninja,
+# so $(HOST_DIR)/bin/python3 will not look for Meson modules in
+# $HOME/.local/lib/python3.x/site-packages
+#
+HOST_MESON_CMD = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/meson
+HOST_NINJA_CMD = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/ninja $(if $(VERBOSE),-v)
 
 # -----------------------------------------------------------------------------
 
@@ -56,9 +56,10 @@ define TARGET_MESON_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
-		$(MESON) \
+		$(HOST_MESON_CMD) setup \
+			--prefix=$(prefix) \
 			--buildtype=release \
-			--cross-file=$(PKG_BUILD_DIR)/build/meson-cross.config \
+			--cross-file=$(PKG_BUILD_DIR)/build/cross-compilation.conf \
 			-Db_pie=false \
 			-Dstrip=false \
 			$($(PKG)_CONF_OPTS) \
@@ -68,7 +69,7 @@ endef
 define TARGET_MESON_CONFIGURE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
-	$(Q)$(call MESON_CROSS_CONFIG_HOOK,$(PKG_BUILD_DIR)/build)
+	$(Q)$(call MESON_CROSS_COMPILATION_CONF_HOOK,$(PKG_BUILD_DIR)/build)
 	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
@@ -76,7 +77,8 @@ endef
 define TARGET_NINJA_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(NINJA) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(HOST_NINJA_CMD) -C $(PKG_BUILD_DIR)/build \
+			$($(PKG)_NINJA_OPTS)
 endef
 
 define TARGET_NINJA_BUILD
@@ -88,8 +90,9 @@ endef
 
 define TARGET_NINJA_INSTALL_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
-		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) DESTDIR=$(TARGET_DIR) \
-		$(NINJA) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
+		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) \
+		DESTDIR=$(TARGET_DIR) \
+		$(HOST_NINJA_CMD) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define TARGET_NINJA_INSTALL
@@ -123,9 +126,11 @@ define HOST_MESON_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
-		$(MESON) \
+		$(HOST_MESON_CMD) setup \
 			--prefix=$(HOST_DIR) \
+			--default-library=shared \
 			--buildtype=release \
+			--wrap-mode=nodownload \
 			$($(PKG)_CONF_OPTS) \
 			$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
 endef
@@ -140,7 +145,8 @@ endef
 define HOST_NINJA_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(NINJA) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(HOST_NINJA_CMD) -C $(PKG_BUILD_DIR)/build \
+			$($(PKG)_NINJA_OPTS)
 endef
 
 define HOST_NINJA_BUILD
@@ -153,7 +159,7 @@ endef
 define HOST_NINJA_INSTALL_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(NINJA) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
+		$(HOST_NINJA_CMD) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define HOST_NINJA_INSTALL
