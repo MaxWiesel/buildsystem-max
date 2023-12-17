@@ -96,9 +96,9 @@ ifndef $(PKG)_CONFIGURE_CMDS
     $(PKG)_CONFIGURE_CMDS =
   else ifeq ($(PKG_MODE),CMAKE)
     ifeq ($(PKG_DESTINATION),HOST)
-      $(PKG)_CONFIGURE_CMDS = $$(HOST_CMAKE_CMDS_DEFAULT)
+      $(PKG)_CONFIGURE_CMDS = $$(HOST_CMAKE_CONFIGURE_CMDS_DEFAULT)
     else
-      $(PKG)_CONFIGURE_CMDS = $$(TARGET_CMAKE_CMDS_DEFAULT)
+      $(PKG)_CONFIGURE_CMDS = $$(TARGET_CMAKE_CONFIGURE_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -139,6 +139,12 @@ ifndef $(PKG)_BUILD_CMDS
       $(PKG)_BUILD_CMDS = $$(HOST_MAKE_BUILD_CMDS_DEFAULT)
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_MAKE_BUILD_CMDS_DEFAULT)
+    endif
+  else ifeq ($(PKG_MODE),CMAKE)
+    ifeq ($(PKG_DESTINATION),HOST)
+      $(PKG)_BUILD_CMDS = $$(HOST_CMAKE_BUILD_CMDS_DEFAULT)
+    else
+      $(PKG)_BUILD_CMDS = $$(TARGET_CMAKE_BUILD_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -191,6 +197,12 @@ ifndef $(PKG)_INSTALL_CMDS
       $(PKG)_INSTALL_CMDS = $$(HOST_MAKE_INSTALL_CMDS_DEFAULT)
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_MAKE_INSTALL_CMDS_DEFAULT)
+    endif
+  else ifeq ($(PKG_MODE),CMAKE)
+    ifeq ($(PKG_DESTINATION),HOST)
+      $(PKG)_INSTALL_CMDS = $$(HOST_CMAKE_INSTALL_CMDS_DEFAULT)
+    else
+      $(PKG)_INSTALL_CMDS = $$(TARGET_CMAKE_INSTALL_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -359,7 +371,7 @@ define EXTRACT # (directory)
 	  ;; \
 	  *) \
 	    case "$($(PKG)_SOURCE)" in \
-	      *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
+	      *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.lz | *.tlz | *.tar.xz | *.txz) \
 	        tar -xf $(DL_DIR)/$($(PKG)_SOURCE) -C $${EXTRACT_DIR}; \
 	      ;; \
 	      *.zip) \
