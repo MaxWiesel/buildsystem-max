@@ -51,6 +51,11 @@ ifndef $(PKG)_PATCH_CUSTOM
   $(PKG)_PATCH_CUSTOM = $$($(PKG)_PATCH)
 endif
 
+# common
+ifndef $(PKG)_ENV
+  $(PKG)_ENV =
+endif
+
 # autoreconf
 ifndef $(PKG)_AUTORECONF
   $(PKG)_AUTORECONF = NO
@@ -69,8 +74,18 @@ ifndef $(PKG)_AUTORECONF_CMDS
 endif
 
 # cmake
-ifndef $(PKG)_CMAKE
-  $(PKG)_CMAKE = cmake
+ifndef $(PKG)_CMAKE_BACKEND
+  $(PKG)_CMAKE_BACKEND = make
+endif
+
+ifeq ($$($(PKG)_CMAKE_BACKEND),make)
+  $(PKG)_GENERATOR = "Unix Makefiles"
+  $(PKG)_GENERATOR_PROGRAM = $$(firstword $$(MAKE))
+else ifeq ($$($(PKG)_CMAKE_BACKEND),ninja)
+  $(PKG)_GENERATOR = "Ninja"
+  $(PKG)_GENERATOR_PROGRAM = $$(HOST_NINJA_BINARY)
+else
+  $$(error Invalid $(PKG)_CMAKE_BACKEND. Valid options are 'make' or 'ninja')
 endif
 
 # configure
@@ -96,9 +111,9 @@ ifndef $(PKG)_CONFIGURE_CMDS
     $(PKG)_CONFIGURE_CMDS =
   else ifeq ($(PKG_MODE),CMAKE)
     ifeq ($(PKG_DESTINATION),HOST)
-      $(PKG)_CONFIGURE_CMDS = $$(HOST_CMAKE_CMDS_DEFAULT)
+      $(PKG)_CONFIGURE_CMDS = $$(HOST_CMAKE_CONFIGURE_CMDS_DEFAULT)
     else
-      $(PKG)_CONFIGURE_CMDS = $$(TARGET_CMAKE_CMDS_DEFAULT)
+      $(PKG)_CONFIGURE_CMDS = $$(TARGET_CMAKE_CONFIGURE_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -127,18 +142,27 @@ ifndef $(PKG)_MAKE_OPTS
   $(PKG)_MAKE_OPTS =
 endif
 
-# waf
+# common
+ifndef $(PKG)_BUILD_ENV
+  $(PKG)_BUILD_ENV =
+endif
 ifndef $(PKG)_BUILD_OPTS
   $(PKG)_BUILD_OPTS =
 endif
 
 # build commands
 ifndef $(PKG)_BUILD_CMDS
-  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
+  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS GENERIC KCONFIG))
     ifeq ($(PKG_DESTINATION),HOST)
       $(PKG)_BUILD_CMDS = $$(HOST_MAKE_BUILD_CMDS_DEFAULT)
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_MAKE_BUILD_CMDS_DEFAULT)
+    endif
+  else ifeq ($(PKG_MODE),CMAKE)
+    ifeq ($(PKG_DESTINATION),HOST)
+      $(PKG)_BUILD_CMDS = $$(HOST_CMAKE_BUILD_CMDS_DEFAULT)
+    else
+      $(PKG)_BUILD_CMDS = $$(TARGET_CMAKE_BUILD_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -179,18 +203,27 @@ ifndef $(PKG)_MAKE_INSTALL_OPTS
   $(PKG)_MAKE_INSTALL_OPTS = $$($(PKG)_MAKE_OPTS)
 endif
 
-# waf
+# common
+ifndef $(PKG)_INSTALL_ENV
+  $(PKG)_INSTALL_ENV =
+endif
 ifndef $(PKG)_INSTALL_OPTS
   $(PKG)_INSTALL_OPTS =
 endif
 
 # install commands
 ifndef $(PKG)_INSTALL_CMDS
-  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
+  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS GENERIC KCONFIG))
     ifeq ($(PKG_DESTINATION),HOST)
       $(PKG)_INSTALL_CMDS = $$(HOST_MAKE_INSTALL_CMDS_DEFAULT)
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_MAKE_INSTALL_CMDS_DEFAULT)
+    endif
+  else ifeq ($(PKG_MODE),CMAKE)
+    ifeq ($(PKG_DESTINATION),HOST)
+      $(PKG)_INSTALL_CMDS = $$(HOST_CMAKE_INSTALL_CMDS_DEFAULT)
+    else
+      $(PKG)_INSTALL_CMDS = $$(TARGET_CMAKE_INSTALL_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -227,6 +260,11 @@ ifeq ($(PKG_MODE),KCONFIG)
     $(PKG)_KCONFIG_FILE = .config
   endif
   $(PKG)_KCONFIG_DOTCONFIG = $$($(PKG)_KCONFIG_FILE)
+endif
+
+# waf
+ifndef $(PKG)_WAF_OPTS
+  $(PKG)_WAF_OPTS =
 endif
 
 # auto-assign some hooks
@@ -359,7 +397,7 @@ define EXTRACT # (directory)
 	  ;; \
 	  *) \
 	    case "$($(PKG)_SOURCE)" in \
-	      *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
+	      *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.lz | *.tlz | *.tar.xz | *.txz) \
 	        tar -xf $(DL_DIR)/$($(PKG)_SOURCE) -C $${EXTRACT_DIR}; \
 	      ;; \
 	      *.zip) \
