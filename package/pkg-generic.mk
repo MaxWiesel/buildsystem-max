@@ -5,7 +5,7 @@
 ################################################################################
 
 define TARGET_MAKE_CONFIGURE
-	@$(call MESSAGE,"Configuring")
+	@$(call MESSAGE,"Configuring $(pkgname)")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
@@ -14,7 +14,7 @@ endef
 define TARGET_MAKE_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS)
 endef
 
@@ -57,7 +57,7 @@ endef
 ################################################################################
 
 define HOST_MAKE_CONFIGURE
-	@$(call MESSAGE,"Configuring")
+	@$(call MESSAGE,"Configuring $(pkgname)")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
@@ -66,7 +66,7 @@ endef
 define HOST_MAKE_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS)
 endef
 
