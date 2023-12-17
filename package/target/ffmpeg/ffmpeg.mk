@@ -9,7 +9,7 @@ FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
-FFMPEG_DEPENDS = openssl zlib bzip2 freetype libvorbis rtmpdump libass libxml2 lame
+FFMPEG_DEPENDS = openssl zlib bzip2 freetype rtmpdump libass libxml2 libvorbis lame
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -31,6 +31,9 @@ FFMPEG_CONF_OPTS = \
 	--disable-fma3 \
 	--disable-fma4 \
 	--disable-inline-asm \
+	--disable-mips32r5 \
+	--disable-mipsdsp \
+	--disable-mipsdspr2 \
 	--disable-mmx \
 	--disable-mmxext \
 	--disable-sse \
@@ -322,26 +325,29 @@ FFMPEG_CONF_OPTS += \
 	--enable-armv6t2 \
 	--enable-neon \
 	--enable-vfp \
+	\
 	--cpu=cortex-a15
-endif
-ifeq ($(TARGET_ARCH),aarch64)
+
+else ifeq ($(TARGET_ARCH),aarch64)
 FFMPEG_CONF_OPTS += \
 	--enable-armv8 \
 	--enable-vfp \
 	--enable-neon
-endif
-ifeq ($(TARGET_ARCH),mips)
+
+else ifeq ($(TARGET_ARCH),mips)
 FFMPEG_CONF_OPTS += \
-	--disable-mips32r5 \
-	--disable-mipsdsp \
-	--disable-mipsdspr2 \
+	--disable-armv6 \
+	--disable-armv6t2 \
 	--disable-loongson2 \
 	--disable-loongson3 \
 	--disable-mmi \
 	--disable-msa \
 	--disable-msa2 \
 	--disable-neon \
-	--disable-vfp
+	--disable-vfp \
+	\
+	--cpu=generic
+
 endif
 
 FFMPEG_CONF_OPTS += \
@@ -355,6 +361,7 @@ FFMPEG_CONF_OPTS += \
 	--disable-stripping \
 	--disable-static \
 	--enable-shared \
+	--disable-extra-warnings \
 	--pkg-config="$(PKG_CONFIG_HOST_BINARY)" \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt "
