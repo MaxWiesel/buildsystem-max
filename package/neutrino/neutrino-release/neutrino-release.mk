@@ -15,21 +15,18 @@ neutrino-release-python:
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
-#	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
 	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ \
-		\( -name '*.a' \
-		-o -name '*.c' \
-		-o -name '*.doc' \
+		\( -name '*.doc' \
 		-o -name '*.egg-info' \
-		-o -name '*.la' \
-		-o -name '*.o' \
 		-o -name '*.pyx' \
 		-o -name '*.txt' \
 		-o -name 'test' \
 		-o -name 'tests' \
+		-o -name '*.rst' \
 		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -rf
 ifeq ($(OPTIMIZATIONS), size)
@@ -89,7 +86,9 @@ neutrino-release-base:
 	fi
 	find $(RELEASE_DIR) \
 		\( -name '*.a' \
+		-o -name '*.c' \
 		-o -name '*.la' \
+		-o -name '*.o' \
 		-o -name '*.old' \
 		-o -name '*.orig' \
 		-o -name '*.-config' \
