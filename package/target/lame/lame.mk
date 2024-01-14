@@ -13,7 +13,10 @@ LAME_DEPENDS += ncurses
 
 LAME_CONF_ENV = \
 	GTK_CONFIG=/bin/false
+
 LAME_CONF_OPTS = \
+	--datarootdir=$(REMOVE_docdir) \
+	--disable-gtktest \
 	--enable-dynamic-frontends
 
 $(D)/lame: | bootstrap
