@@ -4,21 +4,124 @@
 #
 ################################################################################
 
-TARGET_PYTHON_ENV = \
+TARGET_PYTHON_INTERPRETER = $(bindir)/python3
+
+TARGET_PYTHON_LIB_DIR = $(TARGET_LIB_DIR)/python$(basename $(PYTHON3_VERSION))
+TARGET_PYTHON_INCLUDE_DIR = $(TARGET_INCLUDE_DIR)/python$(basename $(PYTHON3_VERSION))
+TARGET_PYTHON_SITE_PACKAGES_DIR = $(TARGET_PYTHON_LIB_DIR)/site-packages
+TARGET_PYTHON_PATH = $(TARGET_PYTHON_LIB_DIR)
+
+# ------------------------------------------------------------------------------
+
+HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python3
+
+HOST_PYTHON_LIB_DIR = $(HOST_DIR)/lib/python$(basename $(PYTHON3_VERSION))
+HOST_PYTHON_INCLUDE_DIR = $(HOST_DIR)/include/python$(basename $(PYTHON3_VERSION))
+HOST_PYTHON_SITE_PACKAGES_DIR = $(HOST_PYTHON_LIB_DIR)/site-packages
+HOST_PYTHON_PATH = $(HOST_PYTHON_LIB_DIR)
+
+# -----------------------------------------------------------------------------
+
+PKG_PYTHON_HOST_PLATFORM = arm-linux-gnueabihf
+
+PKG_PYTHON_SYSCONFIGDATA_PATH = $(TARGET_PYTHON_PATH)/_sysconfigdata__linux_*.py
+PKG_PYTHON_SYSCONFIGDATA_NAME = `{ [ -e $(PKG_PYTHON_SYSCONFIGDATA_PATH) ] && basename $(PKG_PYTHON_SYSCONFIGDATA_PATH) .py; } || true`
+
+# Target python packages
+TARGET_PKG_PYTHON_ENV = \
+	_PYTHON_HOST_PLATFORM="$(PKG_PYTHON_HOST_PLATFORM)" \
+	_PYTHON_PROJECT_BASE="$(TARGET_PYTHON_PATH)" \
+	_PYTHON_SYSCONFIGDATA_NAME="$(PKG_PYTHON_SYSCONFIGDATA_NAME)" \
 	CC="$(TARGET_CC)" \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	LDSHARED="$(TARGET_CC) -shared" \
-	PYTHONPATH=$(TARGET_DIR)/$(PYTHON_SITE_PACKAGES_DIR)
+	CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_PYTHON_INCLUDE_DIR)" \
+	PYTHONPATH="$(TARGET_PYTHON_PATH)" \
+	PYTHONNOUSERSITE=1
 
-TARGET_PYTHON_OPTS = \
+TARGET_PKG_PYTHON_ENV += \
+	_python_sysroot=$(TARGET_DIR) \
+	_python_prefix=$(prefix) \
+	_python_exec_prefix=$(exec_prefix)
+
+# Host python packages
+HOST_PKG_PYTHON_ENV = \
+	$(HOST_CONFIGURE_ENV) \
+	LDSHARED="$(HOSTCC) -shared" \
+	PYTHONPATH=$(HOST_PYTHON_PATH) \
+	PYTHONNOUSERSITE=1
+
+# ------------------------------------------------------------------------------
+
+# Target setuptools-based packages
+TARGET_PKG_PYTHON_SETUPTOOLS_ENV = \
+	$(TARGET_PKG_PYTHON_ENV)
+
+TARGET_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS = \
 	$(if $(VERBOSE),,-q)
 
+TARGET_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS = \
+	$(if $(VERBOSE),,-q) \
+	--install-headers=$(TARGET_PYTHON_INCLUDE_DIR) \
+	--executable=$(TARGET_PYTHON_INTERPRETER) \
+	--root=$(TARGET_DIR) \
+	--prefix=$(prefix) \
+	--single-version-externally-managed
+
+# Host setuptools-based packages
+HOST_PKG_PYTHON_SETUPTOOLS_ENV = \
+	$(HOST_PKG_PYTHON_ENV)
+
+HOST_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS = \
+	$(if $(VERBOSE),,-q)
+
+HOST_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS = \
+	$(if $(VERBOSE),,-q) \
+	--prefix=$(HOST_DIR) \
+	--root=/ \
+	--single-version-externally-managed
+
+# -----------------------------------------------------------------------------
+
+# Target flit- and pep517-based packages
+TARGET_PKG_PYTHON_PEP517_ENV = \
+	$(TARGET_PKG_PYTHON_ENV)
+
+TARGET_PKG_PYTHON_PEP517_BUILD_OPTS =
+
+TARGET_PKG_PYTHON_PEP517_INSTALL_OPTS = \
+	--interpreter=/usr/bin/python \
+	--script-kind=posix \
+	--purelib=$(TARGET_PYTHON_SITE_PACKAGES_DIR) \
+	--headers=$(TARGET_PYTHON_INCLUDE_DIR) \
+	--scripts=$(TARGET_bindir) \
+	--data=$(TARGET_prefix)
+
+# Host flit- and pep517-based packages
+HOST_PKG_PYTHON_PEP517_ENV = \
+	$(HOST_PKG_PYTHON_ENV)
+
+HOST_PKG_PYTHON_PEP517_BUILD_OPTS =
+
+HOST_PKG_PYTHON_PEP517_INSTALL_OPTS = \
+	--interpreter=$(HOST_PYTHON_BINARY) \
+	--script-kind=posix \
+	--purelib=$(HOST_PYTHON_SITE_PACKAGES_DIR) \
+	--headers=$(HOST_PYTHON_INCLUDE_DIR) \
+	--scripts=$(HOST_DIR)/bin \
+	--data=$(HOST_DIR)
+
+HOST_PKG_PYTHON_PEP517_BOOTSTRAP_INSTALL_OPTS = \
+	--installdir=$(HOST_PYTHON_SITE_PACKAGES_DIR)
+
+# -----------------------------------------------------------------------------
+
 define TARGET_PYTHON_BUILD_CMDS_DEFAULT
-	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
-		$(TARGET_PYTHON_ENV) \
-		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-		$(HOST_PYTHON_BINARY) ./setup.py $(TARGET_PYTHON_OPTS) build --executable=/usr/bin/python
+	$(CD) $(PKG_BUILD_DIR); \
+		$($(PKG)_PYTHON_BASE_ENV) $($(PKG)_BUILD_ENV) $($(PKG)_ENV) \
+		$(HOST_PYTHON_BINARY) $($(PKG)_PYTHON_BASE_BUILD_CMD) \
+			$($(PKG)_BUILD_OPTS)
 endef
 
 define TARGET_PYTHON_BUILD
@@ -29,10 +132,10 @@ define TARGET_PYTHON_BUILD
 endef
 
 define TARGET_PYTHON_INSTALL_CMDS_DEFAULT
-	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
-		$(TARGET_PYTHON_ENV) \
-		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-		$(HOST_PYTHON_BINARY) ./setup.py $(TARGET_PYTHON_OPTS) install --root=$(TARGET_DIR) --prefix=/usr
+	$(CD) $(PKG_BUILD_DIR); \
+		$($(PKG)_PYTHON_BASE_ENV) $($(PKG)_INSTALL_ENV) $($(PKG)_ENV) \
+		$(HOST_PYTHON_BINARY) $($(PKG)_PYTHON_BASE_INSTALL_CMD) \
+			$($(PKG)_INSTALL_OPTS)
 endef
 
 define TARGET_PYTHON_INSTALL
@@ -42,6 +145,8 @@ define TARGET_PYTHON_INSTALL
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
 
+# -----------------------------------------------------------------------------
+
 define python-package
 	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
@@ -50,20 +155,13 @@ define python-package
 	$(call TARGET_FOLLOWUP)
 endef
 
-HOST_PYTHON_ENV = \
-	CC="$(HOSTCC)" \
-	CFLAGS="$(HOST_CFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)" \
-	LDSHARED="$(HOSTCC) -shared" \
-	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON_SITE_PACKAGES_DIR)
-
-HOST_PYTHON_OPTS = \
-	$(if $(VERBOSE),,-q)
+# -----------------------------------------------------------------------------
 
 define HOST_PYTHON_BUILD_CMDS_DEFAULT
-	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
-		$(HOST_PYTHON_ENV) \
-		$(HOST_PYTHON_BINARY) ./setup.py $(HOST_PYTHON_OPTS) build
+	$(CD) $(PKG_BUILD_DIR); \
+		$($(PKG)_PYTHON_BASE_ENV) $($(PKG)_BUILD_ENV) $($(PKG)_ENV) \
+		$(HOST_PYTHON_BINARY) $($(PKG)_PYTHON_BASE_BUILD_CMD) \
+			$($(PKG)_BUILD_OPTS)
 endef
 
 define HOST_PYTHON_BUILD
@@ -74,9 +172,10 @@ define HOST_PYTHON_BUILD
 endef
 
 define HOST_PYTHON_INSTALL_CMDS_DEFAULT
-	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
-		$(HOST_PYTHON_ENV) \
-		$(HOST_PYTHON_BINARY) ./setup.py $(HOST_PYTHON_OPTS) install --prefix=$(HOST_DIR)
+	$(CD) $(PKG_BUILD_DIR); \
+		$($(PKG)_PYTHON_BASE_ENV) $($(PKG)_INSTALL_ENV) $($(PKG)_ENV) \
+		$(HOST_PYTHON_BINARY) $($(PKG)_PYTHON_BASE_INSTALL_CMD) \
+			$($(PKG)_INSTALL_OPTS)
 endef
 
 define HOST_PYTHON_INSTALL
@@ -85,6 +184,8 @@ define HOST_PYTHON_INSTALL
 	$(Q)$(call $(PKG)_INSTALL_CMDS)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define host-python-package
 	$(eval PKG_MODE = $(pkg-mode))

@@ -8,7 +8,7 @@
 pkgname = $(subst -config,,$(subst -upgradeconfig,,$(subst .do_compile,,$(subst .do_configure,,$(subst .do_prepare,,$(basename $(@F)))))))
 
 pkg = $(call LOWERCASE,$(pkgname))
-PKG = $(call UPPERCASE,$(pkgname))
+PKG = $(call UPPERCASE,$(pkg))
 
 PKG_PARENT = $(subst HOST_,,$(PKG))
 PKG_DESTINATION = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),HOST,TARGET)
@@ -35,6 +35,16 @@ ifeq ($(PKG_DESTINATION),HOST)
   endif
   ifndef $(PKG)_SITE
     $(PKG)_SITE = $$($(PKG_PARENT)_SITE)
+  endif
+  ifndef $(PKG)_SITE_METHOD
+    $(PKG)_SITE_METHOD = $$($(PKG_PARENT)_SITE_METHOD)
+  endif
+  ifeq ($(PKG_MODE),PYTHON)
+    ifndef $(PKG)_SETUP_TYPE
+      ifdef $(PKG_PARENT)_SETUP_TYPE
+        $(PKG)_SETUP_TYPE = $$($(PKG_PARENT)_SETUP_TYPE)
+      endif
+    endif
   endif
 endif
 
@@ -108,6 +118,8 @@ ifndef $(PKG)_CONFIGURE_CMDS
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_CONFIGURE_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),GENERIC)
+    # no default configure commands in generic packages, but we allow it
+    # for packages with non-autotools configure call, e.g. zlib
     $(PKG)_CONFIGURE_CMDS =
   else ifeq ($(PKG_MODE),CMAKE)
     ifeq ($(PKG_DESTINATION),HOST)
@@ -140,6 +152,48 @@ ifndef $(PKG)_MAKE_ARGS
 endif
 ifndef $(PKG)_MAKE_OPTS
   $(PKG)_MAKE_OPTS =
+endif
+
+# python
+ifeq ($(PKG_MODE),PYTHON)
+  ifdef $(PKG)_SETUP_TYPE
+    # setuptools
+    ifeq ($$($(PKG)_SETUP_TYPE),setuptools)
+      ifeq ($(PKG_DESTINATION),HOST)
+        $(PKG)_PYTHON_BASE_ENV = $(HOST_PKG_PYTHON_SETUPTOOLS_ENV)
+        $(PKG)_PYTHON_BASE_BUILD_CMD = ./setup.py build $(HOST_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS)
+        $(PKG)_PYTHON_BASE_INSTALL_CMD = ./setup.py install $(HOST_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS)
+      else
+        $(PKG)_PYTHON_BASE_ENV = $(TARGET_PKG_PYTHON_SETUPTOOLS_ENV)
+        $(PKG)_PYTHON_BASE_BUILD_CMD = ./setup.py build $(TARGET_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS)
+        $(PKG)_PYTHON_BASE_INSTALL_CMD = ./setup.py install $(TARGET_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS)
+      endif
+    # flit, pep517
+    else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
+      ifeq ($(PKG_DESTINATION),HOST)
+        $(PKG)_PYTHON_BASE_ENV = $(HOST_PKG_PYTHON_PEP517_ENV)
+        $(PKG)_PYTHON_BASE_BUILD_CMD = -m build -n -w $(HOST_PKG_PYTHON_PEP517_BUILD_OPTS)
+        $(PKG)_PYTHON_BASE_INSTALL_CMD = $(PYINSTALLER) dist/* $(HOST_PKG_PYTHON_PEP517_INSTALL_OPTS)
+      else
+        $(PKG)_PYTHON_BASE_ENV = $(TARGET_PKG_PYTHON_PEP517_ENV)
+        $(PKG)_PYTHON_BASE_BUILD_CMD = -m build -n -w $(TARGET_PKG_PYTHON_PEP517_BUILD_OPTS)
+        $(PKG)_PYTHON_BASE_INSTALL_CMD = $(PYINSTALLER) dist/* $(TARGET_PKG_PYTHON_PEP517_INSTALL_OPTS)
+      endif
+    # flit-bootstrap
+    else ifeq ($$($(PKG)_SETUP_TYPE),flit-bootstrap)
+      ifeq ($(PKG_DESTINATION),HOST)
+        $(PKG)_PYTHON_BASE_ENV = $(HOST_PKG_PYTHON_PEP517_ENV)
+        $(PKG)_PYTHON_BASE_BUILD_CMD = -m flit_core.wheel $(HOST_PKG_PYTHON_PEP517_BUILD_OPTS)
+        $(PKG)_PYTHON_BASE_INSTALL_CMD ?= $(PYINSTALLER) dist/* $(HOST_PKG_PYTHON_PEP517_INSTALL_OPTS)
+      else
+        $$(error Invalid $(PKG)_SETUP_TYPE. flit-bootstrap only supported for host packages)
+      endif
+    else
+      $$(error Invalid $(PKG)_SETUP_TYPE. Valid options are 'setuptools', 'pep517' or 'flit')
+    endif
+  else
+    $$(error $(PKG_PARENT)_SETUP_TYPE must be set)
+  endif
 endif
 
 # common
@@ -273,9 +327,63 @@ ifeq ($$($(PKG)_AUTORECONF),YES)
   $(PKG)_AUTORECONF_HOOKS += $(PKG)_AUTORECONF_CMDS
 endif
 
+# auto-assign some dependencies
+ifndef $(PKG)_DEPENDS
+  $(PKG)_DEPENDS =
+endif
+ifeq ($(PKG_MODE),PYTHON)
+  # Add dependency on host-python3 at first
+  $(PKG)_DEPENDS = host-python3 $($(PKG)_DEPENDS)
+  ifeq ($$($(PKG)_SETUP_TYPE),setuptools)
+    $(PKG)_DEPENDS += host-python-setuptools
+  else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
+    $(PKG)_DEPENDS += host-python-pypa-build host-python-installer
+    ifeq ($$($(PKG)_SETUP_TYPE),flit)
+      $(PKG)_DEPENDS += host-python-flit-core
+    endif
+  else ifeq ($$($(PKG)_SETUP_TYPE),flit-bootstrap)
+    # Don't add dependency on host-python-installer for
+    # host-python-installer itself, and its dependencies.
+    $(PKG)_DEPENDS += $$(if $$(filter $$(pkg),host-python-flit-core host-python-installer),,host-python-installer)
+  endif
+  ifeq ($(PKG_DESTINATION),TARGET)
+    $(PKG)_DEPENDS += python3
+  endif
+endif
+
+# cleanup
+ifndef $(PKG)_KEEP_BUILD_DIR
+  $(PKG)_KEEP_BUILD_DIR = NO
+endif
+
 endef # PKG_CHECK_VARIABLES
 
 pkg-check-variables = $(call PKG_CHECK_VARIABLES)
+
+# -----------------------------------------------------------------------------
+
+# debug variables
+define PKG_DEBUG_VARIABLES # (control-flag(s))
+	@echo "control-flags:   $(1)"
+	@echo "pkgname:         $(pkgname)"
+	@echo "pkg:             $(pkg)"
+	@echo "PKG:             $(PKG)"
+	@echo "pkg_parent:      $(pkg_parent)"
+	@echo "PKG_PARENT:      $(PKG_PARENT)"
+	@echo "PKG_DESTINATION: $(PKG_DESTINATION)"
+	@echo "PKG_MODE:        $(PKG_MODE)"
+	@echo "PKG_BUILD_DIR:   $(PKG_BUILD_DIR)"
+	@echo "PKG_FILES_DIR:   $(PKG_FILES_DIR)"
+	@echo "PKG_PATCHES_DIR: $(PKG_PATCHES_DIR)"
+	@$(call draw_line);
+	@echo "$(PKG)_VERSION:        $($(PKG)_VERSION)"
+	@echo "$(PKG)_DIR:            $($(PKG)_DIR)"
+	@echo "$(PKG)_SOURCE:         $($(PKG)_SOURCE)"
+	@echo "$(PKG)_SITE:           $($(PKG)_SITE)"
+	@echo "$(PKG)_SITE_METHOD:    $($(PKG)_SITE_METHOD)"
+	@echo "$(PKG)_DEPENDENCIES:   $($(PKG)_DEPENDENCIES)"
+	#false
+endef
 
 # -----------------------------------------------------------------------------
 
@@ -533,7 +641,7 @@ define HOST_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
-	$(Q)$(call CLEANUP)
+	$(Q)$(if $(filter $($(PKG)_KEEP_BUILD_DIR),NO),$(call CLEANUP))
 	$(foreach hook,$($(PKG)_HOST_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
@@ -549,7 +657,7 @@ define TARGET_FOLLOWUP
 		$($(PKG)_INSTALL_INIT_SYSV))
 	$(Q)$(call REWRITE_CONFIG_SCRIPTS)
 	$(Q)$(call REWRITE_LIBTOOL)
-	$(Q)$(call CLEANUP)
+	$(Q)$(if $(filter $($(PKG)_KEEP_BUILD_DIR),NO),$(call CLEANUP))
 	$(foreach hook,$($(PKG)_TARGET_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_TARGET_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)

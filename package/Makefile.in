@@ -238,6 +238,7 @@ REMOVE-RC.D     = support/scripts/update-rc.d -f -r $(TARGET_DIR)
 
 AUTOCONF_VER = $(shell autoconf --version | head -1 | awk '{print $$4}')
 AUTOCONF_NEW = $(shell echo $(AUTOCONF_VER)\>=2.70 | bc )
+PYINSTALLER = $(BASE_DIR)/support/scripts/pyinstaller.py
 
 # build helper variables
 INSTALL      = $(shell which install || type -p install || echo install)
