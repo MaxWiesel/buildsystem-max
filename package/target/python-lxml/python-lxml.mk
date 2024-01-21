@@ -4,12 +4,20 @@
 #
 ################################################################################
 
-PYTHON_LXML_VERSION = 4.9.3
+PYTHON_LXML_VERSION = 5.1.0
 PYTHON_LXML_DIR = lxml-$(PYTHON_LXML_VERSION)
 PYTHON_LXML_SOURCE = lxml-$(PYTHON_LXML_VERSION).tar.gz
-PYTHON_LXML_SITE = https://files.pythonhosted.org/packages/30/39/7305428d1c4f28282a4f5bdbef24e0f905d351f34cf351ceb131f5cddf78
+PYTHON_LXML_SITE = https://github.com/lxml/lxml/releases/download/lxml-5.1.0
 
-PYTHON_LXML_DEPENDS = python python-setuptools libxml2 libxslt zlib
+PYTHON_LXML_SETUP_TYPE = setuptools
+
+PYTHON_LXML_DEPENDS = libxml2 libxslt zlib
+
+# python-lxml needs these scripts in order to properly detect libxml2 and
+# libxslt compiler and linker flags
+PYTHON_LXML_BUILD_OPTS = \
+	--with-xslt-config=$(HOST_DIR)/bin/xslt-config \
+	--with-xml2-config=$(HOST_DIR)/bin/xml2-config
 
 $(D)/python-lxml: | bootstrap
 	$(call python-package)
