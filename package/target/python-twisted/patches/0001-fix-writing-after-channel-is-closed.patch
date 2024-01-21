@@ -1,6 +1,6 @@
 --- a/src/twisted/web/http.py
 +++ b/src/twisted/web/http.py
-@@ -1108,7 +1108,7 @@
+@@ -1257,7 +1257,7 @@
          if data:
              if self.chunked:
                  self.channel.writeSequence(toChunk(data))
@@ -8,5 +8,4 @@
 +            elif self.channel:
                  self.channel.write(data)
  
-     def addCookie(self, k, v, expires=None, domain=None, path=None,
-
+     def addCookie(
