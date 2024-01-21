@@ -332,8 +332,7 @@ ifndef $(PKG)_DEPENDS
   $(PKG)_DEPENDS =
 endif
 ifeq ($(PKG_MODE),PYTHON)
-  # Add dependency on host-python3 at first
-  $(PKG)_DEPENDS = host-python3 $($(PKG)_DEPENDS)
+  $(PKG)_DEPENDS += host-python3
   ifeq ($$($(PKG)_SETUP_TYPE),setuptools)
     $(PKG)_DEPENDS += host-python-setuptools
   else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
