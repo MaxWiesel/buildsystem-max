@@ -11,6 +11,9 @@ TARGET_PYTHON_INCLUDE_DIR = $(TARGET_INCLUDE_DIR)/python$(basename $(PYTHON3_VER
 TARGET_PYTHON_SITE_PACKAGES_DIR = $(TARGET_PYTHON_LIB_DIR)/site-packages
 TARGET_PYTHON_PATH = $(TARGET_PYTHON_LIB_DIR)
 
+# Provided to other packages
+PYTHON3_PATH = $(TARGET_DIR)/usr/lib/python$(basename $(PYTHON3_VERSION))/
+
 # ------------------------------------------------------------------------------
 
 HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python3
@@ -22,7 +25,7 @@ HOST_PYTHON_PATH = $(HOST_PYTHON_LIB_DIR)
 
 # -----------------------------------------------------------------------------
 
-PKG_PYTHON_HOST_PLATFORM = $(TARGET_ARCH)-linux
+PKG_PYTHON_HOST_PLATFORM = linux-$(TARGET_ARCH)
 PKG_PYTHON_PROJECT_BASE = $(BUILD_DIR)/$(PYTHON3_DIR)
 
 # basename does not evaluate if a file exists, so we must check to ensure
@@ -38,8 +41,11 @@ TARGET_PKG_PYTHON_ENV = \
 	_PYTHON_SYSCONFIGDATA_NAME="$(PKG_PYTHON_SYSCONFIGDATA_NAME)"
 
 TARGET_PKG_PYTHON_ENV += \
-	$(TARGET_CONFIGURE_ENV) \
+	CC="$(TARGET_CC)" \
+	CFLAGS="$(TARGET_CFLAGS)" \
+	LDFLAGS="$(TARGET_LDFLAGS)" \
 	LDSHARED="$(TARGET_CC) -shared" \
+	CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_PYTHON_INCLUDE_DIR)" \
 	PYTHONPATH="$(TARGET_PYTHON_PATH)" \
 	PYTHONNOUSERSITE=1
 
