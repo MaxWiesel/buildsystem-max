@@ -11,5 +11,20 @@ PYTHON_REQUESTS_SITE = https://files.pythonhosted.org/packages/source/r/requests
 
 PYTHON_REQUESTS_SETUP_TYPE = setuptools
 
+PYTHON_REQUESTS_DEPENDS = \
+	host-python-urllib3 \
+	python-cchardet \
+	python-idna \
+	python-certifi
+
+HOST_PYTHON_REQUESTS_DEPENDS = \
+	host-python-certifi \
+	host-python-charset-normalizer \
+	host-python-idna \
+	host-python-urllib3
+
 $(D)/python-requests: | bootstrap
 	$(call python-package)
+
+$(D)/host-python-requests: | bootstrap
+	$(call host-python-package)
