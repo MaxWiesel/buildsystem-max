@@ -374,13 +374,12 @@ define PKG_DEBUG_VARIABLES # (control-flag(s))
 	@echo "PKG_BUILD_DIR:   $(PKG_BUILD_DIR)"
 	@echo "PKG_FILES_DIR:   $(PKG_FILES_DIR)"
 	@echo "PKG_PATCHES_DIR: $(PKG_PATCHES_DIR)"
-	@$(call draw_line);
 	@echo "$(PKG)_VERSION:        $($(PKG)_VERSION)"
 	@echo "$(PKG)_DIR:            $($(PKG)_DIR)"
 	@echo "$(PKG)_SOURCE:         $($(PKG)_SOURCE)"
 	@echo "$(PKG)_SITE:           $($(PKG)_SITE)"
 	@echo "$(PKG)_SITE_METHOD:    $($(PKG)_SITE_METHOD)"
-	@echo "$(PKG)_DEPENDENCIES:   $($(PKG)_DEPENDENCIES)"
+	@echo "$(PKG)_DEPENDS:        $($(PKG)_DEPENDS)"
 	#false
 endef
 
