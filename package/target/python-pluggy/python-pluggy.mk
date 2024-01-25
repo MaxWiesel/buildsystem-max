@@ -11,9 +11,12 @@ PYTHON_PLUGGY_SITE = https://files.pythonhosted.org/packages/source/p/pluggy
 
 PYTHON_PLUGGY_SETUP_TYPE = setuptools
 
-PYTHON_PLUGGY_DEPENDS = host-python-setuptools-scm
+PYTHON_PLUGGY_DEPENDS = \
+	host-python-setuptools-scm
 
-HOST_PYTHON_PLUGGY_DEPENDS = host-python-setuptools-scm
+HOST_PYTHON_PLUGGY_DEPENDS = \
+	host-python-setuptools-scm \
+	host-python-pip
 
 $(D)/python-pluggy: | bootstrap
 	$(call python-package)
