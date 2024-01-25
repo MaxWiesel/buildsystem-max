@@ -4,15 +4,13 @@
 #
 ################################################################################
 
-PYTHON3_VERSION = 3.11.5
+PYTHON3_VERSION_MAJOR = 3.11
+PYTHON3_VERSION = $(PYTHON3_VERSION_MAJOR).5
 PYTHON3_DIR = Python-$(PYTHON3_VERSION)
 PYTHON3_SOURCE = Python-$(PYTHON3_VERSION).tar.xz
 PYTHON3_SITE = https://www.python.org/ftp/python/$(PYTHON3_VERSION)
 
 PYTHON3_DEPENDS = host-python3 libffi ncurses sqlite bzip2 zlib expat openssl
-
-# no cleanup
-PYTHON3_KEEP_BUILD_DIR = YES
 
 PYTHON3_AUTORECONF = YES
 
@@ -24,9 +22,19 @@ PYTHON3_CONF_ENV = \
 	ac_cv_have_lchflags=no \
 	ac_cv_broken_sem_getvalue=no \
 	ac_cv_have_long_long_format=yes \
-	ac_cv_file__dev_ptmx=yes \
-	ac_cv_file__dev_ptc=no \
 	ac_cv_working_tzset=yes
+
+# Bypass configure tests for cross compilation
+PYTHON3_CONF_ENV += \
+	ac_cv_buggy_getaddrinfo=no \
+	ac_cv_file__dev_ptc=no \
+	ac_cv_file__dev_ptmx=yes
+
+# Disable stdlib modules
+# Check for a better way in the future: https://github.com/python/cpython/issues/98558
+PYTHON3_CONF_ENV += \
+	py_cv_module__tkinter=n/a \
+	py_cv_module_nis=n/a
 
 # Make python believe we don't have 'hg', so that it doesn't try to
 # communicate over the network during the build.
@@ -35,10 +43,11 @@ PYTHON3_CONF_ENV += \
 
 PYTHON3_CONF_OPTS = \
 	--enable-shared \
+	--disable-static \
 	--with-build-python=$(HOST_PYTHON_BINARY) \
 	--with-expat=system \
 	--with-libmpdec=none \
-	--with-openssl=$(TARGET_LIB_DIR) \
+	--with-openssl=$(TARGET_DIR)/usr \
 	--with-system-ffi \
 	--without-cxx-main \
 	--without-ensurepip \
@@ -54,6 +63,21 @@ PYTHON3_CONF_OPTS = \
 	--disable-readline \
 	--disable-test-modules \
 	--disable-tk
+
+define PYTHON3_INSTALL_SYMLINK
+	ln -sf python3 $(TARGET_BIN_DIR)/python
+endef
+PYTHON3_TARGET_FINALIZE_HOOKS += PYTHON3_INSTALL_SYMLINK
+
+define PYTHON3_INSTALL_PYTHON_VENV
+	$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/python-venv $(TARGET_BIN_DIR)/python-venv
+endef
+PYTHON3_TARGET_FINALIZE_HOOKS += PYTHON3_INSTALL_PYTHON_VENV
+
+define PYTHON3_TARGET_CLEANUP
+	rm -rf $(addprefix $(TARGET_BIN_DIR)/,python3-config python$(PYTHON3_VERSION_MAJOR)-config smtpd.py.*)
+endef
+PYTHON3_TARGET_FINALIZE_HOOKS += PYTHON3_TARGET_CLEANUP
 
 $(D)/python3: | bootstrap
 	$(call autotools-package)
