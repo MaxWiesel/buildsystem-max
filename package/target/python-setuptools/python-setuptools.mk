@@ -11,14 +11,14 @@ PYTHON_SETUPTOOLS_SITE = https://files.pythonhosted.org/packages/source/s/setupt
 
 PYTHON_SETUPTOOLS_SETUP_TYPE = pep517
 
-PYTHON_SETUPTOOLS_DEPENDS = host-python-wheel
+PYTHON_SETUPTOOLS_DEPENDS = \
+	host-python-wheel
+
+HOST_PYTHON_SETUPTOOLS_DEPENDS = \
+	host-python-wheel
 
 $(D)/python-setuptools: | bootstrap
 	$(call python-package)
-
-# -----------------------------------------------------------------------------
-
-HOST_PYTHON_SETUPTOOLS_DEPENDS = host-python-wheel
 
 $(D)/host-python-setuptools: | bootstrap
 	$(call host-python-package)

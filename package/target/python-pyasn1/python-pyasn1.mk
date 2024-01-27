@@ -11,7 +11,8 @@ PYTHON_PYASN1_SITE = https://pypi.python.org/packages/source/p/pyasn1
 
 PYTHON_PYASN1_SETUP_TYPE = setuptools
 
-PYTHON_PYASN1_DEPENDS = python-pyasn1-modules
+PYTHON_PYASN1_DEPENDS = \
+	python-pyasn1-modules
 
 $(D)/python-pyasn1: | bootstrap
 	$(call python-package)

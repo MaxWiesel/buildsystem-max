@@ -11,7 +11,13 @@ PYTHON_TWISTED_SITE = https://files.pythonhosted.org/packages/b2/ce/cbb56597127b
 
 PYTHON_TWISTED_SETUP_TYPE = setuptools
 
-PYTHON_TWISTED_DEPENDS = python-zope-interface python-constantly host-python-incremental python-incremental python-pyopenssl python-service-identity
+PYTHON_TWISTED_DEPENDS = \
+	host-python-incremental \
+	python-zope-interface \
+	python-constantly \
+	python-incremental \
+	python-pyopenssl \
+	python-service-identity
 
 $(D)/python-twisted: | bootstrap
 	$(call python-package)

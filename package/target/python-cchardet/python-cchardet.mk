@@ -11,7 +11,8 @@ PYTHON_CCHARDET_SITE = https://files.pythonhosted.org/packages/source/c/cchardet
 
 PYTHON_CCHARDET_SETUP_TYPE = setuptools
 
-PYTHON_CCHARDET_DEPENDS = host-python-cython
+PYTHON_CCHARDET_DEPENDS = \
+	host-python-cython
 
 $(D)/python-cchardet: | bootstrap
 	$(call python-package)
