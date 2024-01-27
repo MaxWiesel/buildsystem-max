@@ -12,7 +12,7 @@ PYTHON_CHARSET_NORMALIZER_SITE = https://files.pythonhosted.org/packages/source/
 PYTHON_CHARSET_NORMALIZER_SETUP_TYPE = setuptools
 
 $(D)/python-charset-normalizer: | bootstrap
-	$(call host-python-package)
+	$(call python-package)
 
 $(D)/host-python-charset-normalizer: | bootstrap
 	$(call host-python-package)
