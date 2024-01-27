@@ -14,7 +14,5 @@ PYTHON_PIP_SETUP_TYPE = setuptools
 $(D)/python-pip: | bootstrap
 	$(call python-package)
 
-# -----------------------------------------------------------------------------
-
 $(D)/host-python-pip:  | bootstrap
 	$(call host-python-package)
