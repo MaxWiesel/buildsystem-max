@@ -6,27 +6,23 @@
 
 TARGET_PYTHON_INTERPRETER = $(bindir)/python3
 
-TARGET_PYTHON_LIB_DIR = $(TARGET_LIB_DIR)/python$(basename $(PYTHON3_VERSION))
-TARGET_PYTHON_INCLUDE_DIR = $(TARGET_INCLUDE_DIR)/python$(basename $(PYTHON3_VERSION))
+TARGET_PYTHON_LIB_DIR = $(TARGET_LIB_DIR)/python$(PYTHON3_VERSION_MAJOR)
+TARGET_PYTHON_INCLUDE_DIR = $(TARGET_INCLUDE_DIR)/python$(PYTHON3_VERSION_MAJOR)
 TARGET_PYTHON_SITE_PACKAGES_DIR = $(TARGET_PYTHON_LIB_DIR)/site-packages
-TARGET_PYTHON_PATH = $(TARGET_PYTHON_LIB_DIR)
-
-# Provided to other packages
-PYTHON3_PATH = $(TARGET_DIR)/usr/lib/python$(basename $(PYTHON3_VERSION))/
+TARGET_PYTHON_PATH = $(TARGET_PYTHON_LIB_DIR):$(TARGET_PYTHON_SITE_PACKAGES_DIR)
 
 # ------------------------------------------------------------------------------
 
 HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python3
 
-HOST_PYTHON_LIB_DIR = $(HOST_DIR)/lib/python$(basename $(PYTHON3_VERSION))
-HOST_PYTHON_INCLUDE_DIR = $(HOST_DIR)/include/python$(basename $(PYTHON3_VERSION))
+HOST_PYTHON_LIB_DIR = $(HOST_DIR)/lib/python$(PYTHON3_VERSION_MAJOR)
+HOST_PYTHON_INCLUDE_DIR = $(HOST_DIR)/include/python$(PYTHON3_VERSION_MAJOR)
 HOST_PYTHON_SITE_PACKAGES_DIR = $(HOST_PYTHON_LIB_DIR)/site-packages
-HOST_PYTHON_PATH = $(HOST_PYTHON_LIB_DIR)
+HOST_PYTHON_PATH = $(HOST_PYTHON_LIB_DIR):$(HOST_PYTHON_SITE_PACKAGES_DIR)
 
 # -----------------------------------------------------------------------------
 
 PKG_PYTHON_HOST_PLATFORM = linux-$(TARGET_ARCH)
-PKG_PYTHON_PROJECT_BASE = $(BUILD_DIR)/$(PYTHON3_DIR)
 
 # basename does not evaluate if a file exists, so we must check to ensure
 # the _sysconfigdata__linux_*.py file exists. The "|| true" is added to return
@@ -37,7 +33,6 @@ PKG_PYTHON_SYSCONFIGDATA_NAME = `{ [ -e $(PKG_PYTHON_SYSCONFIGDATA_PATH) ] && ba
 # Target python packages
 TARGET_PKG_PYTHON_ENV = \
 	_PYTHON_HOST_PLATFORM="$(PKG_PYTHON_HOST_PLATFORM)" \
-	_PYTHON_PROJECT_BASE="$(PKG_PYTHON_PROJECT_BASE)" \
 	_PYTHON_SYSCONFIGDATA_NAME="$(PKG_PYTHON_SYSCONFIGDATA_NAME)"
 
 TARGET_PKG_PYTHON_ENV += \
@@ -58,10 +53,10 @@ TARGET_PKG_PYTHON_ENV += \
 HOST_PKG_PYTHON_ENV = \
 	$(HOST_CONFIGURE_ENV) \
 	LDSHARED="$(HOSTCC) -shared" \
-	PYTHONPATH=$(HOST_PYTHON_PATH) \
+	PYTHONPATH="$(HOST_PYTHON_PATH)" \
 	PYTHONNOUSERSITE=1
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 # Target setuptools-based packages
 TARGET_PKG_PYTHON_SETUPTOOLS_ENV = \
@@ -100,7 +95,7 @@ TARGET_PKG_PYTHON_PEP517_ENV = \
 TARGET_PKG_PYTHON_PEP517_BUILD_OPTS =
 
 TARGET_PKG_PYTHON_PEP517_INSTALL_OPTS = \
-	--interpreter=/usr/bin/python \
+	--interpreter=/usr/bin/python3 \
 	--script-kind=posix \
 	--purelib=$(TARGET_PYTHON_SITE_PACKAGES_DIR) \
 	--headers=$(TARGET_PYTHON_INCLUDE_DIR) \
