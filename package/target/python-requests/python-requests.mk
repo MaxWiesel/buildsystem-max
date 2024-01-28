@@ -12,11 +12,10 @@ PYTHON_REQUESTS_SITE = https://files.pythonhosted.org/packages/source/r/requests
 PYTHON_REQUESTS_SETUP_TYPE = setuptools
 
 PYTHON_REQUESTS_DEPENDS = \
-	python-urllib3 \
-	python-cchardet \
+	python-certifi \
 	python-charset-normalizer \
 	python-idna \
-	python-certifi
+	python-urllib3
 
 HOST_PYTHON_REQUESTS_DEPENDS = \
 	host-python-certifi \
