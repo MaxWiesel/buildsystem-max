@@ -14,6 +14,12 @@ PYTHON3_DEPENDS = host-python3 libffi ncurses sqlite bzip2 zlib expat openssl
 
 PYTHON3_AUTORECONF = YES
 
+# Provided to other packages
+PYTHON3_LIB_DIR = usr/lib/python$(PYTHON3_VERSION_MAJOR)
+PYTHON3_INCLUDE_DIR = usr/include/python$(PYTHON3_VERSION_MAJOR)
+PYTHON3_SITE_PACKAGES_DIR = $(PYTHON_LIB_DIR)/site-packages
+PYTHON3_PATH = $(TARGET_DIR)/$(PYTHON3_LIB_DIR)/
+
 PYTHON3_CONF_ENV = \
 	ac_sys_system=Linux \
 	ac_sys_release=2 \
@@ -82,7 +88,7 @@ PYTHON3_TARGET_FINALIZE_HOOKS += PYTHON3_TARGET_CLEANUP
 $(D)/python3: | bootstrap
 	$(call autotools-package)
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 HOST_PYTHON3_DEPENDS = host-libffi
 
