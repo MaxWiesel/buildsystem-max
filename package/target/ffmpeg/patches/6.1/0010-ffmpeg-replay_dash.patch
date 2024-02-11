@@ -1,6 +1,6 @@
 --- a/libavformat/dashdec.c
 +++ b/libavformat/dashdec.c
-@@ -1401,6 +1401,9 @@
+@@ -1400,6 +1400,9 @@
                  } else {
                      num = pls->first_seq_no + (((c->publish_time - c->time_shift_buffer_depth + pls->fragment_duration) - c->suggested_presentation_delay) * pls->fragment_timescale) / pls->fragment_duration;
                  }
