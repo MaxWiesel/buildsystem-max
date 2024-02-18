@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBPNG_VERSION = 1.6.41
+LIBPNG_VERSION = 1.6.42
 LIBPNG_SERIES = 16
 LIBPNG_DIR = libpng-$(LIBPNG_VERSION)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VERSION).tar.xz
