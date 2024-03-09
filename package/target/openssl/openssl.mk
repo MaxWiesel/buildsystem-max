@@ -29,7 +29,8 @@ OPENSSL_CONF_OPTS += \
 	shared \
 	threads \
 	no-hw \
-	no-rc5 \
+	no-engine \
+	no-sse2 \
 	no-tests \
 	no-fuzz-afl \
 	no-fuzz-libfuzzer
