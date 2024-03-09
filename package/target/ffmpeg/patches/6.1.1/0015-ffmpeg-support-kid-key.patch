@@ -78,7 +78,7 @@
  int ff_mp4_read_descr_len(AVIOContext *pb);
 --- a/libavformat/mov.c
 +++ b/libavformat/mov.c
-@@ -7120,19 +7120,62 @@
+@@ -7130,19 +7130,62 @@
      return 0;
  }
  
@@ -142,7 +142,7 @@
          if (ret < 0) {
              return ret;
          }
-@@ -7178,15 +7221,21 @@
+@@ -7188,15 +7231,21 @@
      int i, ret;
      int num_of_encrypted_blocks;
      uint8_t iv[16];
@@ -165,7 +165,7 @@
          if (ret < 0) {
              return ret;
          }
-@@ -7237,15 +7286,21 @@
+@@ -7247,15 +7296,21 @@
  {
      int i, ret, rem_bytes;
      uint8_t *data;
@@ -188,7 +188,7 @@
          if (ret < 0) {
              return ret;
          }
-@@ -7303,15 +7358,21 @@
+@@ -7313,15 +7368,21 @@
      int i, ret, rem_bytes;
      uint8_t iv[16];
      uint8_t *data;
@@ -211,7 +211,7 @@
          if (ret < 0) {
              return ret;
          }
-@@ -7454,7 +7515,7 @@
+@@ -7464,7 +7525,7 @@
              return AVERROR_INVALIDDATA;
          }
  
@@ -220,7 +220,7 @@
              return cenc_decrypt(mov, sc, encrypted_sample, pkt->data, pkt->size);
          } else {
              size_t size;
-@@ -8603,12 +8664,6 @@
+@@ -8613,12 +8674,6 @@
      MOVAtom atom = { AV_RL32("root") };
      int i;
  
@@ -233,7 +233,7 @@
      mov->fc = s;
      mov->trak_index = -1;
      /* .mov and .mp4 aren't streamable anyway (only progressive download if moov is before mdat) */
-@@ -9307,7 +9362,8 @@
+@@ -9317,7 +9372,8 @@
          "Fixed key used for handling Audible AAX files", OFFSET(audible_fixed_key),
          AV_OPT_TYPE_BINARY, {.str="77214d4b196a87cd520045fd20a51d67"},
          .flags = AV_OPT_FLAG_DECODING_PARAM },

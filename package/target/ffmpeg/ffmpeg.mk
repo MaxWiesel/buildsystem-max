@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-FFMPEG_VERSION ?= 4.4.4
+FFMPEG_VERSION ?= 6.1.1
 FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
