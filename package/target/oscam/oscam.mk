@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OSCAM_FLAVOUR ?= oscam-smod
+OSCAM_FLAVOUR ?= oscam
 
 OSCAM_VERSION ?= master
 ifeq ($(OSCAM_FLAVOUR),oscam)
@@ -18,7 +18,7 @@ OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
 OSCAM_SITE_METHOD = git
 
-OSCAM_DEPENDS = openssl libusb
+OSCAM_DEPENDS = openssl libusb libdvbcsa
 
 OSCAM_CONF_OPTS = \
 	--disable all \
@@ -29,15 +29,17 @@ OSCAM_CONF_OPTS = \
 	CLOCKFIX \
 	HAVE_DVBAPI \
 	IRDETO_GUESSING \
-	MODULE_MONITOR \
+	LCDSUPPORT \
 	READ_SDT_CHARSETS \
 	TOUCH \
 	WEBIF_JQUERY \
 	WEBIF_LIVELOG \
 	WITH_DEBUG \
-	WITH_EMU \
 	WITH_LB \
 	WITH_NEUTRINO \
+	\
+	WITH_EMU \
+	WITH_SOFTCAM \
 	\
 	MODULE_CAMD35 \
 	MODULE_CAMD35_TCP \
@@ -45,7 +47,9 @@ OSCAM_CONF_OPTS = \
 	MODULE_CCCSHARE \
 	MODULE_CONSTCW \
 	MODULE_GBOX \
+	MODULE_MONITOR \
 	MODULE_NEWCAMD \
+	MODULE_STREAMRELAY \
 	\
 	READER_CONAX \
 	READER_CRYPTOWORKS \
@@ -58,8 +62,8 @@ OSCAM_CONF_OPTS = \
 	\
 	CARDREADER_INTERNAL \
 	CARDREADER_PHOENIX \
-	CARDREADER_SMARGO \
-	CARDREADER_SC8IN1
+	CARDREADER_SC8IN1 \
+	CARDREADER_SMARGO
 
 oscam.do_prepare:
 	$(call PREPARE)
