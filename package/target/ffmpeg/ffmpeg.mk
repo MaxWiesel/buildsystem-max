@@ -9,7 +9,7 @@ FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
-FFMPEG_DEPENDS = openssl zlib bzip2 freetype rtmpdump libass libxml2 libvorbis lame
+FFMPEG_DEPENDS = openssl zlib bzip2 harfbuzz freetype rtmpdump libass libxml2 libvorbis lame
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -294,11 +294,14 @@ FFMPEG_CONF_OPTS = \
 	--enable-bzlib \
 	--enable-libass \
 	--enable-libfreetype \
+	--enable-libharfbuzz \
+	--enable-libfribidi \
 	--enable-libmp3lame \
 	--enable-librtmp \
 	--enable-libxml2 \
 	--enable-libvorbis \
 	--enable-network \
+	--enable-gpl \
 	--enable-nonfree \
 	--enable-openssl \
 	--enable-zlib \
@@ -321,8 +324,6 @@ FFMPEG_CONF_OPTS = \
 
 ifeq ($(TARGET_ARCH),arm)
 FFMPEG_CONF_OPTS += \
-	--enable-armv6 \
-	--enable-armv6t2 \
 	--enable-neon \
 	--enable-vfp \
 	\
@@ -330,9 +331,8 @@ FFMPEG_CONF_OPTS += \
 
 else ifeq ($(TARGET_ARCH),aarch64)
 FFMPEG_CONF_OPTS += \
-	--enable-armv8 \
-	--enable-vfp \
-	--enable-neon
+	--enable-neon \
+	--enable-vfp
 
 else ifeq ($(TARGET_ARCH),mips)
 FFMPEG_CONF_OPTS += \
