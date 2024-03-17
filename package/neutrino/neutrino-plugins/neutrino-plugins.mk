@@ -6,9 +6,11 @@
 
 NEUTRINO_PLUGINS_VERSION ?= master
 ifeq ($(FLAVOUR),neutrino-max-test)
+NEUTRINO_PLUGINS = neutrino-plugins-max-test
 NEUTRINO_PLUGINS_DIR = neutrino-plugins-max-test.git
 NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max-test.git
 else
+NEUTRINO_PLUGINS = neutrino-plugins-max
 NEUTRINO_PLUGINS_DIR = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max.git
 endif

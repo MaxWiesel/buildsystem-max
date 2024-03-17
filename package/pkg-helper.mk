@@ -28,20 +28,24 @@ patch:
 	@make neutrino-patch
 	@make libstb-hal-patch
 	@make neutrino-plugins-patch
+	@find $(OWN_PATCHES) -type f -size 0b -exec rm {} \;
 
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO)-$(DATE).patch ... $(TERM_NORMAL)"
 	$(shell cd $(BUILD_DIR)/$(NEUTRINO_DIR) && git diff > $(OWN_PATCHES)/$(NEUTRINO)-$(DATE).patch)
+	$(shell cp $(OWN_PATCHES)/$(NEUTRINO)-$(DATE).patch $(OWN_PATCHES)/$(NEUTRINO).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-patch:
 	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL)-$(DATE).patch ... $(TERM_NORMAL)"
 	$(shell cd $(BUILD_DIR)/$(LIBSTB_HAL_DIR) && git diff > $(OWN_PATCHES)/$(LIBSTB_HAL)-$(DATE).patch)
+	$(shell cp $(OWN_PATCHES)/$(LIBSTB_HAL)-$(DATE).patch $(OWN_PATCHES)/$(LIBSTB_HAL).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-plugins-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO_PLUGINS_DIR)-$(DATE).patch ... $(TERM_NORMAL)"
-	$(shell cd $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR) && git diff > $(OWN_PATCHES)/$(NEUTRINO_PLUGINS_DIR)-$(DATE).patch)
+	$(shell cd $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR) && git diff > $(OWN_PATCHES)/$(NEUTRINO_PLUGINS)-$(DATE).patch)
+	$(shell cp $(OWN_PATCHES)/$(NEUTRINO_PLUGINS)-$(DATE).patch $(OWN_PATCHES)/$(NEUTRINO_PLUGINS).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 # -----------------------------------------------------------------------------
