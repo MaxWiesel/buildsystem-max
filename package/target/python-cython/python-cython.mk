@@ -11,5 +11,5 @@ PYTHON_CYTHON_SITE = https://files.pythonhosted.org/packages/source/c/cython
 
 PYTHON_CYTHON_SETUP_TYPE = setuptools
 
-$(D)/host-python-cython: | bootstrap
+host-python-cython: | bootstrap
 	$(call host-python-package)

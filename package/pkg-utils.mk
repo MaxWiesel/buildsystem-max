@@ -10,12 +10,14 @@ pkgname = $(subst -config,,$(subst -upgradeconfig,,$(subst .do_compile,,$(subst 
 pkg = $(call LOWERCASE,$(pkgname))
 PKG = $(call UPPERCASE,$(pkg))
 
-PKG_PARENT = $(subst HOST_,,$(PKG))
+pkg_parent = $(subst host-,,$(pkgname))
+PKG_PARENT = $(call UPPERCASE,$(pkg_parent))
+
 PKG_DESTINATION = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),HOST,TARGET)
 
 PKG_BUILD_DIR = $(BUILD_DIR)/$($(PKG)_DIR)
-PKG_FILES_DIR = $(BASE_DIR)/package/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/files
-PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/patches
+PKG_FILES_DIR = $(PACKAGE_DIR)/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/files
+PKG_PATCHES_DIR = $(PACKAGE_DIR)/*/$(subst -vmlinuz-initrd,,$(subst -platform-util,,$(subst -driver,,$(subst -libs,,$(subst -libgles,,$(subst -libgles-header,,$(subst -mali-module,,$(subst host-,,$(pkgname)))))))))/patches
 
 # -----------------------------------------------------------------------------
 
@@ -452,7 +454,7 @@ define DOWNLOAD # (site,source)
 	  ;; \
 	  svn) \
 	    $(call MESSAGE,"Downloading"); \
-	    $(GET_SVN_SOURCE) $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} $(DL_DIR)/$${DOWNLOAD_SOURCE}; \
+	    $(GET_SVN_SOURCE) $${DOWNLOAD_SITE} $(DL_DIR)/$${DOWNLOAD_SOURCE}; \
 	  ;; \
 	  curl) \
 	    $(call MESSAGE,"Downloading"); \
@@ -628,7 +630,7 @@ endef
 
 define TOUCH
 	@$(call MESSAGE,"Building completed")
-	@touch $(D)/$(notdir $@)
+	@touch $(if $(findstring host-,$(@)),$(HOST_DEPS_DIR),$(DEPS_DIR))/$(notdir $@)
 	@echo ""
 endef
 

@@ -1,6 +1,6 @@
 ################################################################################
 #
-# host-ccache
+# ccache
 #
 ################################################################################
 
@@ -29,4 +29,4 @@ host-ccache: | directories
 	@$(call MESSAGE,"Start-up build")
 	$(call HOST_CCACHE_LINKS)
 	$(call TARGET_CCACHE_LINKS)
-	@touch $(D)/$(notdir $@)
+	@touch $(HOST_DEPS_DIR)/$(notdir $@)

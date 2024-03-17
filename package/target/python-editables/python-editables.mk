@@ -11,5 +11,5 @@ PYTHON_EDITABLES_SITE = https://files.pythonhosted.org/packages/source/e/editabl
 
 PYTHON_EDITABLES_SETUP_TYPE = flit
 
-$(D)/host-python-editables: | bootstrap
+host-python-editables: | bootstrap
 	$(call host-python-package)

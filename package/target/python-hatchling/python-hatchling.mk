@@ -18,5 +18,5 @@ HOST_PYTHON_HATCHLING_DEPENDS = \
 	host-python-pluggy \
 	host-python-trove-classifiers
 
-$(D)/host-python-hatchling: | bootstrap
+host-python-hatchling: | bootstrap
 	$(call host-python-package)

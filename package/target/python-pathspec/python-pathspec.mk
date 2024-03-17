@@ -11,5 +11,5 @@ PYTHON_PATHSPEC_SITE = https://files.pythonhosted.org/packages/source/p/pathspec
 
 PYTHON_PATHSPEC_SETUP_TYPE = setuptools
 
-$(D)/host-python-pathspec: | bootstrap
+host-python-pathspec: | bootstrap
 	$(call host-python-package)

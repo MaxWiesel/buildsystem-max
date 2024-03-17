@@ -17,5 +17,5 @@ HOST_PYTHON_INSTALLER_DEPENDS = \
 HOST_PYTHON_INSTALLER_ENV = \
 	PYTHONPATH="$(PKG_BUILD_DIR)/src"
 
-$(D)/host-python-installer: | bootstrap
+host-python-installer: | bootstrap
 	$(call host-python-package)

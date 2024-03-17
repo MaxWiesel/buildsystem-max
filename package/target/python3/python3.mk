@@ -115,5 +115,5 @@ define HOST_PYTHON3_INSTALL_SYMLINK
 endef
 HOST_PYTHON3_HOST_FINALIZE_HOOKS += HOST_PYTHON3_INSTALL_SYMLINK
 
-$(D)/host-python3: | bootstrap
+host-python3: | bootstrap
 	$(call host-autotools-package)

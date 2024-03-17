@@ -214,6 +214,8 @@ else
 RELEASE_DIR     = $(BASE_DIR)/release
 endif
 DEPS_DIR        = $(BASE_DIR)/.deps
+HOST_DEPS_DIR   = $(HOST_DIR)/.deps
+
 D               = $(DEPS_DIR)
 TARGET_DIR      = $(BASE_DIR)/root
 IMAGE_DIR       = $(BASE_DIR)/release_image
@@ -222,6 +224,7 @@ OWN_PATCHES    ?= $(BASE_DIR)/own_patches
 CROSS_DIR       = $(BASE_DIR)/build_cross/$(CROSSTOOL_GCC_VERSION)-$(TARGET_ARCH)-kernel-$(KERNEL_VERSION)
 CROSS_ROOT_DIR  = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
 HOST_DIR        = $(BASE_DIR)/build_host
+PACKAGE_DIR     = $(BASE_DIR)/package
 
 DATE            = $(shell date '+%Y-%m-%d_%H.%M')
 MAINTAINER     ?= $(shell whoami)
@@ -241,7 +244,15 @@ AUTOCONF_NEW = $(shell echo $(AUTOCONF_VER)\>=2.70 | bc )
 PYINSTALLER = $(BASE_DIR)/support/scripts/pyinstaller.py
 
 # build helper variables
-INSTALL      = $(shell which install || type -p install || echo install)
+define TOOLFIND # (tool)
+$(shell PATH=$(PATH) which $(1) || type -p $(1) || echo $(1))
+endef
+
+PATCH = $(call TOOLFIND,patch) -p1 -i
+PATCH0 = $(call TOOLFIND,patch) -p0 -i
+
+# build helper variables
+INSTALL = $(call TOOLFIND,install)
 INSTALL_CONF = $(INSTALL) -m 0600
 INSTALL_DATA = $(INSTALL) -m 0644
 INSTALL_EXEC = $(INSTALL) -m 0755
@@ -255,7 +266,7 @@ define INSTALL_EXIST # (source, dest)
 endef
 
 # search path(s) for all prerequisites
-VPATH = $(DEPS_DIR)
+VPATH = $(DEPS_DIR) $(HOST_DEPS_DIR)
 
 # -----------------------------------------------------------------------------
 

@@ -55,3 +55,13 @@ E2FSPROGS_TARGET_CLEANUP_HOOKS += E2FSPROGS_TARGET_CLEANUP
 
 $(D)/e2fsprogs: | bootstrap
 	$(call autotools-package)
+
+# -----------------------------------------------------------------------------
+
+HOST_E2FSPROGS_CONF_OPTS = \
+	--enable-symlink-install \
+	--with-crond-dir=no
+
+host-e2fsprogs: | bootstrap
+	$(call host-autotools-package)
+

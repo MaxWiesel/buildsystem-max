@@ -1,6 +1,6 @@
 ################################################################################
 #
-# host-luarocks
+# luarocks
 #
 ################################################################################
 
@@ -29,5 +29,5 @@ define HOST_LUAROCKS_CREATE_CONFIG
 endef
 HOST_LUAROCKS_POST_INSTALL_HOOKS += HOST_LUAROCKS_CREATE_CONFIG
 
-$(D)/host-luarocks: | bootstrap
+host-luarocks: | bootstrap
 	$(call host-autotools-package)

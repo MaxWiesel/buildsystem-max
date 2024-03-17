@@ -11,5 +11,5 @@ PYTHON_TROVE_CLASSIFIERS_SITE = https://files.pythonhosted.org/packages/source/t
 
 PYTHON_TROVE_CLASSIFIERS_SETUP_TYPE = setuptools
 
-$(D)/host-python-trove-classifiers: | bootstrap
+host-python-trove-classifiers: | bootstrap
 	$(call host-python-package)

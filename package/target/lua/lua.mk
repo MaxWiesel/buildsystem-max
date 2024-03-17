@@ -34,3 +34,16 @@ LUA_TARGET_CLEANUP_HOOKS += LUA_TARGET_CLEANUP
 
 $(D)/lua: | bootstrap
 	$(call generic-package)
+
+# -----------------------------------------------------------------------------
+
+HOST_LUA_BINARY = $(HOST_DIR)/bin/lua
+
+HOST_LUA_MAKE_ARGS = \
+	linux
+
+HOST_LUA_MAKE_INSTALL_OPTS = \
+	INSTALL_TOP=$(HOST_DIR)
+
+host-lua: | bootstrap
+	$(call host-generic-package)

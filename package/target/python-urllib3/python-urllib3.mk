@@ -20,5 +20,5 @@ HOST_PYTHON_URLLIB3_DEPENDS = \
 $(D)/python-urllib3: | bootstrap
 	$(call python-package)
 
-$(D)/host-python-urllib3: | bootstrap
+host-python-urllib3: | bootstrap
 	$(call host-python-package)

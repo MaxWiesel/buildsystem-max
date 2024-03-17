@@ -21,5 +21,5 @@ HOST_PYTHON_PLUGGY_DEPENDS = \
 $(D)/python-pluggy: | bootstrap
 	$(call python-package)
 
-$(D)/host-python-pluggy: | bootstrap
+host-python-pluggy: | bootstrap
 	$(call host-python-package)

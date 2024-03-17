@@ -1,6 +1,6 @@
 ################################################################################
 #
-# host-waf
+# waf
 #
 ################################################################################
 
@@ -19,5 +19,5 @@ define HOST_WAF_INSTALL
 endef
 HOST_WAF_INDIVIDUAL_HOOKS += HOST_WAF_INSTALL
 
-$(D)/host-waf: | bootstrap
+host-waf: | bootstrap
 	$(call individual-package,$(PKG_NO_EXTRACT) $(PKG_NO_PATCHES))

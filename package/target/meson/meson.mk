@@ -1,6 +1,6 @@
 ################################################################################
 #
-# host-meson
+# meson
 #
 ################################################################################
 
@@ -13,5 +13,5 @@ MESON_SETUP_TYPE = setuptools
 
 HOST_MESON_DEPENDS = host-ninja
 
-$(D)/host-meson: | bootstrap
+host-meson: | bootstrap
 	$(call host-python-package)
