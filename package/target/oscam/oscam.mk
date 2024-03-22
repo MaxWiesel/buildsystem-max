@@ -18,11 +18,11 @@ OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
 OSCAM_SITE_METHOD = git
 
-OSCAM_DEPENDS = openssl libusb libdvbcsa
+OSCAM_DEPENDS = libusb
 
 OSCAM_CONF_OPTS = \
 	--disable all \
-	--enable WEBIF \
+	--enable \
 	CS_ANTICASC \
 	CS_CACHEEX \
 	CW_CYCLE_CHECK \
@@ -32,6 +32,7 @@ OSCAM_CONF_OPTS = \
 	LCDSUPPORT \
 	READ_SDT_CHARSETS \
 	TOUCH \
+	WEBIF \
 	WEBIF_JQUERY \
 	WEBIF_LIVELOG \
 	WITH_DEBUG \
@@ -49,7 +50,6 @@ OSCAM_CONF_OPTS = \
 	MODULE_GBOX \
 	MODULE_MONITOR \
 	MODULE_NEWCAMD \
-	MODULE_STREAMRELAY \
 	\
 	READER_CONAX \
 	READER_CRYPTOWORKS \
@@ -65,6 +65,22 @@ OSCAM_CONF_OPTS = \
 	CARDREADER_SC8IN1 \
 	CARDREADER_SMARGO
 
+# enable ssl
+OSCAM_DEPENDS += openssl
+OSCAM_CONF_OPTS += \
+	--enable WITH_SSL
+
+# enable streamrelay
+OSCAM_DEPENDS += libdvbcsa
+OSCAM_CONF_OPTS += \
+	--enable MODULE_STREAMRELAY
+
+ifeq ($(TARGET_ARCH),arm)
+# enable/disable arm-neon
+OSCAM_CONF_OPTS += \
+	$(if $(findstring neon,$(TARGET_ABI)),--enable,--disable) WITH_ARM_NEON
+endif
+
 oscam.do_prepare:
 	$(call PREPARE)
 	$(CD) $(PKG_BUILD_DIR); \
@@ -74,7 +90,7 @@ oscam.do_prepare:
 oscam.do_compile:
 	$(CD) $(PKG_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
+		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 USE_LIBDVBCSA=1 LIBDVBCSA_LIB=$(TARGET_LIB_DIR)/libdvbcsa.a \
 		PLUS_TARGET="-rezap" \
 		CONF_DIR=/var/keys \
 		EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \

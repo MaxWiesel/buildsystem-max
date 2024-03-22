@@ -99,6 +99,7 @@ neutrino-release-base:
 	rm -f $(RELEASE_DIR)/lib/libstdc++.*-gdb.py
 	rm -f $(RELEASE_DIR)/lib/libthread_db*
 	rm -f $(RELEASE_DIR)/usr/lib/*.py
+	rm -f $(RELEASE_DIR)/usr/lib/libdvbcsa*
 	rm -f $(RELEASE_DIR)/usr/lib/libfontconfig*
 	rm -f $(RELEASE_DIR)/usr/lib/libthread_db*
 	rm -f $(RELEASE_DIR)/usr/bin/pic2m2v
