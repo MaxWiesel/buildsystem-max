@@ -11,7 +11,7 @@ TARGET_PYTHON_INCLUDE_DIR = $(TARGET_INCLUDE_DIR)/python$(PYTHON3_VERSION_MAJOR)
 TARGET_PYTHON_SITE_PACKAGES_DIR = $(TARGET_PYTHON_LIB_DIR)/site-packages
 TARGET_PYTHON_PATH = $(TARGET_PYTHON_LIB_DIR):$(TARGET_PYTHON_SITE_PACKAGES_DIR)
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python3
 
@@ -33,21 +33,17 @@ PKG_PYTHON_SYSCONFIGDATA_NAME = `{ [ -e $(PKG_PYTHON_SYSCONFIGDATA_PATH) ] && ba
 # Target python packages
 TARGET_PKG_PYTHON_ENV = \
 	_PYTHON_HOST_PLATFORM="$(PKG_PYTHON_HOST_PLATFORM)" \
-	_PYTHON_SYSCONFIGDATA_NAME="$(PKG_PYTHON_SYSCONFIGDATA_NAME)"
-
-TARGET_PKG_PYTHON_ENV += \
+	_PYTHON_SYSCONFIGDATA_NAME="$(PKG_PYTHON_SYSCONFIGDATA_NAME)" \
 	CC="$(TARGET_CC)" \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	LDSHARED="$(TARGET_CC) -shared" \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_PYTHON_INCLUDE_DIR)" \
 	PYTHONPATH="$(TARGET_PYTHON_PATH)" \
-	PYTHONNOUSERSITE=1
-
-TARGET_PKG_PYTHON_ENV += \
+	PYTHONNOUSERSITE=1 \
 	_python_sysroot=$(TARGET_DIR) \
-	_python_prefix=$(prefix) \
-	_python_exec_prefix=$(exec_prefix)
+	_python_prefix=/usr \
+	_python_exec_prefix=/usr
 
 # Host python packages
 HOST_PKG_PYTHON_ENV = \
@@ -67,10 +63,10 @@ TARGET_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS = \
 
 TARGET_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS = \
 	$(if $(VERBOSE),,-q) \
-	--install-headers=$(TARGET_PYTHON_INCLUDE_DIR) \
+	--install-headers=/usr/include/python$(PYTHON3_VERSION_MAJOR) \
 	--executable=$(TARGET_PYTHON_INTERPRETER) \
 	--root=$(TARGET_DIR) \
-	--prefix=$(prefix) \
+	--prefix=/usr \
 	--single-version-externally-managed
 
 # Host setuptools-based packages
@@ -97,10 +93,10 @@ TARGET_PKG_PYTHON_PEP517_BUILD_OPTS =
 TARGET_PKG_PYTHON_PEP517_INSTALL_OPTS = \
 	--interpreter=/usr/bin/python3 \
 	--script-kind=posix \
-	--purelib=$(TARGET_PYTHON_SITE_PACKAGES_DIR) \
-	--headers=$(TARGET_PYTHON_INCLUDE_DIR) \
-	--scripts=$(TARGET_bindir) \
-	--data=$(TARGET_prefix)
+	--purelib=$(TARGET_DIR)/usr/lib/python$(PYTHON3_VERSION_MAJOR)/site-packages \
+	--headers=$(TARGET_DIR)/usr/include/python$(PYTHON3_VERSION_MAJOR) \
+	--scripts=$(TARGET_DIR)/usr/bin \
+	--data=$(TARGET_DIR)/usr
 
 # Host flit- and pep517-based packages
 HOST_PKG_PYTHON_PEP517_ENV = \
@@ -109,17 +105,17 @@ HOST_PKG_PYTHON_PEP517_ENV = \
 HOST_PKG_PYTHON_PEP517_BUILD_OPTS =
 
 HOST_PKG_PYTHON_PEP517_INSTALL_OPTS = \
-	--interpreter=$(HOST_PYTHON_BINARY) \
+	--interpreter=$(HOST_DIR)/bin/python \
 	--script-kind=posix \
-	--purelib=$(HOST_PYTHON_SITE_PACKAGES_DIR) \
-	--headers=$(HOST_PYTHON_INCLUDE_DIR) \
+	--purelib=$(HOST_DIR)/lib/python$(PYTHON3_VERSION_MAJOR)/site-packages \
+	--headers=$(HOST_DIR)/include/python$(PYTHON3_VERSION_MAJOR) \
 	--scripts=$(HOST_DIR)/bin \
 	--data=$(HOST_DIR)
 
 HOST_PKG_PYTHON_PEP517_BOOTSTRAP_INSTALL_OPTS = \
 	--installdir=$(HOST_PYTHON_SITE_PACKAGES_DIR)
 
-# -----------------------------------------------------------------------------
+###############################################################################
 
 define TARGET_PYTHON_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR); \
@@ -143,7 +139,7 @@ define TARGET_PYTHON_INSTALL_CMDS_DEFAULT
 endef
 
 define TARGET_PYTHON_INSTALL
-	@$(call MESSAGE,"Installing")
+	@$(call MESSAGE,"Installing to target")
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_INSTALL_CMDS)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
@@ -159,7 +155,7 @@ define python-package
 	$(call TARGET_FOLLOWUP)
 endef
 
-# -----------------------------------------------------------------------------
+###############################################################################
 
 define HOST_PYTHON_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR); \
@@ -183,7 +179,7 @@ define HOST_PYTHON_INSTALL_CMDS_DEFAULT
 endef
 
 define HOST_PYTHON_INSTALL
-	@$(call MESSAGE,"Installing")
+	@$(call MESSAGE,"Installing to host")
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_INSTALL_CMDS)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
