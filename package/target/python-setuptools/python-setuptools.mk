@@ -14,5 +14,5 @@ PYTHON_SETUPTOOLS_SETUP_TYPE = pep517
 HOST_PYTHON_SETUPTOOLS_DEPENDS = \
 	host-python-wheel
 
-host-python-setuptools: | bootstrap
+$(HD)/host-python-setuptools: | bootstrap
 	$(call host-python-package)

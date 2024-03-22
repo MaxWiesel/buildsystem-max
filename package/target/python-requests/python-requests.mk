@@ -26,5 +26,5 @@ HOST_PYTHON_REQUESTS_DEPENDS = \
 $(D)/python-requests: | bootstrap
 	$(call python-package)
 
-host-python-requests: | bootstrap
+$(HD)/host-python-requests: | bootstrap
 	$(call host-python-package)

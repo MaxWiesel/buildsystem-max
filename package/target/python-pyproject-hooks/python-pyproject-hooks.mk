@@ -11,5 +11,5 @@ PYTHON_PYPROJECT_HOOKS_SITE = https://files.pythonhosted.org/packages/source/p/p
 
 HOST_PYTHON_PYPROJECT_HOOKS_SETUP_TYPE = flit-bootstrap
 
-host-python-pyproject-hooks: | bootstrap
+$(HD)/host-python-pyproject-hooks: | bootstrap
 	$(call host-python-package)

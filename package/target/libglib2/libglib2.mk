@@ -49,5 +49,5 @@ HOST_LIBGLIB2_CONF_OPTS = \
 	-Dinstalled_tests=false \
 	-Doss_fuzz=disabled
 
-host-libglib2: | bootstrap
+$(HD)/host-libglib2: | bootstrap
 	$(call host-meson-package)

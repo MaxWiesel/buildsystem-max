@@ -47,6 +47,10 @@ PYTHON3_CONF_ENV += \
 PYTHON3_CONF_ENV += \
 	ac_cv_prog_HAS_HG=/bin/false
 
+# endian detection
+PYTHON3_CONF_ENV += \
+	ax_cv_c_float_words_bigendian=no
+
 PYTHON3_CONF_OPTS = \
 	--enable-shared \
 	--disable-static \
@@ -115,5 +119,5 @@ define HOST_PYTHON3_INSTALL_SYMLINK
 endef
 HOST_PYTHON3_HOST_FINALIZE_HOOKS += HOST_PYTHON3_INSTALL_SYMLINK
 
-host-python3: | bootstrap
+$(HD)/host-python3: | bootstrap
 	$(call host-autotools-package)

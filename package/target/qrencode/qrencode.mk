@@ -13,5 +13,5 @@ HOST_QRENCODE_CONF_OPTS = \
 	LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lpng" \
 	png_CFLAGS="-I/usr/include/libpng"
 
-host-qrencode: | bootstrap
+$(HD)/host-qrencode: | bootstrap
 	$(call host-autotools-package)

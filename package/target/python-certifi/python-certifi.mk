@@ -14,5 +14,5 @@ PYTHON_CERTIFI_SETUP_TYPE = setuptools
 $(D)/python-certifi: | bootstrap
 	$(call python-package)
 
-host-python-certifi: | bootstrap
+$(HD)/host-python-certifi: | bootstrap
 	$(call host-python-package)

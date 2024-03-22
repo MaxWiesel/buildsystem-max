@@ -52,5 +52,5 @@ define HOST_KMOD_INSTALL_TOOLS
 endef
 HOST_KMOD_POST_INSTALL_HOOKS += HOST_KMOD_INSTALL_TOOLS
 
-host-kmod: | bootstrap
+$(HD)/host-kmod: | bootstrap
 	$(call host-autotools-package)

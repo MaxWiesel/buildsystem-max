@@ -11,5 +11,5 @@ PYTHON_PACKAGING_SITE = https://files.pythonhosted.org/packages/source/p/packagi
 
 HOST_PYTHON_PACKAGING_SETUP_TYPE = flit-bootstrap
 
-host-python-packaging: | bootstrap
+$(HD)/host-python-packaging: | bootstrap
 	$(call host-python-package)

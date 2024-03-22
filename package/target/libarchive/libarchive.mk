@@ -28,5 +28,5 @@ $(D)/libarchive: | bootstrap
 HOST_LIBARCHIVE_CONF_OPTS = \
 	--without-xml2
 
-host-libarchive: | bootstrap
+$(HD)/host-libarchive: | bootstrap
 	$(call host-autotools-package)

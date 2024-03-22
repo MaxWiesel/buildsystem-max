@@ -39,5 +39,5 @@ HOST_PARTED_CONF_OPTS = \
 HOST_PARTED_MAKE_ENV = \
 	CFLAGS="$(HOST_CFLAGS) -fPIC"
 
-host-parted: | bootstrap
+$(HD)/host-parted: | bootstrap
 	$(call host-autotools-package)

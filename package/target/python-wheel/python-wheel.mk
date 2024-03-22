@@ -11,5 +11,5 @@ PYTHON_WHEEL_SITE = https://files.pythonhosted.org/packages/source/w/wheel
 
 PYTHON_WHEEL_SETUP_TYPE = flit
 
-host-python-wheel: | bootstrap
+$(HD)/host-python-wheel: | bootstrap
 	$(call host-python-package)

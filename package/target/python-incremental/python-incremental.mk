@@ -14,5 +14,5 @@ PYTHON_INCREMENTAL_SETUP_TYPE = setuptools
 $(D)/python-incremental: | bootstrap
 	$(call python-package)
 
-host-python-incremental: | bootstrap
+$(HD)/host-python-incremental: | bootstrap
 	$(call host-python-package)

@@ -15,5 +15,5 @@ HOST_PYTHON_SETUPTOOLS_SCM_DEPENDS = \
 	host-python-packaging \
 	host-python-typing-extensions
 
-host-python-setuptools-scm: | bootstrap
+$(HD)/host-python-setuptools-scm: | bootstrap
 	$(call host-python-package)

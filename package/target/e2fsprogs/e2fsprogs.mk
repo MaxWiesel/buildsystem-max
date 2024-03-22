@@ -62,6 +62,6 @@ HOST_E2FSPROGS_CONF_OPTS = \
 	--enable-symlink-install \
 	--with-crond-dir=no
 
-host-e2fsprogs: | bootstrap
+$(HD)/host-e2fsprogs: | bootstrap
 	$(call host-autotools-package)
 

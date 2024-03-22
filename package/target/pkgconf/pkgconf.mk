@@ -24,5 +24,5 @@ define HOST_PKGCONF_INSTALL_WRAPPER
 endef
 HOST_PKGCONF_POST_INSTALL_HOOKS += HOST_PKGCONF_INSTALL_WRAPPER
 
-host-pkgconf: | directories
+$(HD)/host-pkgconf: | directories
 	$(call host-autotools-package)

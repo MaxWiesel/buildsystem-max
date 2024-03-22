@@ -23,5 +23,5 @@ $(D)/libffi: | bootstrap
 HOST_LIBFFI_CONF_OPTS = \
 	--disable-static
 
-host-libffi: | bootstrap
+$(HD)/host-libffi: | bootstrap
 	$(call host-autotools-package)

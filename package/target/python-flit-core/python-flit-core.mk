@@ -17,5 +17,5 @@ HOST_PYTHON_FLIT_CORE_SETUP_TYPE = flit-bootstrap
 HOST_PYTHON_FLIT_CORE_PYTHON_BASE_INSTALL_CMD = \
 	-m bootstrap_install dist/* $(HOST_PKG_PYTHON_PEP517_BOOTSTRAP_INSTALL_OPTS)
 
-host-python-flit-core: | bootstrap
+$(HD)/host-python-flit-core: | bootstrap
 	$(call host-python-package)

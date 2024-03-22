@@ -217,6 +217,7 @@ DEPS_DIR        = $(BASE_DIR)/.deps
 HOST_DEPS_DIR   = $(HOST_DIR)/.deps
 
 D               = $(DEPS_DIR)
+HD              = $(HOST_DEPS_DIR)
 TARGET_DIR      = $(BASE_DIR)/root
 IMAGE_DIR       = $(BASE_DIR)/release_image
 OWN_FILES      ?= $(BASE_DIR)/own_files

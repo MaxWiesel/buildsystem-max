@@ -45,5 +45,5 @@ HOST_LUA_MAKE_ARGS = \
 HOST_LUA_MAKE_INSTALL_OPTS = \
 	INSTALL_TOP=$(HOST_DIR)
 
-host-lua: | bootstrap
+$(HD)/host-lua: | bootstrap
 	$(call host-generic-package)

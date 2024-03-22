@@ -23,5 +23,5 @@ define HOST_ZIC_INSTALL_CMDS
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/zic $(HOST_ZIC_BINARY)
 endef
 
-host-zic: | bootstrap
+$(HD)/host-zic: | bootstrap
 	$(call host-generic-package)

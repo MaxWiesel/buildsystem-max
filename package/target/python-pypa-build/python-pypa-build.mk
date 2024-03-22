@@ -15,5 +15,5 @@ HOST_PYTHON_PYPA_BUILD_DEPENDS = \
 	host-python-packaging \
 	host-python-pyproject-hooks
 
-host-python-pypa-build: | bootstrap
+$(HD)/host-python-pypa-build: | bootstrap
 	$(call host-python-package)

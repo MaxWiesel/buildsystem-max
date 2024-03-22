@@ -14,5 +14,5 @@ PYTHON_IDNA_SETUP_TYPE = flit
 $(D)/python-idna: | bootstrap
 	$(call python-package)
 
-host-python-idna: | bootstrap
+$(HD)/host-python-idna: | bootstrap
 	$(call host-python-package)

@@ -33,5 +33,5 @@ HOST_MTD_UTILS_CONF_OPTS = \
 	--without-xattr \
 	--disable-tests
 
-host-mtd-utils: | bootstrap
+$(HD)/host-mtd-utils: | bootstrap
 	$(call host-autotools-package)

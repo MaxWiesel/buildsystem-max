@@ -37,5 +37,5 @@ HOST_OPKG_CONF_OPTS = \
 	--disable-curl \
 	--disable-gpg
 
-host-opkg: | bootstrap
+$(HD)/host-opkg: | bootstrap
 	$(call host-autotools-package)

@@ -25,7 +25,7 @@ define TARGET_CCACHE_LINKS
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/$(GNU_TARGET_NAME)-g++
 endef
 
-host-ccache: | directories
+$(HD)/host-ccache: | directories
 	@$(call MESSAGE,"Start-up build")
 	$(call HOST_CCACHE_LINKS)
 	$(call TARGET_CCACHE_LINKS)

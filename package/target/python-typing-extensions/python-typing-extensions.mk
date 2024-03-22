@@ -14,5 +14,5 @@ PYTHON_TYPING_EXTENSIONS_SETUP_TYPE = flit
 $(D)/python-typing-extensions: | bootstrap
 	$(call host-python-package)
 
-host-python-typing-extensions: | bootstrap
+$(HD)/host-python-typing-extensions: | bootstrap
 	$(call host-python-package)
