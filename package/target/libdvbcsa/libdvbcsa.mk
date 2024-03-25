@@ -14,7 +14,7 @@ LIBDVBCSA_AUTORECONF = YES
 
 ifeq ($(TARGET_ARCH),arm)
 	LIBDVBCSA_CONF_OPTS = \
-		$(if $(findstring neon,$(TARGET_ABI)),--enable-neon,--disable-neon)
+		$(if $(findstring neon,$(TARGET_ABI)),--enable-neon --enable-uint32,--disable-neon)
 endif
 
 $(D)/libdvbcsa: | bootstrap
