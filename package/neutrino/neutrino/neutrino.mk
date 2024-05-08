@@ -177,10 +177,10 @@ NEUTRINO_CONF_OPTS += \
 	--disable-shoutcast-key-manage
 endif
 
-NEUTRINO_WEATHER_DEV_KEY ?=
-ifneq ($(strip $(NEUTRINO_WEATHER_DEV_KEY)),)
+NEUTRINO_WEATHER_API_KEY ?=
+ifneq ($(strip $(NEUTRINO_WEATHER_API_KEY)),)
 NEUTRINO_CONF_OPTS += \
-	--with-weather-dev-key="$(NEUTRINO_WEATHER_DEV_KEY)" \
+	--with-weather-api-key="$(NEUTRINO_WEATHER_API_KEY)" \
 	--disable-weather-key-manage
 endif
 
