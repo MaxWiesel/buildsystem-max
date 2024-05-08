@@ -156,10 +156,10 @@ NEUTRINO_CONF_OPTS += \
 	--disable-omdb-key-manage
 endif
 
-NEUTRINO_TMDB_DEV_KEY ?=
-ifneq ($(strip $(NEUTRINO_TMDB_DEV_KEY)),)
+NEUTRINO_TMDB_API_KEY ?=
+ifneq ($(strip $(NEUTRINO_TTMDB_API_KEY)),)
 NEUTRINO_CONF_OPTS += \
-	--with-tmdb-dev-key="$(NEUTRINO_TMDB_DEV_KEY)" \
+	--with-tmdb-api-key="$(NEUTRINO_TMDB_API_KEY)" \
 	--disable-tmdb-key-manage
 endif
 
