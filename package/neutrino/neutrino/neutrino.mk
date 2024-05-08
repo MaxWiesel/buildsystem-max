@@ -163,10 +163,10 @@ NEUTRINO_CONF_OPTS += \
 	--disable-tmdb-key-manage
 endif
 
-NEUTRINO_YOUTUBE_DEV_KEY ?=
-ifneq ($(strip $(NEUTRINO_YOUTUBE_DEV_KEY)),)
+NEUTRINO_YOUTUBE_API_KEY ?=
+ifneq ($(strip $(NEUTRINO_YOUTUBE_API_KEY)),)
 NEUTRINO_CONF_OPTS += \
-	--with-youtube-dev-key="$(NEUTRINO_YOUTUBE_DEV_KEY)" \
+	--with-youtube-api-key="$(NEUTRINO_YOUTUBE_API_KEY)" \
 	--disable-youtube-key-manage
 endif
 
