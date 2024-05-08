@@ -170,10 +170,10 @@ NEUTRINO_CONF_OPTS += \
 	--disable-youtube-key-manage
 endif
 
-NEUTRINO_SHOUTCAST_DEV_KEY ?=
-ifneq ($(strip $(NEUTRINO_SHOUTCAST_DEV_KEY)),)
+NEUTRINO_SHOUTCAST_DEV_ID ?=
+ifneq ($(strip $(NEUTRINO_SHOUTCAST_DEV_ID)),)
 NEUTRINO_CONF_OPTS += \
-	--with-shoutcast-dev-key="$(NEUTRINO_SHOUTCAST_DEV_KEY)" \
+	--with-shoutcast-dev-id="$(NEUTRINO_SHOUTCAST_DEV_ID)" \
 	--disable-shoutcast-key-manage
 endif
 
