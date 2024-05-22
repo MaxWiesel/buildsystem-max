@@ -50,7 +50,6 @@ case $1 in
 		echo "Target receivers:"
 		echo ""
 		echo "   1)  Neutrino PC generic"
-		echo "   2)  Neutrino PC raspi"
 		echo ""
 		echo "  10)  VU+ Duo 4K"
 		echo "  11)  VU+ Solo 4k"
@@ -77,7 +76,6 @@ esac
 
 case "$REPLY" in
 	 1) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
-	 2) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="raspi";;
 	10) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4k";;
 	11) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vusolo4k";;
 	12) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuultimo4k";;
@@ -164,23 +162,21 @@ echo "FLAVOUR=$FLAVOUR" >> .config
 ##############################################
 
 case $3 in
-	[1-5]) REPLY=$3;;
+	[1-4]) REPLY=$3;;
 	*)	echo -e "\nToolchain gcc version:"
 		echo "   1) GCC version 6.5.0"
 		echo "   2) GCC version 8.5.0"
-		echo "   3) GCC version 11.4.0"
-		echo "   4) GCC version 12.3.0"
-		echo "   5) GCC version 13.2.0"
-		read -p "Select toolchain gcc version (1-5)? [2] "
+		echo "   3) GCC version 13.2.0"
+		echo "   4) GCC version 14.1.0"
+		read -p "Select toolchain gcc version (1-4)? [2] "
 		REPLY="${REPLY:-2}";;
 esac
 
 case "$REPLY" in
 	1) GCC_VERSION="6.5.0";;
 	2) GCC_VERSION="8.5.0";;
-	3) GCC_VERSION="11.4.0";;
-	4) GCC_VERSION="12.3.0";;
-	5) GCC_VERSION="13.2.0";;
+	3) GCC_VERSION="13.2.0";;
+	4) GCC_VERSION="14.1.0";;
 	*) GCC_VERSION="8.5.0";;
 esac
 echo "GCC_VERSION=$GCC_VERSION" >> .config

@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CROSSTOOL_NG_VERSION = cf6b174
+CROSSTOOL_NG_VERSION = 380bd7c
 CROSSTOOL_NG_DIR = crosstool-ng.git
 CROSSTOOL_NG_SOURCE = crosstool-ng.git
 CROSSTOOL_NG_SITE = https://github.com/crosstool-ng
