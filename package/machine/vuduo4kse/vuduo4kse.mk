@@ -8,7 +8,7 @@ VUDUO4KSE_DRIVER_DATE = 20200903
 VUDUO4KSE_DRIVER_REV = r0
 VUDUO4KSE_DRIVER_VERSION = 4.1.45-$(VUDUO4KSE_DRIVER_DATE).$(VUDUO4KSE_DRIVER_REV)
 VUDUO4KSE_DRIVER_SOURCE = vuplus-dvb-proxy-vuduo4kse-$(VUDUO4KSE_DRIVER_VERSION).tar.gz
-VUDUO4KSE_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
+VUDUO4KSE_DRIVER_SITE = https://source.mynonpublic.com/vuplus/release/vuplus-dvb-proxy
 
 $(D)/vuduo4kse-driver: | bootstrap
 	$(call STARTUP)
@@ -28,7 +28,7 @@ VUDUO4KSE_LIBGLES_REV = r0
 VUDUO4KSE_LIBGLES_VERSION = 17.1-$(VUDUO4KSE_LIBGLES_DATE).$(VUDUO4KSE_LIBGLES_REV)
 VUDUO4KSE_LIBGLES_DIR = libgles-vuduo4kse
 VUDUO4KSE_LIBGLES_SOURCE = libgles-vuduo4kse-$(VUDUO4KSE_LIBGLES_VERSION).tar.gz
-VUDUO4KSE_LIBGLES_SITE = http://code.vuplus.com/download/release/libgles
+VUDUO4KSE_LIBGLES_SITE = https://source.mynonpublic.com/vuplus/release/libgles
 
 $(D)/vuduo4kse-libgles: | bootstrap
 	$(call PREPARE)
@@ -49,7 +49,7 @@ VUDUO4KSE_PLATFORM_UTIL_REV = r0
 VUDUO4KSE_PLATFORM_UTIL_VERSION = 17.1-$(VUDUO4KSE_PLATFORM_UTIL_DATE).$(VUDUO4KSE_PLATFORM_UTIL_REV)
 VUDUO4KSE_PLATFORM_UTIL_DIR = platform-util-vuduo4kse
 VUDUO4KSE_PLATFORM_UTIL_SOURCE = platform-util-vuduo4kse-$(VUDUO4KSE_PLATFORM_UTIL_VERSION).tar.gz
-VUDUO4KSE_PLATFORM_UTIL_SITE = http://code.vuplus.com/download/release/platform-util
+VUDUO4KSE_PLATFORM_UTIL_SITE = https://source.mynonpublic.com/vuplus/release/platform-util
 
 define VUDUO4KSE_PLATFORM_UTIL_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-platform-util $(TARGET_DIR)/etc/init.d/vuplus-platform-util
@@ -72,7 +72,7 @@ VUDUO4KSE_VMLINUZ_INITRD_DATE = 20230801
 VUDUO4KSE_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4kse/downloads
 else
 VUDUO4KSE_VMLINUZ_INITRD_DATE = 20200326
-VUDUO4KSE_VMLINUZ_INITRD_SITE = http://code.vuplus.com/download/release/kernel
+VUDUO4KSE_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
 endif
 VUDUO4KSE_VMLINUZ_INITRD_VERSION = $(VUDUO4KSE_VMLINUZ_INITRD_DATE)
 VUDUO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuduo4kse_$(VUDUO4KSE_VMLINUZ_INITRD_VERSION).tar.gz

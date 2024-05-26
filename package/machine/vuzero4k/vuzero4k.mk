@@ -8,7 +8,7 @@ VUZERO4K_DRIVER_DATE = 20190424
 VUZERO4K_DRIVER_REV = r0
 VUZERO4K_DRIVER_VERSION = 4.1.20-$(VUZERO4K_DRIVER_DATE).$(VUZERO4K_DRIVER_REV)
 VUZERO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuzero4k-$(VUZERO4K_DRIVER_VERSION).tar.gz
-VUZERO4K_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
+VUZERO4K_DRIVER_SITE = https://source.mynonpublic.com/vuplus/release/vuplus-dvb-proxy
 
 $(D)/vuzero4k-driver: | bootstrap
 	$(call STARTUP)
@@ -28,7 +28,7 @@ VUZERO4K_LIBGLES_REV = r0
 VUZERO4K_LIBGLES_VERSION = 17.1-$(VUZERO4K_LIBGLES_DATE).$(VUZERO4K_LIBGLES_REV)
 VUZERO4K_LIBGLES_DIR = libgles-vuzero4k
 VUZERO4K_LIBGLES_SOURCE = libgles-vuzero4k-$(VUZERO4K_LIBGLES_VERSION).tar.gz
-VUZERO4K_LIBGLES_SITE = http://code.vuplus.com/download/release/libgles
+VUZERO4K_LIBGLES_SITE = https://source.mynonpublic.com/vuplus/release/libgles
 
 $(D)/vuzero4k-libgles: | bootstrap
 	$(call PREPARE)
@@ -49,7 +49,7 @@ VUZERO4K_PLATFORM_UTIL_REV = r0
 VUZERO4K_PLATFORM_UTIL_VERSION = 17.1-$(VUZERO4K_PLATFORM_UTIL_DATE).$(VUZERO4K_PLATFORM_UTIL_REV)
 VUZERO4K_PLATFORM_UTIL_DIR = platform-util-vuzero4k
 VUZERO4K_PLATFORM_UTIL_SOURCE = platform-util-vuzero4k-$(VUZERO4K_PLATFORM_UTIL_VERSION).tar.gz
-VUZERO4K_PLATFORM_UTIL_SITE = http://code.vuplus.com/download/release/platform-util
+VUZERO4K_PLATFORM_UTIL_SITE = https://source.mynonpublic.com/vuplus/release/platform-util
 
 define VUZERO4K_PLATFORM_UTIL_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-platform-util $(TARGET_DIR)/etc/init.d/vuplus-platform-util
@@ -72,7 +72,7 @@ VUZERO4K_VMLINUZ_INITRD_DATE = 20230801
 VUZERO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuzero4k/downloads
 else
 VUZERO4K_VMLINUZ_INITRD_DATE = 20170522
-VUZERO4K_VMLINUZ_INITRD_SITE = http://code.vuplus.com/download/release/kernel
+VUZERO4K_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
 endif
 VUZERO4K_VMLINUZ_INITRD_VERSION = $(VUZERO4K_VMLINUZ_INITRD_DATE)
 VUZERO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuzero4k_$(VUZERO4K_VMLINUZ_INITRD_VERSION).tar.gz

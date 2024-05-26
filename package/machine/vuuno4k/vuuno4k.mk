@@ -8,7 +8,7 @@ VUUNO4K_DRIVER_DATE = 20190104
 VUUNO4K_DRIVER_REV = r0
 VUUNO4K_DRIVER_VERSION = 3.14.28-$(VUUNO4K_DRIVER_DATE).$(VUUNO4K_DRIVER_REV)
 VUUNO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuuno4k-$(VUUNO4K_DRIVER_VERSION).tar.gz
-VUUNO4K_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
+VUUNO4K_DRIVER_SITE = https://source.mynonpublic.com/vuplus/release/vuplus-dvb-proxy
 
 $(D)/vuuno4k-driver: | bootstrap
 	$(call STARTUP)
@@ -28,7 +28,7 @@ VUUNO4K_LIBGLES_REV = r0
 VUUNO4K_LIBGLES_VERSION = 17.1-$(VUUNO4K_LIBGLES_DATE).$(VUUNO4K_LIBGLES_REV)
 VUUNO4K_LIBGLES_DIR = libgles-vuuno4k
 VUUNO4K_LIBGLES_SOURCE = libgles-vuuno4k-$(VUUNO4K_LIBGLES_VERSION).tar.gz
-VUUNO4K_LIBGLES_SITE = http://code.vuplus.com/download/release/libgles
+VUUNO4K_LIBGLES_SITE = https://source.mynonpublic.com/vuplus/release/libgles
 
 $(D)/vuuno4k-libgles: | bootstrap
 	$(call PREPARE)
@@ -49,7 +49,7 @@ VUUNO4K_PLATFORM_UTIL_REV = r0
 VUUNO4K_PLATFORM_UTIL_VERSION = 17.1-$(VUUNO4K_PLATFORM_UTIL_DATE).$(VUUNO4K_PLATFORM_UTIL_REV)
 VUUNO4K_PLATFORM_UTIL_DIR = platform-util-vuuno4k
 VUUNO4K_PLATFORM_UTIL_SOURCE = platform-util-vuuno4k-$(VUUNO4K_PLATFORM_UTIL_VERSION).tar.gz
-VUUNO4K_PLATFORM_UTIL_SITE = http://code.vuplus.com/download/release/platform-util
+VUUNO4K_PLATFORM_UTIL_SITE = https://source.mynonpublic.com/vuplus/release/platform-util
 
 define VUUNO4K_PLATFORM_UTIL_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-platform-util $(TARGET_DIR)/etc/init.d/vuplus-platform-util
@@ -72,7 +72,7 @@ VUUNO4K_VMLINUZ_INITRD_DATE = 20230801
 VUUNO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuuno4k/downloads
 else
 VUUNO4K_VMLINUZ_INITRD_DATE = 20170209
-VUUNO4K_VMLINUZ_INITRD_SITE = http://code.vuplus.com/download/release/kernel
+VUUNO4K_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
 endif
 VUUNO4K_VMLINUZ_INITRD_VERSION = $(VUUNO4K_VMLINUZ_INITRD_DATE)
 VUUNO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuuno4k_$(VUUNO4K_VMLINUZ_INITRD_VERSION).tar.gz

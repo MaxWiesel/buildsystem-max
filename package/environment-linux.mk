@@ -117,7 +117,7 @@ KERNEL_IMAGE_TYPE = zImage
 KERNEL_SOURCE = stblinux-${KERNEL_SOURCE_VERSION}.tar.bz2
 
 KERNEL_DTB  = $(empty)
-KERNEL_SITE = http://code.vuplus.com/download/release/kernel
+KERNEL_SITE = https://source.mynonpublic.com/vuplus/release/kernel
 KERNEL_DIR = linux
 
 endif
