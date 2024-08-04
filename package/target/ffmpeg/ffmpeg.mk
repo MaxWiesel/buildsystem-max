@@ -5,8 +5,8 @@
 ################################################################################
 
 FFMPEG_VERSION ?= 6.1.1
-FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
-FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
+FFMPEG_DIR ?= ffmpeg-$(FFMPEG_VERSION)
+FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.bz2
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
 FFMPEG_DEPENDS = openssl zlib bzip2 harfbuzz freetype rtmpdump libass libxml2 libvorbis lame
