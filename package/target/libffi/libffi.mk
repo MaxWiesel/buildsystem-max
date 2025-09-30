@@ -13,6 +13,7 @@ LIBFFI_AUTORECONF = YES
 
 LIBFFI_CONF_OPTS = \
 	--disable-static \
+	--disable-multi-os-directory \
 	--enable-builddir=libffi
 
 $(D)/libffi: | bootstrap
