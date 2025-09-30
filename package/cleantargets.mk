@@ -28,7 +28,6 @@ distclean:
 	@-rm -rf $(TARGET_DIR)
 	@-rm -rf $(BUILD_DIR)
 	@-rm -rf $(DEPS_DIR)
-	@mkdir -p $(HOST_DIR)
 	@mkdir -p $(DEPS_DIR)
 	@mkdir -p $(HOST_DEPS_DIR)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
