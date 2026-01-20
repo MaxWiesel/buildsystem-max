@@ -10,7 +10,7 @@ ASTRA_SM_SOURCE = astra-sm.git
 ASTRA_SM_SITE = https://github.com/crazycat69
 ASTRA_SM_SITE_METHOD = git
 
-ASTRA_SM_DEPENDS = openssl
+ASTRA_SM_DEPENDENCIES = openssl
 
 ASTRA_SM_AUTORECONF = YES
 

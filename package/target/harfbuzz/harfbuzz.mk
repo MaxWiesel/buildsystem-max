@@ -9,7 +9,7 @@ HARFBUZZ_DIR = harfbuzz-$(HARFBUZZ_VERSION)
 HARFBUZZ_SOURCE = harfbuzz-$(HARFBUZZ_VERSION).tar.bz2
 HARFBUZZ_SITE = https://www.freedesktop.org/software/harfbuzz/release
 
-HARFBUZZ_DEPENDS = libglib2 freetype
+HARFBUZZ_DEPENDENCIES = libglib2 freetype
 
 HARFBUZZ_AUTORECONF = YES
 

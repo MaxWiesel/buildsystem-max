@@ -11,7 +11,7 @@ PYTHON_SETUPTOOLS_SCM_SITE = https://files.pythonhosted.org/packages/source/s/se
 
 PYTHON_SETUPTOOLS_SCM_SETUP_TYPE = flit
 
-HOST_PYTHON_SETUPTOOLS_SCM_DEPENDS = \
+HOST_PYTHON_SETUPTOOLS_SCM_DEPENDENCIES = \
 	host-python-packaging \
 	host-python-typing-extensions
 

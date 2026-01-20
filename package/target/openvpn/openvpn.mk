@@ -9,7 +9,7 @@ OPENVPN_DIR = openvpn-$(OPENVPN_VERSION)
 OPENVPN_SOURCE = openvpn-$(OPENVPN_VERSION).tar.gz
 OPENVPN_SITE = http://build.openvpn.net/downloads/releases
 
-OPENVPN_DEPENDS = lzo openssl
+OPENVPN_DEPENDENCIES = lzo openssl
 
 OPENVPN_CONF_ENV = \
 	NETSTAT="/bin/netstat" \

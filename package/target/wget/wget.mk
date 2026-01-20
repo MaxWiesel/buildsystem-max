@@ -9,7 +9,7 @@ WGET_DIR = wget-$(WGET_VERSION)
 WGET_SOURCE = wget-$(WGET_VERSION).tar.gz
 WGET_SITE = https://ftp.gnu.org/gnu/wget
 
-WGET_DEPENDS = openssl
+WGET_DEPENDENCIES = openssl
 
 WGET_CONF_OPTS = \
 	--infodir=$(REMOVE_infodir) \

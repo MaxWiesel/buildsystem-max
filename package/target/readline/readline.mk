@@ -9,7 +9,7 @@ READLINE_DIR = readline-$(READLINE_VERSION)
 READLINE_SOURCE = readline-$(READLINE_VERSION).tar.gz
 READLINE_SITE = https://ftp.gnu.org/gnu/readline
 
-READLINE_DEPENDS = ncurses
+READLINE_DEPENDENCIES = ncurses
 
 READLINE_CONF_ENV = \
 	bash_cv_func_sigsetjmp=yes \

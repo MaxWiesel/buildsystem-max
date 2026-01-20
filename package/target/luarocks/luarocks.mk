@@ -9,7 +9,7 @@ LUAROCKS_DIR = luarocks-$(LUAROCKS_VERSION)
 LUAROCKS_SOURCE = luarocks-$(LUAROCKS_VERSION).tar.gz
 LUAROCKS_SITE = https://luarocks.github.io/luarocks/releases
 
-HOST_LUAROCKS_DEPENDS = host-lua
+HOST_LUAROCKS_DEPENDENCIES = host-lua
 
 LUAROCKS_CONFIG_DIR  = $(HOST_DIR)/etc
 HOST_LUAROCKS_CONFIG = $(LUAROCKS_CONFIG_DIR)/luarocks/config-$(LUA_ABIVERSION).lua

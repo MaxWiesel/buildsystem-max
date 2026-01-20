@@ -9,7 +9,7 @@ AUTOFS_DIR = autofs-$(AUTOFS_VERSION)
 AUTOFS_SOURCE = autofs-$(AUTOFS_VERSION).tar.xz
 AUTOFS_SITE = https://www.kernel.org/pub/linux/daemons/autofs/v5
 
-AUTOFS_DEPENDS = libtirpc
+AUTOFS_DEPENDENCIES = libtirpc
 
 AUTOFS_CONF_ENV = \
 	ac_cv_path_RANLIB=$(TARGET_RANLIB) \

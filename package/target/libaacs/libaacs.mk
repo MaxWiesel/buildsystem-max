@@ -9,7 +9,7 @@ LIBAACS_DIR = libaacs-$(LIBAACS_VERSION)
 LIBAACS_SOURCE = libaacs-$(LIBAACS_VERSION).tar.bz2
 LIBAACS_SITE = https://download.videolan.org/pub/videolan/libaacs/$(LIBAACS_VERSION)
 
-LIBAACS_DEPENDS = libgcrypt
+LIBAACS_DEPENDENCIES = libgcrypt
 
 LIBAACS_CONF_OPTS = \
 	--disable-werror \

@@ -10,7 +10,7 @@ LIBDPF_SOURCE = dpf-ax.git
 LIBDPF_SITE = $(MAX-GIT-GITHUB)
 LIBDPF_SITE_METHOD = git
 
-LIBDPF_DEPENDS = libusb-compat
+LIBDPF_DEPENDENCIES = libusb-compat
 
 LIBDPF_MAKE_OPTS = \
 	-C dpflib libdpf.a \

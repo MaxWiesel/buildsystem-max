@@ -10,7 +10,7 @@ DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE = https://github.com/tbsdtv
 DVB_APPS_SITE_METHOD = git
 
-DVB_APPS_DEPENDS = kernel.do_compile libiconv
+DVB_APPS_DEPENDENCIES = kernel.do_compile libiconv
 
 DVB_APPS_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV) \

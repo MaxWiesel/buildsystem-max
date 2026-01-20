@@ -10,7 +10,7 @@ PYTHON3_DIR = Python-$(PYTHON3_VERSION)
 PYTHON3_SOURCE = Python-$(PYTHON3_VERSION).tar.xz
 PYTHON3_SITE = https://www.python.org/ftp/python/$(PYTHON3_VERSION)
 
-PYTHON3_DEPENDS = host-python3 libffi ncurses sqlite bzip2 zlib expat openssl
+PYTHON3_DEPENDENCIES = host-python3 libffi ncurses sqlite bzip2 zlib expat openssl
 
 PYTHON3_AUTORECONF = YES
 
@@ -94,7 +94,7 @@ $(D)/python3: | bootstrap
 
 # -----------------------------------------------------------------------------
 
-HOST_PYTHON3_DEPENDS = host-libffi
+HOST_PYTHON3_DEPENDENCIES = host-libffi
 
 HOST_PYTHON3_AUTORECONF = YES
 

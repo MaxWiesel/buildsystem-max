@@ -9,7 +9,7 @@ LIBGCRYPT_DIR = libgcrypt-$(LIBGCRYPT_VERSION)
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VERSION).tar.bz2
 LIBGCRYPT_SITE = https://gnupg.org/ftp/gcrypt/libgcrypt
 
-LIBGCRYPT_DEPENDS = libgpg-error
+LIBGCRYPT_DEPENDENCIES = libgpg-error
 
 LIBGCRYPT_CONFIG_SCRIPTS = libgcrypt-config
 

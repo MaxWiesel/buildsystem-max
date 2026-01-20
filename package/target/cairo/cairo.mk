@@ -9,7 +9,7 @@ CAIRO_DIR = cairo-$(CAIRO_VERSION)
 CAIRO_SOURCE = cairo-$(CAIRO_VERSION).tar.xz
 CAIRO_SITE = https://www.cairographics.org/releases
 
-CAIRO_DEPENDS = libglib2 zlib libpng freetype pixman
+CAIRO_DEPENDENCIES = libglib2 zlib libpng freetype pixman
 
 CAIRO_CONF_ENV = \
 	ax_cv_c_float_words_bigendian="no"

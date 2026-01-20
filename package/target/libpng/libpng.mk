@@ -10,7 +10,7 @@ LIBPNG_DIR = libpng-$(LIBPNG_VERSION)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VERSION).tar.xz
 LIBPNG_SITE = https://downloads.sourceforge.net/project/libpng/libpng$(LIBPNG_SERIES)/$(LIBPNG_VERSION)
 
-LIBPNG_DEPENDS = zlib
+LIBPNG_DEPENDENCIES = zlib
 
 LIBPNG_CONFIG_SCRIPTS = libpng$(LIBPNG_SERIES)-config
 

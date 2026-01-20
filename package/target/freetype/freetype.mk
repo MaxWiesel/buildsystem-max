@@ -9,7 +9,7 @@ FREETYPE_DIR = freetype-$(FREETYPE_VERSION)
 FREETYPE_SOURCE = freetype-$(FREETYPE_VERSION).tar.xz
 FREETYPE_SITE = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VERSION)
 
-FREETYPE_DEPENDS = libpng zlib
+FREETYPE_DEPENDENCIES = libpng zlib
 
 FREETYPE_CONFIG_SCRIPTS = freetype-config
 

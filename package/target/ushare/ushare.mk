@@ -9,7 +9,7 @@ USHARE_DIR = ushare-uShare_v$(USHARE_VERSION)
 USHARE_SOURCE = uShare_v$(USHARE_VERSION).tar.gz
 USHARE_SITE = https://github.com/GeeXboX/ushare/archive
 
-USHARE_DEPENDS = libupnp
+USHARE_DEPENDENCIES = libupnp
 
 USHARE_CONF_OPTS = \
 	--prefix=/usr \

@@ -9,7 +9,7 @@ OPENSSH_DIR = openssh-$(OPENSSH_VERSION)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VERSION).tar.gz
 OPENSSH_SITE = https://artfiles.org/openbsd/OpenSSH/portable
 
-OPENSSH_DEPENDS = zlib openssl
+OPENSSH_DEPENDENCIES = zlib openssl
 
 OPENSSH_AUTORECONF = YES
 

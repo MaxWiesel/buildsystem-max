@@ -9,7 +9,7 @@ NTFS_3G_DIR = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION)
 NTFS_3G_SOURCE = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION).tgz
 NTFS_3G_SITE = https://tuxera.com/opensource
 
-NTFS_3G_DEPENDS = libfuse
+NTFS_3G_DEPENDENCIES = libfuse
 
 NTFS_3G_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \

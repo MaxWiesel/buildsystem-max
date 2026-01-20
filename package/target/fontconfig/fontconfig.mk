@@ -9,7 +9,7 @@ FONTCONFIG_DIR = fontconfig-$(FONTCONFIG_VERSION)
 FONTCONFIG_SOURCE = fontconfig-$(FONTCONFIG_VERSION).tar.xz
 FONTCONFIG_SITE = https://www.freedesktop.org/software/fontconfig/release
 
-FONTCONFIG_DEPENDS = freetype expat
+FONTCONFIG_DEPENDENCIES = freetype expat
 
 FONTCONFIG_CONF_OPTS = \
 	--bindir=$(REMOVE_bindir) \

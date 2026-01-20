@@ -9,7 +9,7 @@ LIBXML2_DIR = libxml2-$(LIBXML2_VERSION)
 LIBXML2_SOURCE = libxml2-$(LIBXML2_VERSION).tar.xz
 LIBXML2_SITE = https://download.gnome.org/sources/libxml2/$(basename $(LIBXML2_VERSION))
 
-LIBXML2_DEPENDS = zlib
+LIBXML2_DEPENDENCIES = zlib
 
 LIBXML2_CONFIG_SCRIPTS = xml2-config
 

@@ -9,7 +9,7 @@ LIBXSLT_DIR = libxslt-$(LIBXSLT_VERSION)
 LIBXSLT_SOURCE = libxslt-$(LIBXSLT_VERSION).tar.xz
 LIBXSLT_SITE = https://download.gnome.org/sources/libxslt/1.1
 
-LIBXSLT_DEPENDS = libxml2
+LIBXSLT_DEPENDENCIES = libxml2
 
 LIBXSLT_CONFIG_SCRIPTS = xslt-config
 

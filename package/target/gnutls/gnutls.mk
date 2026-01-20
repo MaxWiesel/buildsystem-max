@@ -9,7 +9,7 @@ GNUTLS_DIR = gnutls-$(GNUTLS_VERSION)
 GNUTLS_SOURCE = gnutls-$(GNUTLS_VERSION).tar.xz
 GNUTLS_SITE = https://www.gnupg.org/ftp/gcrypt/gnutls/v$(basename $(GNUTLS_VERSION))
 
-GNUTLS_DEPENDS = ca-bundle nettle
+GNUTLS_DEPENDENCIES = ca-bundle nettle
 
 GNUTLS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \

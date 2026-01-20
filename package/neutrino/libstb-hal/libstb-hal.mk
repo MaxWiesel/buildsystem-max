@@ -10,7 +10,7 @@ LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE = $(GIT_SITE)
 LIBSTB_HAL_SITE_METHOD = git
 
-LIBSTB_HAL_DEPENDS = ffmpeg openthreads
+LIBSTB_HAL_DEPENDENCIES = ffmpeg openthreads
 
 ifeq ($(BOXTYPE),generic)
 LIBSTB_HAL_CONF_OPTS = \

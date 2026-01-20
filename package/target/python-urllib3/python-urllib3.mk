@@ -11,10 +11,10 @@ PYTHON_URLLIB3_SITE = https://files.pythonhosted.org/packages/source/u/urllib3
 
 PYTHON_URLLIB3_SETUP_TYPE = setuptools
 
-PYTHON_URLLIB3_DEPENDS = \
+PYTHON_URLLIB3_DEPENDENCIES = \
 	host-python-hatchling
 
-HOST_PYTHON_URLLIB3_DEPENDS = \
+HOST_PYTHON_URLLIB3_DEPENDENCIES = \
 	host-python-hatchling
 
 $(D)/python-urllib3: | bootstrap

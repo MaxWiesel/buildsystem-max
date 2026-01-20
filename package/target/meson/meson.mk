@@ -11,7 +11,7 @@ MESON_SITE = https://github.com/mesonbuild/meson/releases/download/$(MESON_VERSI
 
 MESON_SETUP_TYPE = setuptools
 
-HOST_MESON_DEPENDS = host-ninja
+HOST_MESON_DEPENDENCIES = host-ninja
 
 $(HD)/host-meson: | bootstrap
 	$(call host-python-package)

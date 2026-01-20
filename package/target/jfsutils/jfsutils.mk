@@ -9,7 +9,7 @@ JFSUTILS_DIR = jfsutils-$(JFSUTILS_VERSION)
 JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VERSION).tar.gz
 JFSUTILS_SITE = http://jfs.sourceforge.net/project/pub
 
-JFSUTILS_DEPENDS = e2fsprogs
+JFSUTILS_DEPENDENCIES = e2fsprogs
 
 define JFSUTILS_POST_PATCH
 	$(SED) '/unistd.h/a#include <sys/types.h>' $(PKG_BUILD_DIR)/fscklog/extract.c

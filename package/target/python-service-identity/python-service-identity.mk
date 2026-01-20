@@ -11,7 +11,7 @@ PYTHON_SERVICE_IDENTITY_SITE = https://files.pythonhosted.org/packages/source/s/
 
 PYTHON_SERVICE_IDENTITY_SETUP_TYPE = setuptools
 
-PYTHON_SERVICE_IDENTITY_DEPENDS = \
+PYTHON_SERVICE_IDENTITY_DEPENDENCIES = \
 	python-attr \
 	python-attrs \
 	python-pyasn1

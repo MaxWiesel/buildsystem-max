@@ -9,7 +9,7 @@ MTD_UTILS_DIR = mtd-utils-$(MTD_UTILS_VERSION)
 MTD_UTILS_SOURCE = mtd-utils-$(MTD_UTILS_VERSION).tar.bz2
 MTD_UTILS_SITE = https://infraroot.at/pub/mtd
 
-TD_UTILS_DEPENDS = zlib lzo e2fsprogs
+TD_UTILS_DEPENDENCIES = zlib lzo e2fsprogs
 
 MTD_UTILS_CONF_OPTS = \
 	--disable-tests \

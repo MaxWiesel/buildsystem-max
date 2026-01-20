@@ -10,7 +10,7 @@ LUA_CURL_SOURCE = lua-curlv3.git
 LUA_CURL_SITE = https://github.com/Lua-cURL
 LUA_CURL_SITE_METHOD = git
 
-LUA_CURL_DEPENDS = libcurl lua
+LUA_CURL_DEPENDENCIES = libcurl lua
 
 LUA_CURL_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)

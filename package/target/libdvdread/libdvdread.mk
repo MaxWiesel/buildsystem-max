@@ -9,7 +9,7 @@ LIBDVDREAD_DIR = libdvdread-$(LIBDVDREAD_VERSION)
 LIBDVDREAD_SOURCE = libdvdread-$(LIBDVDREAD_VERSION).tar.bz2
 LIBDVDREAD_SITE = http://www.videolan.org/pub/videolan/libdvdread/$(LIBDVDREAD_VERSION)
 
-LIBDVDREAD_DEPENDS = libdvdcss
+LIBDVDREAD_DEPENDENCIES = libdvdcss
 
 LIBDVDREAD_CONF_ENV = \
 	CFLAGS="$(TARGET_CFLAGS) -std=gnu99"

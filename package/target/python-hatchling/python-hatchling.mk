@@ -11,7 +11,7 @@ PYTHON_HATCHLING_SITE = https://files.pythonhosted.org/packages/source/h/hatchli
 
 PYTHON_HATCHLING_SETUP_TYPE = pep517
 
-HOST_PYTHON_HATCHLING_DEPENDS = \
+HOST_PYTHON_HATCHLING_DEPENDENCIES = \
 	host-python-editables \
 	host-python-packaging \
 	host-python-pathspec \

@@ -11,7 +11,7 @@ PYTHON_TWISTED_SITE = https://files.pythonhosted.org/packages/b2/ce/cbb56597127b
 
 PYTHON_TWISTED_SETUP_TYPE = setuptools
 
-PYTHON_TWISTED_DEPENDS = \
+PYTHON_TWISTED_DEPENDENCIES = \
 	host-python-incremental \
 	python-zope-interface \
 	python-constantly \

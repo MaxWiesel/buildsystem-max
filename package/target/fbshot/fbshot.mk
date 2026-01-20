@@ -9,7 +9,7 @@ FBSHOT_DIR = fbshot-$(FBSHOT_VERSION)
 FBSHOT_SOURCE = fbshot-$(FBSHOT_VERSION).tar.gz
 FBSHOT_SITE = http://distro.ibiblio.org/amigolinux/download/Utils/fbshot
 
-FBSHOT_DEPENDS = libpng
+FBSHOT_DEPENDENCIES = libpng
 
 define FBSHOT_PATCH_MAKEFILE
 	$(SED) 's|	gcc |	$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) |' $(PKG_BUILD_DIR)/Makefile

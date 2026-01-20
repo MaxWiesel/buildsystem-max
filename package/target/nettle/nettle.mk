@@ -9,7 +9,7 @@ NETTLE_DIR = nettle-$(NETTLE_VERSION)
 NETTLE_SOURCE = nettle-$(NETTLE_VERSION).tar.gz
 NETTLE_SITE = https://ftp.gnu.org/gnu/nettle
 
-NETTLE_DEPENDS = gmp
+NETTLE_DEPENDENCIES = gmp
 
 NETTLE_CONF_OPTS = \
 	--disable-documentation

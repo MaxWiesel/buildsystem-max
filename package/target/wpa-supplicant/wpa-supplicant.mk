@@ -9,7 +9,7 @@ WPA_SUPPLICANT_DIR = wpa_supplicant-$(WPA_SUPPLICANT_VERSION)
 WPA_SUPPLICANT_SOURCE = wpa_supplicant-$(WPA_SUPPLICANT_VERSION).tar.gz
 WPA_SUPPLICANT_SITE = https://w1.fi/releases
 
-WPA_SUPPLICANT_DEPENDS = libnl openssl wireless-tools
+WPA_SUPPLICANT_DEPENDENCIES = libnl openssl wireless-tools
 
 WPA_SUPPLICANT_SUBDIR = wpa_supplicant
 

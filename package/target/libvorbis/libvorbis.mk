@@ -9,7 +9,7 @@ LIBVORBIS_DIR = libvorbis-$(LIBVORBIS_VERSION)
 LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VERSION).tar.xz
 LIBVORBIS_SITE = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 
-LIBVORBIS_DEPENDS = libogg
+LIBVORBIS_DEPENDENCIES = libogg
 
 LIBVORBIS_AUTORECONF = YES
 

@@ -9,7 +9,7 @@ LIBVORBISIDEC_DIR = libvorbisidec-$(LIBVORBISIDEC_VERSION)
 LIBVORBISIDEC_SOURCE = libvorbisidec_$(LIBVORBISIDEC_VERSION).orig.tar.gz
 LIBVORBISIDEC_SITE = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
 
-LIBVORBISIDEC_DEPENDS = libogg
+LIBVORBISIDEC_DEPENDENCIES = libogg
 
 LIBVORBISIDEC_AUTORECONF = YES
 

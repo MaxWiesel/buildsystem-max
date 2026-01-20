@@ -11,7 +11,7 @@ PYTHON_LXML_SITE = https://files.pythonhosted.org/packages/source/l/lxml
 
 PYTHON_LXML_SETUP_TYPE = setuptools
 
-PYTHON_LXML_DEPENDS = \
+PYTHON_LXML_DEPENDENCIES = \
 	libxml2 \
 	libxslt \
 	zlib

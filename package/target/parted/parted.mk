@@ -9,7 +9,7 @@ PARTED_DIR = parted-$(PARTED_VERSION)
 PARTED_SOURCE = parted-$(PARTED_VERSION).tar.xz
 PARTED_SITE = https://ftp.gnu.org/gnu/parted
 
-PARTED_DEPENDS = e2fsprogs libiconv
+PARTED_DEPENDENCIES = e2fsprogs libiconv
 
 PARTED_AUTORECONF = YES
 

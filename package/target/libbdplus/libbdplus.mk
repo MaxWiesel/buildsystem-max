@@ -9,7 +9,7 @@ LIBBDPLUS_DIR = libbdplus-$(LIBBDPLUS_VERSION)
 LIBBDPLUS_SOURCE = libbdplus-$(LIBBDPLUS_VERSION).tar.bz2
 LIBBDPLUS_SITE = https://download.videolan.org/pub/videolan/libbdplus/$(LIBBDPLUS_VERSION)
 
-LIBBDPLUS_DEPENDS = libaacs
+LIBBDPLUS_DEPENDENCIES = libaacs
 
 LIBBDPLUS_CONF_OPTS = \
 	--enable-shared \

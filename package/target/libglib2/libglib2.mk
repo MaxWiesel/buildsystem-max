@@ -9,7 +9,7 @@ LIBGLIB2_DIR = glib-$(LIBGLIB2_VERSION)
 LIBGLIB2_SOURCE = glib-$(LIBGLIB2_VERSION).tar.xz
 LIBGLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(LIBGLIB2_VERSION))
 
-LIBGLIB2_DEPENDS = host-libglib2 libffi util-linux zlib libiconv
+LIBGLIB2_DEPENDENCIES = host-libglib2 libffi util-linux zlib libiconv
 
 LIBGLIB2_CONF_OPTS = \
 	-Dman=false \
@@ -37,7 +37,7 @@ $(D)/libglib2: | bootstrap
 
 # -----------------------------------------------------------------------------
 
-HOST_LIBGLIB2_DEPENDS = host-meson host-libffi
+HOST_LIBGLIB2_DEPENDENCIES = host-meson host-libffi
 
 HOST_LIBGLIB2_CONF_OPTS = \
 	-Ddtrace=false \

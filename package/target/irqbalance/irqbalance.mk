@@ -9,7 +9,7 @@ IRQBALANCE_DIR = irqbalance-$(IRQBALANCE_VERSION)
 IRQBALANCE_SOURCE = irqbalance-$(IRQBALANCE_VERSION).tar.gz
 IRQBALANCE_SITE = $(call github,irqbalance,irqbalance,v$(IRQBALANCE_VERSION))
 
-IRQBALANCE_DEPENDS = libglib2 ncurses
+IRQBALANCE_DEPENDENCIES = libglib2 ncurses
 
 IRQBALANCE_CONF_OPTS = \
 	-Dcapng=disabled \

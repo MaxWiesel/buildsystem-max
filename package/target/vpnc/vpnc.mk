@@ -9,7 +9,7 @@ VPNC_DIR = vpnc-$(VPNC_VERSION)
 VPNC_SOURCE = vpnc-$(VPNC_VERSION).tar.gz
 VPNC_SITE = $(call github,ndpgroup,vpnc,$(VPNC_VERSION))
 
-VPNC_DEPENDS = openssl libgcrypt libgpg-error
+VPNC_DEPENDENCIES = openssl libgcrypt libgpg-error
 
 VPNC_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)

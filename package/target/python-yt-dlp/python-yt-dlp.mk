@@ -11,7 +11,7 @@ PYTHON_YT_DLP_SITE = https://files.pythonhosted.org/packages/source/y/yt-dlp
 
 PYTHON_YT_DLP_SETUP_TYPE = flit
 
-PYTHON_YT_DLP_DEPENDS = \
+PYTHON_YT_DLP_DEPENDENCIES = \
 	python-brotli \
 	python-certifi \
 	python-websockets \

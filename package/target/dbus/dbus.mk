@@ -9,7 +9,7 @@ DBUS_DIR = dbus-$(DBUS_VERSION)
 DBUS_SOURCE = dbus-$(DBUS_VERSION).tar.gz
 DBUS_SITE = https://dbus.freedesktop.org/releases/dbus
 
-DBUS_DEPENDS = expat
+DBUS_DEPENDENCIES = expat
 
 DBUS_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -Wno-cast-align" \

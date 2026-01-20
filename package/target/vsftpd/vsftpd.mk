@@ -9,7 +9,7 @@ VSFTPD_DIR = vsftpd-$(VSFTPD_VERSION)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VERSION).tar.gz
 VSFTPD_SITE = https://security.appspot.com/downloads
 
-VSFTPD_DEPENDS = openssl
+VSFTPD_DEPENDENCIES = openssl
 
 VSFTPD_MAKE_OPTS = \
 	$(TARGET_CONFIGURE_ENV) \

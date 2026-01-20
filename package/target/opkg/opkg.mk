@@ -9,7 +9,7 @@ OPKG_DIR = opkg-$(OPKG_VERSION)
 OPKG_SOURCE = opkg-$(OPKG_VERSION).tar.gz
 OPKG_SITE = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
-OPKG_DEPENDS = host-opkg libarchive
+OPKG_DEPENDENCIES = host-opkg libarchive
 
 OPKG_CONF_OPTS = \
 	--disable-curl \
@@ -27,7 +27,7 @@ $(D)/opkg: | bootstrap
 
 # -----------------------------------------------------------------------------
 
-HOST_OPKG_DEPENDS = host-libarchive
+HOST_OPKG_DEPENDENCIES = host-libarchive
 
 HOST_OPKG_ENV = \
 	CFLAGS="-I$(HOST_DIR)/include" \

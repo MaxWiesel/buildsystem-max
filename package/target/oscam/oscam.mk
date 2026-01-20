@@ -18,7 +18,7 @@ OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
 OSCAM_SITE_METHOD = git
 
-OSCAM_DEPENDS = libusb
+OSCAM_DEPENDENCIES = libusb
 
 OSCAM_CONF_OPTS = \
 	--disable all \

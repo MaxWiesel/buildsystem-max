@@ -335,25 +335,25 @@ ifeq ($(PKG_MODE),PYTHON)
 endif
 
 # auto-assign some dependencies
-ifndef $(PKG)_DEPENDS
-  $(PKG)_DEPENDS =
+ifndef $(PKG)_DEPENDENCIES
+  $(PKG)_DEPENDENCIES =
 endif
 ifeq ($(PKG_MODE),PYTHON)
-  $(PKG)_DEPENDS += host-python3
+  $(PKG)_DEPENDENCIES += host-python3
   ifeq ($$($(PKG)_SETUP_TYPE),setuptools)
-    $(PKG)_DEPENDS += host-python-setuptools
+    $(PKG)_DEPENDENCIES += host-python-setuptools
   else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
-    $(PKG)_DEPENDS += host-python-pypa-build host-python-installer
+    $(PKG)_DEPENDENCIES += host-python-pypa-build host-python-installer
     ifeq ($$($(PKG)_SETUP_TYPE),flit)
-      $(PKG)_DEPENDS += host-python-flit-core
+      $(PKG)_DEPENDENCIES += host-python-flit-core
     endif
   else ifeq ($$($(PKG)_SETUP_TYPE),flit-bootstrap)
     # Don't add dependency on host-python-installer for
     # host-python-installer itself, and its dependencies.
-    $(PKG)_DEPENDS += $$(if $$(filter $$(pkg),host-python-flit-core host-python-installer),,host-python-installer)
+    $(PKG)_DEPENDENCIES += $$(if $$(filter $$(pkg),host-python-flit-core host-python-installer),,host-python-installer)
   endif
   ifeq ($(PKG_DESTINATION),TARGET)
-    $(PKG)_DEPENDS += python3
+    $(PKG)_DEPENDENCIES += python3
   endif
 endif
 
@@ -386,7 +386,7 @@ define PKG_DEBUG_VARIABLES # (control-flag(s))
 	@echo "$(PKG)_SOURCE:         $($(PKG)_SOURCE)"
 	@echo "$(PKG)_SITE:           $($(PKG)_SITE)"
 	@echo "$(PKG)_SITE_METHOD:    $($(PKG)_SITE_METHOD)"
-	@echo "$(PKG)_DEPENDS:        $($(PKG)_DEPENDS)"
+	@echo "$(PKG)_DEPENDENCIES:   $($(PKG)_DEPENDENCIES)"
 	#false
 endef
 
@@ -419,7 +419,7 @@ endef
 
 # start-up build
 define STARTUP
-	$(if $($(PKG)_DEPENDS),$(call DEPENDS))
+	$(if $($(PKG)_DEPENDENCIES),$(call DEPENDENCIES))
 	@$(call MESSAGE,"Start-up build")
 	$(Q)$(call CLEANUP)
 endef
@@ -427,8 +427,8 @@ endef
 # -----------------------------------------------------------------------------
 
 # resolve dependencies
-define DEPENDS
-	@+make $($(PKG)_DEPENDS)
+define DEPENDENCIES
+	@+make $($(PKG)_DEPENDENCIES)
 endef
 
 # -----------------------------------------------------------------------------

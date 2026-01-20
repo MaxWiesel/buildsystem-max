@@ -9,7 +9,7 @@ E2FSPROGS_DIR = e2fsprogs-$(E2FSPROGS_VERSION)
 E2FSPROGS_SOURCE = e2fsprogs-$(E2FSPROGS_VERSION).tar.gz
 E2FSPROGS_SITE = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(E2FSPROGS_VERSION)
 
-E2FSPROGS_DEPENDS = util-linux
+E2FSPROGS_DEPENDENCIES = util-linux
 
 E2FSPROGS_AUTORECONF = YES
 

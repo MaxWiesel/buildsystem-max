@@ -9,7 +9,7 @@ PNGPP_DIR = png++-$(PNGPP_VERSION)
 PNGPP_SOURCE = png++-$(PNGPP_VERSION).tar.gz
 PNGPP_SITE = https://download.savannah.gnu.org/releases/pngpp
 
-PNGPP_DEPENDS = libpng
+PNGPP_DEPENDENCIES = libpng
 
 PNGPP_MAKE_INSTALL_ARGS = \
 	install-headers

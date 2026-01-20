@@ -9,7 +9,7 @@ DJMOUNT_DIR = djmount-$(DJMOUNT_VERSION)
 DJMOUNT_SOURCE = djmount-$(DJMOUNT_VERSION).tar.gz
 DJMOUNT_SITE = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VERSION)
 
-DJMOUNT_DEPENDS = libupnp libfuse
+DJMOUNT_DEPENDENCIES = libupnp libfuse
 
 DJMOUNT_AUTORECONF = YES
 

@@ -9,7 +9,7 @@ USBUTILS_DIR = usbutils-$(USBUTILS_VERSION)
 USBUTILS_SOURCE = usbutils-$(USBUTILS_VERSION).tar.xz
 USBUTILS_SITE = https://www.kernel.org/pub/linux/utils/usb/usbutils
 
-USBUTILS_DEPENDS = libusb
+USBUTILS_DEPENDENCIES = libusb
 
 USBUTILS_AUTORECONF = YES
 

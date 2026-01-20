@@ -9,7 +9,7 @@ MC_DIR = mc-$(MC_VERSION)
 MC_SOURCE = mc-$(MC_VERSION).tar.xz
 MC_SITE = ftp.midnight-commander.org
 
-MC_DEPENDS = ncurses libglib2
+MC_DEPENDENCIES = ncurses libglib2
 
 MC_AUTORECONF = YES
 

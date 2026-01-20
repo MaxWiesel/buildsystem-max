@@ -9,7 +9,7 @@ CURLFTPFS_DIR = curlftpfs-$(CURLFTPFS_VERSION)
 CURLFTPFS_SOURCE = curlftpfs-$(CURLFTPFS_VERSION).tar.gz
 CURLFTPFS_SITE = https://sourceforge.net/projects/curlftpfs/files/latest/download
 
-CURLFTPFS_DEPENDS = libcurl libfuse libglib2
+CURLFTPFS_DEPENDENCIES = libcurl libfuse libglib2
 
 CURLFTPFS_CONF_ENV = \
 	ac_cv_func_malloc_0_nonnull=yes \

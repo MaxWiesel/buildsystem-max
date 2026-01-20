@@ -10,7 +10,7 @@ LUASOCKET_SOURCE = luasocket.git
 LUASOCKET_SITE = https://github.com/diegonehab
 LUASOCKET_SITE_METHOD = git
 
-LUASOCKET_DEPENDS = lua
+LUASOCKET_DEPENDENCIES = lua
 
 define LUASOCKET_POST_PATCH
 	$(SED) "s@LD_linux=gcc@LD_LINUX=$(TARGET_CC)@; \

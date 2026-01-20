@@ -11,7 +11,7 @@ PYTHON_PYPA_BUILD_SITE = https://files.pythonhosted.org/packages/source/b/build
 
 HOST_PYTHON_PYPA_BUILD_SETUP_TYPE = flit-bootstrap
 
-HOST_PYTHON_PYPA_BUILD_DEPENDS = \
+HOST_PYTHON_PYPA_BUILD_DEPENDENCIES = \
 	host-python-packaging \
 	host-python-pyproject-hooks
 

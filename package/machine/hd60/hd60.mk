@@ -94,7 +94,7 @@ HD60_MALI_MODULE_VERSION = DX910-SW-99002-r7p0-00rel0
 HD60_MALI_MODULE_DIR = $(HD60_MALI_MODULE_VERSION)
 HD60_MALI_MODULE_SOURCE = $(HD60_MALI_MODULE_VERSION).tgz
 HD60_MALI_MODULE_SITE = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
-HD60_MALI_MODULE_DEPENDS = kernel hd60-libgles-header
+HD60_MALI_MODULE_DEPENDENCIES = kernel hd60-libgles-header
 
 HD60_MALI_MODULE_MAKE_OPTS = \
 	-C $(KERNEL_OBJ_DIR)

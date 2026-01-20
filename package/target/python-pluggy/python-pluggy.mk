@@ -11,7 +11,7 @@ PYTHON_PLUGGY_SITE = https://files.pythonhosted.org/packages/source/p/pluggy
 
 PYTHON_PLUGGY_SETUP_TYPE = setuptools
 
-HOST_PYTHON_PLUGGY_DEPENDS = \
+HOST_PYTHON_PLUGGY_DEPENDENCIES = \
 	host-python-pip
 
 $(HD)/host-python-pluggy: | bootstrap

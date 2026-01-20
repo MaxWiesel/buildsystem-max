@@ -10,7 +10,7 @@ LUA_DIR = lua-$(LUA_VERSION)
 LUA_SOURCE = lua-$(LUA_VERSION).tar.gz
 LUA_SITE = https://www.lua.org/ftp
 
-LUA_DEPENDS = host-lua ncurses
+LUA_DEPENDENCIES = host-lua ncurses
 
 LUA_MAKE_ARGS = \
 	linux

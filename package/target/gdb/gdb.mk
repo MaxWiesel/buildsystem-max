@@ -9,7 +9,7 @@ GDB_DIR = gdb-$(GDB_VERSION)
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.xz
 GDB_SITE = https://sourceware.org/pub/gdb/releases
 
-GDB_DEPENDS = zlib ncurses
+GDB_DEPENDENCIES = zlib ncurses
 
 GDB_CONF_OPTS = \
 	--enable-static \

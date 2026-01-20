@@ -17,7 +17,7 @@ endif
 NEUTRINO_PLUGINS_SITE = $(MAX-GIT-GITHUB)
 NEUTRINO_PLUGINS_SITE_METHOD = git
 
-NEUTRINO_PLUGINS_DEPENDS = ffmpeg libcurl libpng libjpeg-turbo giflib freetype
+NEUTRINO_PLUGINS_DEPENDENCIES = ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
 ifeq ($(BOXTYPE),generic)
 NEUTRINO_PLUGINS_CONF_OPTS = \

@@ -10,7 +10,7 @@ XUPNPD_SOURCE = xupnpd.git
 XUPNPD_SITE = https://github.com/clark15b
 XUPNPD_SITE_METHOD = git
 
-XUPNPD_DEPENDS = lua openssl neutrino-plugins
+XUPNPD_DEPENDENCIES = lua openssl neutrino-plugins
 
 XUPNPD_SUBDIR = src
 

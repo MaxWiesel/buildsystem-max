@@ -11,7 +11,7 @@ PYTHON_INSTALLER_SITE = https://files.pythonhosted.org/packages/source/i/install
 
 HOST_PYTHON_INSTALLER_SETUP_TYPE = flit-bootstrap
 
-HOST_PYTHON_INSTALLER_DEPENDS = \
+HOST_PYTHON_INSTALLER_DEPENDENCIES = \
 	host-python-flit-core
 
 HOST_PYTHON_INSTALLER_ENV = \

@@ -11,7 +11,7 @@ PYTHON_PYASN1_SITE = https://files.pythonhosted.org/packages/source/p/pyasn1
 
 PYTHON_PYASN1_SETUP_TYPE = setuptools
 
-PYTHON_PYASN1_DEPENDS = \
+PYTHON_PYASN1_DEPENDENCIES = \
 	python-pyasn1-modules
 
 $(D)/python-pyasn1: | bootstrap

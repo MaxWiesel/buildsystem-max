@@ -10,7 +10,7 @@ RTMPDUMP_SOURCE = rtmpdump.git
 RTMPDUMP_SITE = https://github.com/oe-alliance
 RTMPDUMP_SITE_METHOD = git
 
-RTMPDUMP_DEPENDS = zlib openssl
+RTMPDUMP_DEPENDENCIES = zlib openssl
 
 RTMPDUMP_MAKE_ENV = \
 	CROSS_COMPILE=$(TARGET_CROSS) \

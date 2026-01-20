@@ -9,7 +9,7 @@ PROCPS_NG_DIR = procps-ng-$(PROCPS_NG_VERSION)
 PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VERSION).tar.xz
 PROCPS_NG_SITE = http://sourceforge.net/projects/procps-ng/files/Production
 
-PROCPS_NG_DEPENDS = ncurses
+PROCPS_NG_DEPENDENCIES = ncurses
 
 PROCPS_NG_AUTORECONF = YES
 

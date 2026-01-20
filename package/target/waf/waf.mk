@@ -9,7 +9,7 @@ WAF_DIR = waf-$(WAF_VERSION)
 WAF_SOURCE = waf-$(WAF_VERSION)
 WAF_SITE = https://waf.io
 
-HOST_WAF_DEPENDS = host-python
+HOST_WAF_DEPENDENCIES = host-python
 
 HOST_WAF_BINARY = $(HOST_DIR)/bin/waf
 

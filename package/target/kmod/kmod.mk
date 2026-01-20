@@ -9,7 +9,7 @@ KMOD_DIR = kmod-$(KMOD_VERSION)
 KMOD_SOURCE = kmod-$(KMOD_VERSION).tar.xz
 KMOD_SITE = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
 
-KMOD_DEPENDS = zlib
+KMOD_DEPENDENCIES = zlib
 
 KMOD_AUTORECONF = YES
 

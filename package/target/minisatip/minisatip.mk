@@ -9,7 +9,7 @@ MINISATIP_DIR = minisatip-$(MINISATIP_VERSION)
 MINISATIP_SOURCE = minisatip-$(MINISATIP_VERSION).tar.gz
 MINISATIP_SITE = $(call github,catalinii,minisatip,v$(MINISATIP_VERSION))
 
-MINISATIP_DEPENDS = libdvbcsa libxml2 openssl
+MINISATIP_DEPENDENCIES = libdvbcsa libxml2 openssl
 
 MINISATIP_CONF_ENV = \
 	CFLAGS+=" -ldl"

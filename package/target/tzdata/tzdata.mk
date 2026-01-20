@@ -9,7 +9,7 @@ TZDATA_DIR = tzdata$(TZDATA_VERSION)
 TZDATA_SOURCE = tzdata$(TZDATA_VERSION).tar.gz
 TZDATA_SITE = https://data.iana.org/time-zones/releases
 
-TZDATA_DEPENDS = host-zic
+TZDATA_DEPENDENCIES = host-zic
 
 # fix non-existing subdir in tzdata tarball
 TZDATA_EXTRACT_DIR = $($(PKG)_DIR)

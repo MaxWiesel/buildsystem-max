@@ -9,7 +9,7 @@ NETSURF_DIR = netsurf-all-$(NETSURF_VERSION)
 NETSURF_SOURCE = netsurf-all-$(NETSURF_VERSION).tar.gz
 NETSURF_SITE = http://download.netsurf-browser.org/netsurf/releases/source-full
 
-NETSURF_DEPENDS = $(SHARE_NEUTRINO_PLUGINS) libpng libjpeg-turbo openssl libiconv freetype expat libcurl
+NETSURF_DEPENDENCIES = $(SHARE_NEUTRINO_PLUGINS) libpng libjpeg-turbo openssl libiconv freetype expat libcurl
 
 NETSURF_CONF_OPTS = \
 	PREFIX=/usr \

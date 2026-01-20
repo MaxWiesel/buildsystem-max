@@ -9,7 +9,7 @@ HDDTEMP_DIR = hddtemp-$(HDDTEMP_VERSION)
 HDDTEMP_SOURCE = hddtemp-$(HDDTEMP_VERSION).tar.bz2
 HDDTEMP_SITE = http://savannah.c3sl.ufpr.br/hddtemp
 
-HDDTEMP_DEPENDS = libiconv
+HDDTEMP_DEPENDENCIES = libiconv
 
 HDDTEMP_CONF_OPTS = \
 	LIBS="-liconv" \
