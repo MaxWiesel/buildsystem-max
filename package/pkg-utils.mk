@@ -170,8 +170,8 @@ ifeq ($(PKG_MODE),PYTHON)
         $(PKG)_PYTHON_BASE_BUILD_CMD = ./setup.py build $(TARGET_PKG_PYTHON_SETUPTOOLS_BUILD_OPTS)
         $(PKG)_PYTHON_BASE_INSTALL_CMD = ./setup.py install $(TARGET_PKG_PYTHON_SETUPTOOLS_INSTALL_OPTS)
       endif
-    # flit, pep517
-    else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
+    # flit, hatch, pep517
+    else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit hatch pep517))
       ifeq ($(PKG_DESTINATION),HOST)
         $(PKG)_PYTHON_BASE_ENV = $(HOST_PKG_PYTHON_PEP517_ENV)
         $(PKG)_PYTHON_BASE_BUILD_CMD = -m build -n -w $(HOST_PKG_PYTHON_PEP517_BUILD_OPTS)
@@ -191,7 +191,7 @@ ifeq ($(PKG_MODE),PYTHON)
         $$(error Invalid $(PKG)_SETUP_TYPE. flit-bootstrap only supported for host packages)
       endif
     else
-      $$(error Invalid $(PKG)_SETUP_TYPE. Valid options are 'setuptools', 'pep517' or 'flit')
+      $$(error Invalid $(PKG)_SETUP_TYPE. Valid options are 'setuptools', 'pep517', 'hatch' or 'flit')
     endif
   else
     $$(error $(PKG_PARENT)_SETUP_TYPE must be set)
@@ -342,9 +342,11 @@ ifeq ($(PKG_MODE),PYTHON)
   $(PKG)_DEPENDENCIES += host-python3
   ifeq ($$($(PKG)_SETUP_TYPE),setuptools)
     $(PKG)_DEPENDENCIES += host-python-setuptools
-  else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit pep517))
+  else ifeq ($$($(PKG)_SETUP_TYPE),$$(filter $$($(PKG)_SETUP_TYPE),flit hatch pep517))
     $(PKG)_DEPENDENCIES += host-python-pypa-build host-python-installer
-    ifeq ($$($(PKG)_SETUP_TYPE),flit)
+    ifeq ($$($(PKG)_SETUP_TYPE),hatch)
+      $(PKG)_DEPENDENCIES += host-python-hatchling
+    else ifeq ($$($(PKG)_SETUP_TYPE),flit)
       $(PKG)_DEPENDENCIES += host-python-flit-core
     endif
   else ifeq ($$($(PKG)_SETUP_TYPE),flit-bootstrap)
