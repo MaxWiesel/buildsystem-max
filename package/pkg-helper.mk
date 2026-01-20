@@ -66,13 +66,17 @@ TUXBOX_CUSTOMIZE = [ -x support/scripts/$(notdir $@)-local.sh ] && \
 
 ifeq ($(GITSSH),1)
 MAX-GIT-GITHUB = git@github.com:MaxWiesel
-URL_1          = https://github.com/MaxWiesel
-URL_2          = $(MAX-GIT-GITHUB)
+URL_1 = https://github.com/MaxWiesel
+URL_2 = $(MAX-GIT-GITHUB)
 else
 MAX-GIT-GITHUB = https://github.com/MaxWiesel
-URL_1          = git@github.com:MaxWiesel
-URL_2          = $(MAX-GIT-GITHUB)
+URL_1 = git@github.com:MaxWiesel
+URL_2 = $(MAX-GIT-GITHUB)
 endif
+
+PYPI_MIRROR = https://files.pythonhosted.org/packages/source
+
+# -----------------------------------------------------------------------------
 
 REPOSITORIES = \
 	. \
