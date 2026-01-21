@@ -19,5 +19,10 @@ LAME_CONF_OPTS = \
 	--disable-gtktest \
 	--enable-dynamic-frontends
 
+define LAME_TARGET_CLEANUP
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,doc html)
+endef
+LAME_TARGET_FINALIZE_HOOKS += LAME_TARGET_CLEANUP
+
 $(D)/lame: | bootstrap
 	$(call autotools-package)
