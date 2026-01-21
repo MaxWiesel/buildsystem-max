@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-AIO_GRAB_VERSION = master
+AIO_GRAB_VERSION = a90860
 AIO_GRAB_DIR = aio-grab.git
 AIO_GRAB_SOURCE = aio-grab.git
 AIO_GRAB_SITE = https://github.com/oe-alliance
