@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-HD51_DRIVER_DATE = 20191120
+HD51_DRIVER_DATE = 20250429
 HD51_DRIVER_VERSION = 4.10.12-$(HD51_DRIVER_DATE)
 HD51_DRIVER_SOURCE = hd51-drivers-$(HD51_DRIVER_VERSION).zip
 HD51_DRIVER_SITE = http://source.mynonpublic.com/gfutures
@@ -26,7 +26,7 @@ $(D)/hd51-driver: | bootstrap
 #
 ################################################################################
 
-HD51_LIBGLES_DATE = 20191101
+HD51_LIBGLES_DATE = 20250217
 HD51_LIBGLES_VERSION = $(HD51_LIBGLES_DATE)
 HD51_LIBGLES_SOURCE = hd51-v3ddriver-$(HD51_LIBGLES_VERSION).zip
 HD51_LIBGLES_SITE = http://downloads.mutant-digital.net/v3ddriver
