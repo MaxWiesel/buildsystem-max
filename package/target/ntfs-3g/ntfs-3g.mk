@@ -5,11 +5,13 @@
 ################################################################################
 
 NTFS_3G_VERSION = 2022.10.3
-NTFS_3G_DIR = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION)
-NTFS_3G_SOURCE = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION).tgz
-NTFS_3G_SITE = https://tuxera.com/opensource
+NTFS_3G_DIR = ntfs-3g-$(NTFS_3G_VERSION)
+NTFS_3G_SOURCE = ntfs-3g-$(NTFS_3G_VERSION).tar.gz
+NTFS_3G_SITE = $(call github,tuxera,ntfs-3g,$(NTFS_3G_VERSION))
 
-NTFS_3G_DEPENDENCIES = libfuse
+NTFS_3G_DEPENDENCIES = libfuse libgcrypt
+
+NTFS_3G_AUTORECONF = YES
 
 NTFS_3G_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
