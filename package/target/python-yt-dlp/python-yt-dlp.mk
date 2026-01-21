@@ -4,12 +4,12 @@
 #
 ################################################################################
 
-PYTHON_YT_DLP_VERSION = 2025.2.19
+PYTHON_YT_DLP_VERSION = 2025.12.8
 PYTHON_YT_DLP_DIR = yt_dlp-$(PYTHON_YT_DLP_VERSION)
 PYTHON_YT_DLP_SOURCE = yt_dlp-$(PYTHON_YT_DLP_VERSION).tar.gz
 PYTHON_YT_DLP_SITE = $(PYPI_MIRROR)/y/yt-dlp
 
-PYTHON_YT_DLP_SETUP_TYPE = flit
+PYTHON_YT_DLP_SETUP_TYPE = hatch
 
 PYTHON_YT_DLP_DEPENDENCIES = \
 	python-brotli \
@@ -17,6 +17,7 @@ PYTHON_YT_DLP_DEPENDENCIES = \
 	python-mutagen \
 	python-pycryptodomex \
 	python-requests \
+	python-urllib3 \
 	python-websockets
 
 define PYTHON_YT_DLP_TARGET_CLEANUP
