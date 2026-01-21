@@ -1,0 +1,17 @@
+################################################################################
+#
+# python-trio-websocket
+#
+################################################################################
+
+PYTHON_TRIO_WEBSOCKET_VERSION = 0.12.2
+PYTHON_TRIO_WEBSOCKET_DIR = trio_websocket-$(PYTHON_TRIO_WEBSOCKET_VERSION)
+PYTHON_TRIO_WEBSOCKET_SOURCE = trio_websocket-$(PYTHON_TRIO_WEBSOCKET_VERSION).tar.gz
+PYTHON_TRIO_WEBSOCKET_SITE = $(PYPI_MIRROR)/t/trio-websocket
+
+PYTHON_TRIO_WEBSOCKET_SETUP_TYPE = setuptools
+
+PYTHON_TRIO_WEBSOCKET_DEPENDENCIES = python-wsproto
+
+$(D)/python-trio-websocket: | bootstrap
+	$(call python-package)
