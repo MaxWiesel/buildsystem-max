@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-DVB_APPS_VERSION = master
+DVB_APPS_VERSION = 9f848e
 DVB_APPS_DIR = dvb-apps.git
 DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE = https://github.com/tbsdtv
