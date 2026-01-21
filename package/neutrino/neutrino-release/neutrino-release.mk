@@ -21,6 +21,7 @@ neutrino-release-python:
 #	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
 	find $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/ \
 		\( -name '*.doc' \
+		-o -name '*.dist-info' \
 		-o -name '*.egg-info' \
 		-o -name '*.pyx' \
 		-o -name '*.txt' \
