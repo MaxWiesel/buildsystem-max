@@ -11,6 +11,8 @@ MINIDLNA_SITE = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINID
 
 MINIDLNA_DEPENDENCIES = zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 
+MINIDLNA_AUTORECONF = YES
+
 MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
