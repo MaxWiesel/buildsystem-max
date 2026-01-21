@@ -7,7 +7,7 @@
 PARTED_VERSION = 3.2
 PARTED_DIR = parted-$(PARTED_VERSION)
 PARTED_SOURCE = parted-$(PARTED_VERSION).tar.xz
-PARTED_SITE = https://ftp.gnu.org/gnu/parted
+PARTED_SITE = $(GNU_MIRROR)/parted
 
 PARTED_DEPENDENCIES = e2fsprogs libiconv
 

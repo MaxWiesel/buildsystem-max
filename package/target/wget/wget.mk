@@ -7,7 +7,7 @@
 WGET_VERSION = 1.21.4
 WGET_DIR = wget-$(WGET_VERSION)
 WGET_SOURCE = wget-$(WGET_VERSION).tar.gz
-WGET_SITE = https://ftp.gnu.org/gnu/wget
+WGET_SITE = $(GNU_MIRROR)/wget
 
 WGET_DEPENDENCIES = openssl
 

@@ -7,7 +7,7 @@
 BASH_VERSION = 5.0
 BASH_DIR = bash-$(BASH_VERSION)
 BASH_SOURCE = bash-$(BASH_VERSION).tar.gz
-BASH_SITE = http://ftp.gnu.org/gnu/bash
+BASH_SITE = $(GNU_MIRROR)/bash
 
 BASH_CONF_ENV += \
 	bash_cv_getcwd_malloc=yes \

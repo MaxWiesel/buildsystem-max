@@ -74,6 +74,7 @@ URL_1 = git@github.com:MaxWiesel
 URL_2 = $(MAX-GIT-GITHUB)
 endif
 
+GNU_MIRROR = http://ftp.gnu.org/pub/gnu
 PYPI_MIRROR = https://files.pythonhosted.org/packages/source
 
 # -----------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 NCURSES_VERSION = 6.1
 NCURSES_DIR = ncurses-$(NCURSES_VERSION)
 NCURSES_SOURCE = ncurses-$(NCURSES_VERSION).tar.gz
-NCURSES_SITE = https://ftp.gnu.org/pub/gnu/ncurses
+NCURSES_SITE = $(GNU_MIRROR)/ncurses
 
 NCURSES_CONF_OPTS = \
 	--enable-pc-files \

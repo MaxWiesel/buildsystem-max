@@ -7,7 +7,7 @@
 READLINE_VERSION = 8.1.2
 READLINE_DIR = readline-$(READLINE_VERSION)
 READLINE_SOURCE = readline-$(READLINE_VERSION).tar.gz
-READLINE_SITE = https://ftp.gnu.org/gnu/readline
+READLINE_SITE = $(GNU_MIRROR)/readline
 
 READLINE_DEPENDENCIES = ncurses
 
