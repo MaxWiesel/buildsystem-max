@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BRE2ZE4K_DRIVER_DATE = 20191120
+BRE2ZE4K_DRIVER_DATE = 20250429
 BRE2ZE4K_DRIVER_VERSION = 4.10.12-$(BRE2ZE4K_DRIVER_DATE)
 BRE2ZE4K_DRIVER_SOURCE = bre2ze4k-drivers-$(BRE2ZE4K_DRIVER_VERSION).zip
 BRE2ZE4K_DRIVER_SITE = http://source.mynonpublic.com/gfutures
@@ -26,7 +26,7 @@ $(D)/bre2ze4k-driver: | bootstrap
 #
 ################################################################################
 
-BRE2ZE4K_LIBGLES_DATE = 20191101
+BRE2ZE4K_LIBGLES_DATE = 20250429
 BRE2ZE4K_LIBGLES_VERSION = $(BRE2ZE4K_LIBGLES_DATE)
 BRE2ZE4K_LIBGLES_SOURCE = bre2ze4k-v3ddriver-$(BRE2ZE4K_LIBGLES_VERSION).zip
 BRE2ZE4K_LIBGLES_SITE = http://downloads.mutant-digital.net/v3ddriver
