@@ -13,7 +13,7 @@ PYTHON_HATCH_FANCY_PYPI_README_SETUP_TYPE = hatch
 
 # -----------------------------------------------------------------------------
 
-$(HD)/HOST_PYTHON_HATCH_FANCY_PYPI_README_DEPENDENCIES = host-python-setuptools-scm
+HOST_PYTHON_HATCH_FANCY_PYPI_README_DEPENDENCIES = host-python-setuptools-scm
 
-host-python-hatch-fancy-pypi-readme: | bootstrap
+$(HD)/host-python-hatch-fancy-pypi-readme: | bootstrap
 	$(call host-python-package)
