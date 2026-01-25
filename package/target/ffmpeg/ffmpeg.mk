@@ -50,6 +50,7 @@ FFMPEG_CONF_OPTS = \
 	--disable-vdpau \
 	\
 	--disable-muxers \
+	--enable-muxer=ac3 \
 	--enable-muxer=adts \
 	--enable-muxer=apng \
 	--enable-muxer=asf \
@@ -106,9 +107,11 @@ FFMPEG_CONF_OPTS = \
 	--enable-encoder=ljpeg \
 	--enable-encoder=libvorbis \
 	--enable-encoder=mjpeg \
+	--enable-encoder=mp2 \
 	--enable-encoder=mpeg1video \
 	--enable-encoder=mpeg2video \
 	--enable-encoder=mpeg4 \
+	--enable-encoder=pcm_s16le \
 	--enable-encoder=png \
 	--enable-encoder=rawvideo \
 	--enable-encoder=wmav2 \
