@@ -75,6 +75,7 @@ URL_2 = $(MAX-GIT-GITHUB)
 endif
 
 GNU_MIRROR = http://ftp.gnu.org/pub/gnu
+KERNEL_MIRROR = https://cdn.kernel.org/pub
 PYPI_MIRROR = https://files.pythonhosted.org/packages/source
 
 # -----------------------------------------------------------------------------

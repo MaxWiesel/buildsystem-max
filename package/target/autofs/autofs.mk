@@ -7,7 +7,7 @@
 AUTOFS_VERSION = 5.1.8
 AUTOFS_DIR = autofs-$(AUTOFS_VERSION)
 AUTOFS_SOURCE = autofs-$(AUTOFS_VERSION).tar.xz
-AUTOFS_SITE = https://www.kernel.org/pub/linux/daemons/autofs/v5
+AUTOFS_SITE = $(KERNEL_MIRROR)/linux/daemons/autofs/v5
 
 AUTOFS_DEPENDENCIES = libtirpc
 
