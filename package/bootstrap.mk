@@ -126,48 +126,48 @@ $(D)/bootstrap: $(BOOTSTRAP)
 #
 ################################################################################
 
-IMAGE_DEPENDS  = bootstrap
-IMAGE_DEPENDS += ncurses
-IMAGE_DEPENDS += bash
-IMAGE_DEPENDS += procps-ng
-IMAGE_DEPENDS += kmod
-IMAGE_DEPENDS += sysvinit
-IMAGE_DEPENDS += base-files
-IMAGE_DEPENDS += netbase
-IMAGE_DEPENDS += e2fsprogs
-#IMAGE_DEPENDS += jfsutils
-IMAGE_DEPENDS += dosfstools
-IMAGE_DEPENDS += parted
-IMAGE_DEPENDS += gptfdisk
-IMAGE_DEPENDS += hd-idle
-IMAGE_DEPENDS += ntfs-3g
-IMAGE_DEPENDS += tzdata
-IMAGE_DEPENDS += openresolv
-IMAGE_DEPENDS += rpcbind
-IMAGE_DEPENDS += nfs-utils
-IMAGE_DEPENDS += htop
-IMAGE_DEPENDS += vsftpd
-IMAGE_DEPENDS += autofs
-IMAGE_DEPENDS += ethtool
-IMAGE_DEPENDS += ofgwrite
-IMAGE_DEPENDS += wget
-IMAGE_DEPENDS += busybox
-IMAGE_DEPENDS += fbshot
-IMAGE_DEPENDS += aio-grab
-IMAGE_DEPENDS += dvbsnoop
-IMAGE_DEPENDS += libusb
-IMAGE_DEPENDS += wpa-supplicant
-IMAGE_DEPENDS += wireless-tools
-IMAGE_DEPENDS += udpxy
-IMAGE_DEPENDS += mc
+IMAGE_DEPENDENCIES  = bootstrap
+IMAGE_DEPENDENCIES += ncurses
+IMAGE_DEPENDENCIES += bash
+IMAGE_DEPENDENCIES += procps-ng
+IMAGE_DEPENDENCIES += kmod
+IMAGE_DEPENDENCIES += sysvinit
+IMAGE_DEPENDENCIES += base-files
+IMAGE_DEPENDENCIES += netbase
+IMAGE_DEPENDENCIES += e2fsprogs
+#IMAGE_DEPENDENCIES += jfsutils
+IMAGE_DEPENDENCIES += dosfstools
+IMAGE_DEPENDENCIES += parted
+IMAGE_DEPENDENCIES += gptfdisk
+IMAGE_DEPENDENCIES += hd-idle
+IMAGE_DEPENDENCIES += ntfs-3g
+IMAGE_DEPENDENCIES += tzdata
+IMAGE_DEPENDENCIES += openresolv
+IMAGE_DEPENDENCIES += rpcbind
+IMAGE_DEPENDENCIES += nfs-utils
+IMAGE_DEPENDENCIES += htop
+IMAGE_DEPENDENCIES += vsftpd
+IMAGE_DEPENDENCIES += autofs
+IMAGE_DEPENDENCIES += ethtool
+IMAGE_DEPENDENCIES += ofgwrite
+IMAGE_DEPENDENCIES += wget
+IMAGE_DEPENDENCIES += busybox
+IMAGE_DEPENDENCIES += fbshot
+IMAGE_DEPENDENCIES += aio-grab
+IMAGE_DEPENDENCIES += dvbsnoop
+IMAGE_DEPENDENCIES += libusb
+IMAGE_DEPENDENCIES += wpa-supplicant
+IMAGE_DEPENDENCIES += wireless-tools
+IMAGE_DEPENDENCIES += udpxy
+IMAGE_DEPENDENCIES += mc
 ifeq ($(BOXMODEL),hd60)
-IMAGE_DEPENDS += harfbuzz
+IMAGE_DEPENDENCIES += harfbuzz
 endif
 
-IMAGE_DEPENDS += \
-	$(USER_IMAGE_DEPENDS)
+IMAGE_DEPENDENCIES += \
+	$(USER_IMAGE_DEPENDENCIES)
 
-$(D)/image-deps: $(IMAGE_DEPENDS)
+$(D)/image-deps: $(IMAGE_DEPENDENCIES)
 	@touch $(D)/$(notdir $@)
 
 ################################################################################
@@ -176,25 +176,25 @@ $(D)/image-deps: $(IMAGE_DEPENDS)
 #
 ################################################################################
 
-MACHINE_DEPENDS  = bootstrap
-MACHINE_DEPENDS += kernel
-MACHINE_DEPENDS += kernel-modules-clean
-MACHINE_DEPENDS += $(BOXMODEL)-driver
+MACHINE_DEPENDENCIES  = bootstrap
+MACHINE_DEPENDENCIES += kernel
+MACHINE_DEPENDENCIES += kernel-modules-clean
+MACHINE_DEPENDENCIES += $(BOXMODEL)-driver
 ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61))
-MACHINE_DEPENDS += $(BOXMODEL)-libgles
+MACHINE_DEPENDENCIES += $(BOXMODEL)-libgles
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-MACHINE_DEPENDS += $(BOXMODEL)-platform-util
-MACHINE_DEPENDS += $(BOXMODEL)-vmlinuz-initrd
+MACHINE_DEPENDENCIES += $(BOXMODEL)-platform-util
+MACHINE_DEPENDENCIES += $(BOXMODEL)-vmlinuz-initrd
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
-MACHINE_DEPENDS += $(BOXMODEL)-libs
-#MACHINE_DEPENDS += $(BOXMODEL)-mali-module
+MACHINE_DEPENDENCIES += $(BOXMODEL)-libs
+#MACHINE_DEPENDENCIES += $(BOXMODEL)-mali-module
 endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
-MACHINE_DEPENDS += wlan-qcom
+MACHINE_DEPENDENCIES += wlan-qcom
 endif
 
-$(D)/machine-deps: $(MACHINE_DEPENDS)
+$(D)/machine-deps: $(MACHINE_DEPENDENCIES)
 	$(LINUX_RUN_DEPMOD)
 	@touch $(D)/$(notdir $@)

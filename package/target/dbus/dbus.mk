@@ -29,7 +29,7 @@ else
 DBUS_CONF_OPTS += \
 	--enable-systemd \
 	--with-systemdsystemunitdir=/usr/lib/systemd/system
-DBUS_DEPENDS += systemd
+DBUS_DEPENDENCIES += systemd
 endif
 
 define DBUS_TARGET_CLEANUP

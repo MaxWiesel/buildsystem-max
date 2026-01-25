@@ -84,7 +84,7 @@ else
 endif
 	@touch $(D)/$(notdir $@)
 
-$(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDENCIES) libstb-hal.do_prepare libstb-hal.do_compile
 	@$(call MESSAGE,"Installing to target")
 ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install

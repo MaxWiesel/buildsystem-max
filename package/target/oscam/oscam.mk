@@ -66,12 +66,12 @@ OSCAM_CONF_OPTS = \
 	CARDREADER_SMARGO
 
 # enable ssl
-OSCAM_DEPENDS += openssl
+OSCAM_DEPENDENCIES += openssl
 OSCAM_CONF_OPTS += \
 	--enable WITH_SSL
 
 # enable streamrelay
-OSCAM_DEPENDS += libdvbcsa
+OSCAM_DEPENDENCIES += libdvbcsa
 OSCAM_CONF_OPTS += \
 	--enable MODULE_STREAMRELAY
 

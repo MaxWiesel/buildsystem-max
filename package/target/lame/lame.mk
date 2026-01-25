@@ -9,7 +9,7 @@ LAME_DIR = lame-$(LAME_VERSION)
 LAME_SOURCE = lame-$(LAME_VERSION).tar.gz
 LAME_SITE = http://downloads.sourceforge.net/project/lame/lame/$(LAME_VERSION)
 
-LAME_DEPENDS += ncurses
+LAME_DEPENDENCIES = ncurses
 
 LAME_CONF_ENV = \
 	GTK_CONFIG=/bin/false

@@ -9,8 +9,6 @@ JSONCPP_DIR = jsoncpp-$(JSONCPP_VERSION)
 JSONCPP_SOURCE = jsoncpp-$(JSONCPP_VERSION).tar.gz
 JSONCPP_SITE = $(call github,open-source-parsers,jsoncpp,$(JSONCPP_VERSION))
 
-##JSONCPP_DEPENDENCIES = host-meson
-
 JSONCPP_CONF_OPTS = \
 	-Dtests=false
 

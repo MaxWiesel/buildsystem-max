@@ -12,7 +12,7 @@ HDPARM_SITE = https://sourceforge.net/projects/hdparm/files/hdparm
 HDPARM_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)
 
-HDPARM_MAKE_INSTALL_OPTS = \
+HDPARM_MAKE_OPTS = \
 	mandir=$(REMOVE_mandir)
 
 $(D)/hdparm: | bootstrap

@@ -40,29 +40,29 @@ GIT_SITE            ?= $(MAX-GIT-GITHUB)
 NEUTRINO             = neutrino-max-evo
 endif
 
-NEUTRINO_DEPENDS  = bootstrap
-NEUTRINO_DEPENDS += libpng
-NEUTRINO_DEPENDS += libjpeg-turbo
-NEUTRINO_DEPENDS += fribidi
-NEUTRINO_DEPENDS += freetype
-NEUTRINO_DEPENDS += giflib
-NEUTRINO_DEPENDS += ffmpeg
-NEUTRINO_DEPENDS += libcurl
-NEUTRINO_DEPENDS += libdvbsi
-NEUTRINO_DEPENDS += libsigc
-NEUTRINO_DEPENDS += openssl
-NEUTRINO_DEPENDS += e2fsprogs
-NEUTRINO_DEPENDS += openthreads
-NEUTRINO_DEPENDS += pugixml
-NEUTRINO_DEPENDS += lua
-NEUTRINO_DEPENDS += luaposix
-NEUTRINO_DEPENDS += luaexpat
-NEUTRINO_DEPENDS += lua-curl
-NEUTRINO_DEPENDS += luasocket
-NEUTRINO_DEPENDS += lua-feedparser
-NEUTRINO_DEPENDS += luasoap
-NEUTRINO_DEPENDS += luajson
-NEUTRINO_DEPENDS += $(LOCAL_NEUTRINO_DEPS)
+NEUTRINO_DEPENDENCIES  = bootstrap
+NEUTRINO_DEPENDENCIES += libpng
+NEUTRINO_DEPENDENCIES += libjpeg-turbo
+NEUTRINO_DEPENDENCIES += fribidi
+NEUTRINO_DEPENDENCIES += freetype
+NEUTRINO_DEPENDENCIES += giflib
+NEUTRINO_DEPENDENCIES += ffmpeg
+NEUTRINO_DEPENDENCIES += libcurl
+NEUTRINO_DEPENDENCIES += libdvbsi
+NEUTRINO_DEPENDENCIES += libsigc
+NEUTRINO_DEPENDENCIES += openssl
+NEUTRINO_DEPENDENCIES += e2fsprogs
+NEUTRINO_DEPENDENCIES += openthreads
+NEUTRINO_DEPENDENCIES += pugixml
+NEUTRINO_DEPENDENCIES += lua
+NEUTRINO_DEPENDENCIES += luaposix
+NEUTRINO_DEPENDENCIES += luaexpat
+NEUTRINO_DEPENDENCIES += lua-curl
+NEUTRINO_DEPENDENCIES += luasocket
+NEUTRINO_DEPENDENCIES += lua-feedparser
+NEUTRINO_DEPENDENCIES += luasoap
+NEUTRINO_DEPENDENCIES += luajson
+NEUTRINO_DEPENDENCIES += $(LOCAL_NEUTRINO_DEPS)
 
 NEUTRINO_CFLAGS  = -Wall -W -Wshadow 
 NEUTRINO_CFLAGS += -Wno-psabi
@@ -186,17 +186,17 @@ endif
 
 ifeq ($(EXTERNAL_LCD),graphlcd)
 NEUTRINO_CONF_OPTS += --enable-graphlcd
-NEUTRINO_DEPENDS += graphlcd-base
+NEUTRINO_DEPENDENCIES += graphlcd-base
 endif
 ifeq ($(EXTERNAL_LCD),lcd4linux)
 NEUTRINO_CONF_OPTS += --enable-lcd4linux
-NEUTRINO_DEPENDS += lcd4linux
+NEUTRINO_DEPENDENCIES += lcd4linux
 endif
 ifeq ($(EXTERNAL_LCD),both)
 NEUTRINO_CONF_OPTS += --enable-graphlcd
-NEUTRINO_DEPENDS += graphlcd-base
+NEUTRINO_DEPENDENCIES += graphlcd-base
 NEUTRINO_CONF_OPTS += --enable-lcd4linux
-NEUTRINO_DEPENDS += lcd4linux
+NEUTRINO_DEPENDENCIES += lcd4linux
 endif
 
 # enable ffmpeg audio decoder in neutrino
@@ -205,25 +205,25 @@ AUDIODEC = ffmpeg
 ifeq ($(AUDIODEC),ffmpeg)
 NEUTRINO_CONF_OPTS += --enable-ffmpegdec
 else
-NEUTRINO_DEPENDS += libid3tag
-NEUTRINO_DEPENDS += libmad
+NEUTRINO_DEPENDENCIES += libid3tag
+NEUTRINO_DEPENDENCIES += libmad
 
 NEUTRINO_CONF_OPTS += --with-tremor
-NEUTRINO_DEPENDS += libvorbisidec
+NEUTRINO_DEPENDENCIES += libvorbisidec
 
 NEUTRINO_CONF_OPTS += --enable-flac
-NEUTRINO_DEPENDS += flac
+NEUTRINO_DEPENDENCIES += flac
 endif
 
 NEUTRINO_CONF_OPTS += \
 	$(USER_NEUTRINO_CONF_OPTS)
 
-NEUTRINO_DEPENDS += neutrino-channellogos
-NEUTRINO_DEPENDS += neutrino-mediathek
-NEUTRINO_DEPENDS += neutrino-plugins
-NEUTRINO_DEPENDS += xupnpd
+NEUTRINO_DEPENDENCIES += neutrino-channellogos
+NEUTRINO_DEPENDENCIES += neutrino-mediathek
+NEUTRINO_DEPENDENCIES += neutrino-plugins
+NEUTRINO_DEPENDENCIES += xupnpd
 ifneq ($(FLAVOUR), neutrino-max-evo)
-NEUTRINO_DEPENDS += libstb-hal
+NEUTRINO_DEPENDENCIES += libstb-hal
 else
 NEUTRINO_CONF_OPTS += \
 	--enable-flv2mpeg4
@@ -263,7 +263,7 @@ else
 endif
 	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
+$(D)/neutrino: $(NEUTRINO_DEPENDENCIES) neutrino.do_prepare neutrino.do_compile
 	@$(call MESSAGE,"Installing to target")
 ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install

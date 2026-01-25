@@ -206,6 +206,6 @@ endif
 # To build single plugins from neutrino-plugins repository call
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
 
-neutrino-plugin-%: $(NEUTRINO_PLUGINS_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.do_configure
+neutrino-plugin-%: $(NEUTRINO_PLUGINS_DEPENDENCIES) neutrino-plugins.do_prepare neutrino-plugins.do_configure
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)
