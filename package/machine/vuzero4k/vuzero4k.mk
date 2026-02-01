@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-VUZERO4K_DRIVER_DATE = 20190424
+VUZERO4K_DRIVER_DATE = 20210407
 VUZERO4K_DRIVER_REV = r0
 VUZERO4K_DRIVER_VERSION = 4.1.20-$(VUZERO4K_DRIVER_DATE).$(VUZERO4K_DRIVER_REV)
 VUZERO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuzero4k-$(VUZERO4K_DRIVER_VERSION).tar.gz
