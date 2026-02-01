@@ -169,8 +169,8 @@ case $3 in
 		echo "   3) GCC version 13.4.0"
 		echo "   4) GCC version 14.3.0"
 		echo "   5) GCC version 15.2.0"
-		read -p "Select toolchain gcc version (1-5)? [2] "
-		REPLY="${REPLY:-2}";;
+		read -p "Select toolchain gcc version (1-5)? [3] "
+		REPLY="${REPLY:-3}";;
 esac
 
 case "$REPLY" in
