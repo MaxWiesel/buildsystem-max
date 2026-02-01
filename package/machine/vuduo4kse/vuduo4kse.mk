@@ -63,22 +63,26 @@ $(D)/vuduo4kse-platform-util: | bootstrap
 
 ################################################################################
 #
-# vuduo4kse-vmlinuz-initrd 7278b1
+# vuduo4kse-vmlinuz-initrd 7445d0
 #
 ################################################################################
 
 ifeq ($(VU_MULTIBOOT),1)
 VUDUO4KSE_VMLINUZ_INITRD_DATE = 20230801
-VUDUO4KSE_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4kse/downloads
+VUDUO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd-7445d0
 else
 VUDUO4KSE_VMLINUZ_INITRD_DATE = 20200326
 VUDUO4KSE_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
+VUDUO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuduo4kse_$(VUDUO4KSE_VMLINUZ_INITRD_VERSION).tar.gz
 endif
 VUDUO4KSE_VMLINUZ_INITRD_VERSION = $(VUDUO4KSE_VMLINUZ_INITRD_DATE)
-VUDUO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuduo4kse_$(VUDUO4KSE_VMLINUZ_INITRD_VERSION).tar.gz
 
 $(D)/vuduo4kse-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
+ifeq ($(VU_MULTIBOOT),1)
+	cp $(PKG_FILES_DIR)/$(VUSOLO4K_VMLINUZ_INITRD_SOURCE)_vuduo4kse $(BUILD_DIR)/$(VUDUO4KSE_VMLINUZ_INITRD_SOURCE)
+else
 	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR))
+endif
 	$(call TARGET_FOLLOWUP)
