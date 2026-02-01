@@ -11,15 +11,17 @@ VSFTPD_SITE = https://security.appspot.com/downloads
 
 VSFTPD_DEPENDENCIES = openssl
 
+VSFTPD_LIBS += -lcrypt -lcrypto -lssl -lcap
+
 VSFTPD_MAKE_OPTS = \
 	$(TARGET_CONFIGURE_ENV) \
-	LIBS="-lcrypt -lcrypto -lssl"
+	LIBS="$(VSFTPD_LIBS)"
 
-define VSFTPD_POST_PATCH
+define VSFTPD_PATCH_BUILDDEFS_H
 	$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' $(PKG_BUILD_DIR)/builddefs.h
 	$(SED) 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' $(PKG_BUILD_DIR)/builddefs.h
 endef
-VSFTPD_POST_PATCH_HOOKS += VSFTPD_POST_PATCH
+VSFTPD_POST_PATCH_HOOKS += VSFTPD_PATCH_BUILDDEFS_H
 
 define VSFTPD_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vsftpd.init $(TARGET_DIR)/etc/init.d/vsftpd
