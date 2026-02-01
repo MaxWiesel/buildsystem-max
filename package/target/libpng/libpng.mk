@@ -4,11 +4,11 @@
 #
 ################################################################################
 
-LIBPNG_VERSION = 1.6.42
+LIBPNG_VERSION = 1.6.54
 LIBPNG_SERIES = 16
 LIBPNG_DIR = libpng-$(LIBPNG_VERSION)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VERSION).tar.xz
-LIBPNG_SITE = https://downloads.sourceforge.net/project/libpng/libpng$(LIBPNG_SERIES)/$(LIBPNG_VERSION)
+LIBPNG_SITE = https://sourceforge.net/projects/libpng/files/libpng$(LIBPNG_SERIES)/$(LIBPNG_VERSION)
 
 LIBPNG_DEPENDENCIES = zlib
 
