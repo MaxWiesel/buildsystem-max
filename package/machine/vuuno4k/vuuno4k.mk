@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-VUUNO4K_DRIVER_DATE = 20190104
+VUUNO4K_DRIVER_DATE = 20190424
 VUUNO4K_DRIVER_REV = r0
 VUUNO4K_DRIVER_VERSION = 3.14.28-$(VUUNO4K_DRIVER_DATE).$(VUUNO4K_DRIVER_REV)
 VUUNO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuuno4k-$(VUUNO4K_DRIVER_VERSION).tar.gz
