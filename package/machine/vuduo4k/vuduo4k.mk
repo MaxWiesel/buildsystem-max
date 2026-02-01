@@ -70,16 +70,20 @@ $(D)/vuduo4k-platform-util: | bootstrap
 
 ifeq ($(VU_MULTIBOOT),1)
 VUDUO4K_VMLINUZ_INITRD_DATE = 20230801
-VUDUO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4k/downloads
+VUDUO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd-7278b1
 else
 VUDUO4K_VMLINUZ_INITRD_DATE = 20181030
 VUDUO4K_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
+VUDUO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuduo4k_$(VUDUO4K_VMLINUZ_INITRD_VERSION).tar.gz
 endif
 VUDUO4K_VMLINUZ_INITRD_VERSION = $(VUDUO4K_VMLINUZ_INITRD_DATE)
-VUDUO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuduo4k_$(VUDUO4K_VMLINUZ_INITRD_VERSION).tar.gz
 
 $(D)/vuduo4k-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
+ifeq ($(VU_MULTIBOOT),1)
+	cp $(PKG_FILES_DIR)/$(VUDUO4K_VMLINUZ_INITRD_SOURCE) $(BUILD_DIR)/$(VUDUO4K_VMLINUZ_INITRD_SOURCE)
+else
 	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR))
+endif
 	$(call TARGET_FOLLOWUP)
