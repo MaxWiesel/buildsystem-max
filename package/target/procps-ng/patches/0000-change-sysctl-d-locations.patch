@@ -1,8 +1,8 @@
-diff --git a/sysctl.c b/sysctl.c
+diff --git a/src/sysctl.c b/src/sysctl.c
 index bbca0b9..90d594d 100644
 --- a/src/sysctl.c
 +++ b/src/sysctl.c
-@@ -811,7 +811,7 @@ static int PreloadSystem(void)
+@@ -834,7 +834,7 @@ static int PreloadSystem(void)
  	const char *dirs[] = {
  		"/etc/sysctl.d",
  		"/run/sysctl.d",

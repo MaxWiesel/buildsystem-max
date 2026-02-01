@@ -1,6 +1,6 @@
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -20,8 +20,6 @@
+@@ -19,8 +19,6 @@
  ACLOCAL_AMFLAGS = -I m4
  SUBDIRS = \
  	local \
