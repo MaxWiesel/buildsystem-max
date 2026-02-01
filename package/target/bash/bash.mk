@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BASH_VERSION = 5.0
+BASH_VERSION = 5.3
 BASH_DIR = bash-$(BASH_VERSION)
 BASH_SOURCE = bash-$(BASH_VERSION).tar.gz
 BASH_SITE = $(GNU_MIRROR)/bash
