@@ -69,16 +69,20 @@ $(D)/vusolo4k-platform-util: | bootstrap
 
 ifeq ($(VU_MULTIBOOT),1)
 VUSOLO4K_VMLINUZ_INITRD_DATE = 20230801
-VUSOLO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vusolo4k/downloads
+VUSOLO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd-7366c0
 else
 VUSOLO4K_VMLINUZ_INITRD_DATE = 20170209
 VUSOLO4K_VMLINUZ_INITRD_SITE = https://source.mynonpublic.com/vuplus/release/kernel
+VUSOLO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vusolo4k_$(VUSOLO4K_VMLINUZ_INITRD_VERSION).tar.gz
 endif
 VUSOLO4K_VMLINUZ_INITRD_VERSION = $(VUSOLO4K_VMLINUZ_INITRD_DATE)
-VUSOLO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vusolo4k_$(VUSOLO4K_VMLINUZ_INITRD_VERSION).tar.gz
 
 $(D)/vusolo4k-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
+ifeq ($(VU_MULTIBOOT),1)
+	cp $(PKG_FILES_DIR)/$(VUSOLO4K_VMLINUZ_INITRD_SOURCE) $(BUILD_DIR)/$(VUSOLO4K_VMLINUZ_INITRD_SOURCE)
+else
 	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR))
+endif
 	$(call TARGET_FOLLOWUP)
