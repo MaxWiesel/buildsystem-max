@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PROTEK4K_DRIVER_DATE = 20191101
+PROTEK4K_DRIVER_DATE = 20250429
 PROTEK4K_DRIVER_VERSION = 4.10.12-$(PROTEK4K_DRIVER_DATE)
 PROTEK4K_DRIVER_SOURCE = protek4k-drivers-$(PROTEK4K_DRIVER_VERSION).zip
 PROTEK4K_DRIVER_SITE = http://source.mynonpublic.com/ceryon
