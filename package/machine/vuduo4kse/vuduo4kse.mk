@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-VUDUO4KSE_DRIVER_DATE = 20200903
+VUDUO4KSE_DRIVER_DATE = 20210527
 VUDUO4KSE_DRIVER_REV = r0
 VUDUO4KSE_DRIVER_VERSION = 4.1.45-$(VUDUO4KSE_DRIVER_DATE).$(VUDUO4KSE_DRIVER_REV)
 VUDUO4KSE_DRIVER_SOURCE = vuplus-dvb-proxy-vuduo4kse-$(VUDUO4KSE_DRIVER_VERSION).tar.gz
