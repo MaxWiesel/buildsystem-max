@@ -14,10 +14,6 @@ ASTRA_SM_DEPENDENCIES = openssl
 
 ASTRA_SM_AUTORECONF = YES
 
-ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),13.4.0 14.3.0 15.2.0))
-ASTRA_SM_PATCH += 0002-replace-sys-siglist.patch-gcc
-endif
-
 ASTRA_SM_CONF_OPTS = \
 	--without-lua
 
