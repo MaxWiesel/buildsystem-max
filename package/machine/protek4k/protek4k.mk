@@ -26,7 +26,7 @@ $(D)/protek4k-driver: | bootstrap
 #
 ################################################################################
 
-PROTEK4K_LIBGLES_DATE = 20191101
+PROTEK4K_LIBGLES_DATE = 20250217
 PROTEK4K_LIBGLES_VERSION = $(PROTEK4K_LIBGLES_DATE)
 PROTEK4K_LIBGLES_SOURCE = 8100s-v3ddriver-$(PROTEK4K_LIBGLES_VERSION).zip
 PROTEK4K_LIBGLES_SITE = https://source.mynonpublic.com/ceryon
