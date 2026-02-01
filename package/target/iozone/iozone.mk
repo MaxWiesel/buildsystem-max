@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-IOZONE_VERSION = 3_493
+IOZONE_VERSION = 3_507
 IOZONE_DIR = iozone$(IOZONE_VERSION)
 IOZONE_SOURCE = iozone$(IOZONE_VERSION).tgz
 IOZONE_SITE = http://www.iozone.org/src/current
