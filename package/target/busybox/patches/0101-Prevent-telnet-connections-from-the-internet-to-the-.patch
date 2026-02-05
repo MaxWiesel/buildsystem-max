@@ -14,12 +14,12 @@ diff --git a/networking/telnetd.c b/networking/telnetd.c
 index f06e958..27e6c93 100644
 --- a/networking/telnetd.c
 +++ b/networking/telnetd.c
-@@ -656,6 +656,161 @@
+@@ -656,6 +656,161 @@ static void handle_sigchld(int sig UNUSED_PARAM)
  
  	errno = save_errno;
  }
 +#include <ifaddrs.h>
-+static int is_permitted_ipv4_connection(unsigned long ipv4)
++int is_permitted_ipv4_connection(unsigned long ipv4)
 +{
 +	struct ifaddrs *ifaddr, *ifa;
 +	unsigned long own_ip;
@@ -29,7 +29,7 @@ index f06e958..27e6c93 100644
 +	 || ((ipv4 >> 20) == 2753)  // private class B 172.16.x.x/12
 +	 || ((ipv4 >> 16) == 49320) // private class C 192.168.x.x/16
 +	 || ((ipv4 >> 16) == 43518) // link local 169.254.x.x/16
-+	 || ( ipv4 == 2130706433))  // localhost 127.0.0.1
++	 || ( ipv4 == 2130706433))  // localhist 127.0.0.1
 +	{
 +		return 1;
 +	}
@@ -58,7 +58,7 @@ index f06e958..27e6c93 100644
 +	return 0;
 +}
 +
-+static int is_permitted_ipv6_connection(unsigned char* ipv6)
++int is_permitted_ipv6_connection(unsigned char* ipv6)
 +{
 +	struct ifaddrs *ifaddr, *ifa;
 +	unsigned char buffer[16];
@@ -149,7 +149,7 @@ index f06e958..27e6c93 100644
 +}
 +
 +/* Checks whether source ip address is out of private ip address range or is from same subnet */
-+static int is_permitted_connection(int fd)
++int is_permitted_connection(int fd)
 +{
 +	int ret = 0;
 +	unsigned long ipv4;
@@ -176,7 +176,7 @@ index f06e958..27e6c93 100644
  
  int telnetd_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
  int telnetd_main(int argc UNUSED_PARAM, char **argv)
-@@ -817,6 +972,13 @@
+@@ -817,6 +972,13 @@ int telnetd_main(int argc UNUSED_PARAM, char **argv)
  			goto again;
  		close_on_exec_on(fd);
  

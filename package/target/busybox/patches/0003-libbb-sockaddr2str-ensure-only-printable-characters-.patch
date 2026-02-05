@@ -1,4 +1,4 @@
-From 9d825e854ef53ebbe0aea2f1a69f52b763104daf Mon Sep 17 00:00:00 2001
+From 68eaf20d86d4fe0f16a914817217f386155157cc Mon Sep 17 00:00:00 2001
 From: Ariadne Conill <ariadne@dereferenced.org>
 Date: Mon, 19 Sep 2022 14:15:12 +0200
 Subject: [PATCH] libbb: sockaddr2str: ensure only printable characters are
@@ -17,7 +17,7 @@ diff --git a/libbb/xconnect.c b/libbb/xconnect.c
 index 0e0b247b8..02c061e67 100644
 --- a/libbb/xconnect.c
 +++ b/libbb/xconnect.c
-@@ -524,8 +524,9 @@ static char* FAST_FUNC sockaddr2str(const struct sockaddr *sa, int flags)
+@@ -497,8 +497,9 @@ static char* FAST_FUNC sockaddr2str(const struct sockaddr *sa, int flags)
  	);
  	if (rc)
  		return NULL;
@@ -28,7 +28,7 @@ index 0e0b247b8..02c061e67 100644
  #if ENABLE_FEATURE_IPV6
  	if (sa->sa_family == AF_INET6) {
  		if (strchr(host, ':')) /* heh, it's not a resolved hostname */
-@@ -536,7 +537,7 @@ static char* FAST_FUNC sockaddr2str(const struct sockaddr *sa, int flags)
+@@ -509,7 +510,7 @@ static char* FAST_FUNC sockaddr2str(const struct sockaddr *sa, int flags)
  #endif
  	/* For now we don't support anything else, so it has to be INET */
  	/*if (sa->sa_family == AF_INET)*/
@@ -38,5 +38,5 @@ index 0e0b247b8..02c061e67 100644
  }
  
 -- 
-2.37.3
+2.48.1
 

@@ -19,7 +19,7 @@
 -		if (!used_res) {
 -			used_res = result;
 -			break;
-+	int forcev6 = 0;
++	int forcev6=0;
 +	FILE *fp = xfopen_for_read("/proc/net/route");
 +	routes = fscanf(fp, "%*[^\n]\n");
 +	if (routes < 0) {
@@ -29,7 +29,7 @@
 +//		routes = fscanf(fp, "%63s%lx%lx%X%d%d%d%lx%d%d%d\n", void, void, void, void, void, void, void, void, void, void, void);
 +//		if ((routes <= 0) &&
 +		if (feof(fp)) {
-+			forcev6 = 1;
++			forcev6=1;
 +		}
 +		fclose(fp);
 +	}
@@ -55,5 +55,3 @@
  		}
  	}
  #endif
-
-

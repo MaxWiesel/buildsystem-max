@@ -178,7 +178,7 @@ $(D)/image-deps: $(IMAGE_DEPENDENCIES)
 
 MACHINE_DEPENDENCIES  = bootstrap
 MACHINE_DEPENDENCIES += kernel
-MACHINE_DEPENDENCIES += kernel-modules-clean
+#MACHINE_DEPENDENCIES += kernel-modules-clean
 MACHINE_DEPENDENCIES += $(BOXMODEL)-driver
 ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61))
 MACHINE_DEPENDENCIES += $(BOXMODEL)-libgles

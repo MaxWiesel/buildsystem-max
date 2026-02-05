@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BUSYBOX_VERSION = 1.36.1
+BUSYBOX_VERSION = 1.37.0
 BUSYBOX_DIR = busybox-$(BUSYBOX_VERSION)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VERSION).tar.bz2
 BUSYBOX_SITE = https://www.busybox.net/downloads
@@ -30,6 +30,12 @@ BUSYBOX_MAKE_ENV = \
 	CFLAGS="$(BUSYBOX_CFLAGS)" \
 	CFLAGS_busybox="$(BUSYBOX_CFLAGS_busybox)"
 
+BUSYBOX_MAKE_ARGS = \
+	busybox
+
+BUSYBOX_MAKE_INSTALL_ARGS = \
+	install-noclobber
+
 BUSYBOX_MAKE_OPTS = \
 	AR="$(TARGET_AR)" \
 	NM="$(TARGET_NM)" \
@@ -41,13 +47,51 @@ BUSYBOX_MAKE_OPTS = \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
-$(D)/busybox: | bootstrap
-	$(call PREPARE)
-	$(CD) $(PKG_BUILD_DIR); \
-		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
-		$(SED) 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
-		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) busybox; \
-		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) install-noclobber
+BUSYBOX_CONFIG = $(PKG_FILES_DIR)/busybox.config
+BUSYBOX_BUILD_CONFIG = $(PKG_BUILD_DIR)/$($(PKG)_KCONFIG_FILE)
+
+define BUSYBOX_INSTALL_CONFIG
+	$(INSTALL_DATA) $(BUSYBOX_CONFIG) $(BUSYBOX_BUILD_CONFIG)
+	$(call KCONFIG_SET_OPT,CONFIG_PREFIX,"$(TARGET_DIR)")
+endef
+BUSYBOX_POST_PATCH_HOOKS += BUSYBOX_INSTALL_CONFIG
+
+# BUSYBOX_MODIFY_CONFIG start
+define BUSYBOX_SET_IPV6
+	$(call KCONFIG_ENABLE_OPT,CONFIG_FEATURE_IPV6)
+	$(call KCONFIG_ENABLE_OPT,CONFIG_FEATURE_IFUPDOWN_IPV6)
+endef
+
+define BUSYBOX_SET_PKILL
+	$(call KCONFIG_ENABLE_OPT,CONFIG_PKILL)
+endef
+
+define BUSYBOX_SET_SWAP
+	$(call KCONFIG_ENABLE_OPT,CONFIG_SWAPON)
+	$(call KCONFIG_ENABLE_OPT,CONFIG_SWAPOFF)
+endef
+
+define BUSYBOX_SET_HEXDUMP
+	$(call KCONFIG_ENABLE_OPT,CONFIG_HEXDUMP)
+endef
+
+define BUSYBOX_SET_START_STOP_DAEMON
+	$(call KCONFIG_ENABLE_OPT,CONFIG_START_STOP_DAEMON)
+	$(call KCONFIG_ENABLE_OPT,CONFIG_FEATURE_START_STOP_DAEMON_LONG_OPTIONS)
+	$(call KCONFIG_ENABLE_OPT,CONFIG_FEATURE_START_STOP_DAEMON_FANCY)
+endef
+# BUSYBOX_MODIFY_CONFIG end
+
+define BUSYBOX_MODIFY_CONFIG
+	$(call BUSYBOX_SET_IPV6)
+	$(call BUSYBOX_SET_SWAP)
+	$(call BUSYBOX_SET_HEXDUMP)
+	$(call BUSYBOX_SET_PKILL)
+	$(call BUSYBOX_SET_START_STOP_DAEMON)
+endef
+BUSYBOX_POST_PATCH_HOOKS += BUSYBOX_MODIFY_CONFIG
+
+define BUSYBOX_ADD_TO_SHELLS
 	@if grep -q "CONFIG_CROND=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
 		mkdir -p $(TARGET_DIR)/etc/cron/crontabs; \
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/cron.busybox $(TARGET_DIR)/etc/init.d/cron.busybox; \
@@ -78,7 +122,13 @@ $(D)/busybox: | bootstrap
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/50default $(TARGET_DIR)/etc/udhcpc.d/50default; \
 		$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/default.script $(TARGET_SHARE_DIR)/udhcpc/default.script; \
 	fi
-	$(call TARGET_FOLLOWUP)
+endef
+BUSYBOX_POST_INSTALL_HOOKS += BUSYBOX_ADD_TO_SHELLS
+
+$(D)/busybox: | bootstrap
+	$(call kconfig-package)
+
+# -----------------------------------------------------------------------------
 
 busybox-config: | bootstrap
 	$(call PREPARE)
