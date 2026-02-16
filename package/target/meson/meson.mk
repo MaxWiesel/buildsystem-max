@@ -11,7 +11,17 @@ MESON_SITE = https://github.com/mesonbuild/meson/releases/download/$(MESON_VERSI
 
 MESON_SETUP_TYPE = setuptools
 
+# -----------------------------------------------------------------------------
+
 HOST_MESON_DEPENDENCIES = host-ninja
+
+HOST_MESON_BINARY = $(HOST_DIR)/bin/meson
+
+# Avoid interpreter shebang longer than 128 chars
+define HOST_MESON_SET_INTERPRETER
+	$(SED) '1s:.*:#!/usr/bin/env python3:' $(HOST_MESON_BINARY)
+endef
+HOST_MESON_HOST_FINALIZE_HOOKS += HOST_MESON_SET_INTERPRETER
 
 $(HD)/host-meson: | bootstrap
 	$(call host-python-package)
