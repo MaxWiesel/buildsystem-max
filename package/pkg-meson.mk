@@ -18,6 +18,7 @@ define MESON_CROSS_COMPILATION_CONF_HOOK # (dest dir)
 		echo "ar = '$(TARGET_AR)'"; \
 		echo "strip = '$(TARGET_STRIP)'"; \
 		echo "nm = '$(TARGET_NM)'"; \
+		echo "cmake = '$(HOST_CMAKE_BINARY)'"; \
 		echo "pkgconfig = '$(PKG_CONFIG_HOST_BINARY)'"; \
 		echo ""; \
 		echo "[built-in options]"; \
@@ -26,11 +27,13 @@ define MESON_CROSS_COMPILATION_CONF_HOOK # (dest dir)
 		echo "cpp_args = '$(TARGET_CXXFLAGS)'"; \
 		echo "cpp_link_args = '$(TARGET_LDFLAGS)'"; \
 		echo "prefix = '$(prefix)'"; \
+		echo "cmake_prefix_path = '$(TARGET_LIB_DIR)/cmake'"; \
 		echo ""; \
 		echo "[properties]"; \
 		echo "needs_exe_wrapper = true"; \
 		echo "sys_root = '$(TARGET_DIR)'"; \
 		echo "pkg_config_libdir = '$(PKG_CONFIG_PATH)'"; \
+		echo "cmake_defaults = true"; \
 		echo ""; \
 		echo "[host_machine]"; \
 		echo "system = 'linux'"; \
@@ -48,8 +51,8 @@ MESON_PKG_BUILD_DIR = $(PKG_BUILD_DIR)/build
 # so $(HOST_DIR)/bin/python3 will not look for Meson modules in
 # $HOME/.local/lib/python3.x/site-packages
 #
-HOST_MESON_CMD = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/meson
-HOST_NINJA_CMD = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/ninja $(if $(VERBOSE),-v)
+HOST_MESON_CMD = PYTHONNOUSERSITE=y $(HOST_MESON_BINARY)
+HOST_NINJA_CMD = PYTHONNOUSERSITE=y $(HOST_NINJA_BINARY) $(if $(VERBOSE),-v)
 
 # -----------------------------------------------------------------------------
 
