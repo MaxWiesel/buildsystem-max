@@ -14,6 +14,11 @@ CAIRO_DEPENDENCIES = libglib2 zlib libpng freetype pixman
 CAIRO_CONF_ENV = \
 	ax_cv_c_float_words_bigendian="no"
 
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
+CAIRO_MAKE_OPTS += \
+	CFLAGS="$(TARGET_CFLAGS) -std=gnu17"
+endif
+
 CAIRO_CONF_OPTS = \
 	--with-html-dir=$(REMOVE_htmldir) \
 	--with-x=no \
