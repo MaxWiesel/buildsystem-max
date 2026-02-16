@@ -17,6 +17,11 @@ LCD4LINUX_CONF_OPTS = \
 	--with-plugins='all,!apm,!asterisk,!dbus,!dvb,!gps,!hddtemp,!huawei,!imon,!isdn,!kvv,!mpd,!mpris_dbus,!mysql,!pop3,!ppp,!python,!qnaplog,!raspi,!sample,!seti,!w1retap,!wireless,!xmms' \
 	--with-ncurses=$(TARGET_LIB_DIR)
 
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
+LCD4LINUX_MAKE_ENV += \
+	CFLAGS="$(TARGET_CFLAGS) -Wno-error=incompatible-pointer-types -std=gnu17"
+endif
+
 define LCD4LINUX_INSTALL_FILES
 	cp -a $(PKG_FILES_DIR)/icons/* $(SHARE_NEUTRINO_LCD4LINUX)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/lcd4linux.init $(TARGET_DIR)/etc/init.d/lcd4linux
