@@ -24,6 +24,11 @@ MINISATIP_CONF_OPTS = \
 MINISATIP_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)
 
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
+MINISATIP_MAKE_ENV += \
+	CFLAGS="$(TARGET_CFLAGS) -std=gnu17"
+endif
+
 define MINISATIP_INSTALL_INIT_SYSV
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/minisatip $(TARGET_DIR)/etc/default/minisatip
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/minisatip.init $(TARGET_DIR)/etc/init.d/minisatip
