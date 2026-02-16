@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-READLINE_VERSION = 8.1.2
+READLINE_VERSION = 8.3
 READLINE_DIR = readline-$(READLINE_VERSION)
 READLINE_SOURCE = readline-$(READLINE_VERSION).tar.gz
 READLINE_SITE = $(GNU_MIRROR)/readline
