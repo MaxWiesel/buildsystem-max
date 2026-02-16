@@ -24,9 +24,17 @@ NETSURF_CONF_OPTS = \
 	NETSURF_FB_FONT_SANS_SERIF=neutrino.ttf \
 	TARGET=framebuffer
 
+NETSURF_CFLAGS = $(TARGET_CFLAGS) -I$(PKG_BUILD_DIR)/tmpusr/include
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),14.3.0 15.2.0))
+NETSURF_CFLAGS += \
+	-Wno-error=declaration-missing-parameter-type \
+	-Wno-error=incompatible-pointer-types \
+	-std=gnu17
+endif
+
 NETSURF_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV) \
-	CFLAGS="$(TARGET_CFLAGS) -I$(PKG_BUILD_DIR)/tmpusr/include" \
+	CFLAGS="$(NETSURF_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS) -L$(PKG_BUILD_DIR)/tmpusr/lib" 
 
 NETSURF_MAKE_OPTS = \
