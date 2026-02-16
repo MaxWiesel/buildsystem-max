@@ -98,6 +98,14 @@ ifeq ($(AUTOCONF_NEW),1)
 SAMBA_AUTOCONF_PATCH = autoconf2.71.patch
 endif
 
+SAMBA_CFLAGS = $(TARGET_CFLAGS)
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),14.3.0 15.2.0))
+SAMBA_CFLAGS += \
+	-Wno-error=implicit-function-declaration 
+endif
+SAMBA_CONF_ENV += \
+	CFLAGS="$(SAMBA_CFLAGS)"
+
 define SAMBA_AUTOGEN_SH
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		./autogen.sh
