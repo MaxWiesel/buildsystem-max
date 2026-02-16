@@ -22,6 +22,11 @@ STREAMRIPPER_CONF_OPTS = \
 	--with-included-argv=yes \
 	--with-included-libmad=no
 
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),14.3.0 15.2.0))
+STREAMRIPPER_MAKE_OPTS += \
+	CFLAGS="$(TARGET_CFLAGS) -Wno-error=implicit-function-declaration -std=gnu17"
+endif
+
 define STREAMRIPPER_INSTALL_FILES
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/streamripper.sh $(TARGET_DIR)/bin/
 endef
