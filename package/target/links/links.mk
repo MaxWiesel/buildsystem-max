@@ -27,6 +27,10 @@ LINKS_CONF_OPTS = \
 	--without-svgalib \
 	--without-x
 
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),14.3.0 15.2.0))
+LINKS_MAKE_OPTS += CFLAGS="$(TARGET_CFLAGS) -Wno-error=int-conversion -Wno-error=implicit-function-declaration -std=gnu17"
+endif
+
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 e4hdultra protek4k hd60 hd61))
 define LINKS_PATCH_RCINPUT_C
 	$(SED) 's|"/dev/input/event0"|"/dev/input/event1"|' $(PKG_BUILD_DIR)/rcinput.c
