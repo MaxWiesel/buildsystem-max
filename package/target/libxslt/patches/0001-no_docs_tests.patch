@@ -1,12 +1,14 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -472,11 +472,6 @@
+@@ -482,13 +482,6 @@
  	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libxslt.py DESTINATION ${LIBXSLT_PYTHON_INSTALL_DIR} COMPONENT runtime)
  endif()
  
 -install(FILES libexslt/libexslt.3 DESTINATION ${CMAKE_INSTALL_MANDIR}/man3 COMPONENT documentation)
 -install(FILES libxslt/libxslt.3 DESTINATION ${CMAKE_INSTALL_MANDIR}/man3 COMPONENT documentation)
--install(FILES doc/xsltproc.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 COMPONENT documentation)
+-if(LIBXSLT_WITH_PROGRAMS)
+-	install(FILES doc/xsltproc.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 COMPONENT documentation)
+-endif()
 -install(DIRECTORY doc/ DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/libxslt COMPONENT documentation PATTERN Makefile.* EXCLUDE)
 -
  if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
