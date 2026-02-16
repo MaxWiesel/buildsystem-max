@@ -11,11 +11,16 @@ VSFTPD_SITE = https://security.appspot.com/downloads
 
 VSFTPD_DEPENDENCIES = openssl
 
-VSFTPD_LIBS += -lcrypt -lcrypto -lssl -lcap
+VSFTPD_LIBS += -lcrypt -lcrypto -lssl
 
 VSFTPD_MAKE_OPTS = \
 	$(TARGET_CONFIGURE_ENV) \
 	LIBS="$(VSFTPD_LIBS)"
+
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
+VSFTPD_MAKE_OPTS += \
+	CFLAGS="$(TARGET_CFLAGS) -std=gnu17"
+endif
 
 define VSFTPD_PATCH_BUILDDEFS_H
 	$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' $(PKG_BUILD_DIR)/builddefs.h
