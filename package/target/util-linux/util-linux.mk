@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-UTIL_LINUX_VERSION = 2.39.2
+UTIL_LINUX_VERSION = 2.41.3
 UTIL_LINUX_DIR = util-linux-$(UTIL_LINUX_VERSION)
 UTIL_LINUX_SOURCE = util-linux-$(UTIL_LINUX_VERSION).tar.xz
 #UTIL_LINUX_SITE = $(KERNEL_MIRROR)/linux/utils/util-linux/v$(UTIL_LINUX_VERSION)
@@ -19,6 +19,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-gtk-doc \
 	\
 	--disable-agetty \
+	--disable-asciidoc \
 	--disable-bash-completion \
 	--disable-bfs \
 	--disable-cal \
@@ -58,6 +59,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-pg \
 	--disable-pg-bell \
 	--disable-pivot_root \
+	--disable-poman \
 	--disable-pylibmount \
 	--disable-raw \
 	--disable-rename \
@@ -80,10 +82,13 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-wdctl \
 	--disable-wipefs \
 	--disable-write \
+	--disable-year2038 \
 	--disable-zramctl \
 	\
 	--disable-makeinstall-chown \
 	--disable-makeinstall-setuid \
+	\
+	--disable-liblastlog2 \
 	\
 	--enable-libfdisk \
 	--enable-libsmartcols \
@@ -114,7 +119,7 @@ UTIL_LINUX_POST_INSTALL_HOOKS += UTIL_LINUX_INSTALL_FILES
 define UTIL_LINUX_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt lsblk pipesz)
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel findfs fsfreeze fstrim mkfs mkswap swaplabel)
-	rm -f $(addprefix $(TARGET_BIN_DIR)/,choom col colcrt colrm column fadvise fincore flock getopt isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,bits choom col colcrt colrm column enosys exch fadvise fincore flock getopt isosize linux32 linux64 look lscpu lsipc lsclocks lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid setpgid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,ldattach readprofile rtcwake uuidd)
 endef
 UTIL_LINUX_TARGET_CLEANUP_HOOKS += UTIL_LINUX_TARGET_CLEANUP
