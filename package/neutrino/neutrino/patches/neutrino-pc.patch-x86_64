@@ -1,8 +1,8 @@
 diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
-index 338a2de8e..568b7b945 100644
+index e995cfc97..9117e5fad 100644
 --- a/src/eitd/sectionsd.cpp
 +++ b/src/eitd/sectionsd.cpp
-@@ -1505,7 +1505,7 @@ void CTimeThread::run()
+@@ -1502,7 +1502,7 @@ void CTimeThread::run()
  		dvb_time = 0;
  		timediff = 0;
  
@@ -12,10 +12,10 @@ index 338a2de8e..568b7b945 100644
  			success = true;
  		} else if (dvb_time_update) {
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index eff263f05..062102df3 100644
+index 6b17545f0..70c3de135 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
-@@ -3005,9 +3005,9 @@ TIMER_START();
+@@ -3059,9 +3059,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -28,7 +28,7 @@ index eff263f05..062102df3 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5369,7 +5369,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5545,7 +5545,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;
@@ -38,7 +38,7 @@ index eff263f05..062102df3 100644
  	CZapit::getInstance()->Stop();
  	printf("zapit shutdown done\n");
 diff --git a/src/nhttpd/nhttpd.conf.in b/src/nhttpd/nhttpd.conf.in
-index f22ffa825..646cff6e3 100644
+index afcb3c67c..2bdf7fe85 100644
 --- a/src/nhttpd/nhttpd.conf.in
 +++ b/src/nhttpd/nhttpd.conf.in
 @@ -3,7 +3,7 @@ Language.selected=Deutsch
@@ -47,6 +47,6 @@ index f22ffa825..646cff6e3 100644
  WebsiteMain.override_directory=@TARGET_PUBLIC_HTTPDDIR@
 -WebsiteMain.port=80
 +WebsiteMain.port=8080
+ WebsiteMain.host=0.0.0.0
  WebsiteMain.hosted_directory=@TARGET_HOSTED_HTTPDDIR@
- configfile.version=4
- mod_auth.authenticate=false
+ configfile.version=5
