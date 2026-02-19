@@ -4,10 +4,10 @@
 #
 ################################################################################
 
-WLAN_QCOM_FIRMWARE_VERSION = qca6174
-WLAN_QCOM_FIRMWARE_DIR     = firmware-$(WLAN_QCOM_FIRMWARE_VERSION)
-WLAN_QCOM_FIRMWARE_SOURCE  = firmware-$(WLAN_QCOM_FIRMWARE_VERSION).zip
-WLAN_QCOM_FIRMWARE_SITE    = http://source.mynonpublic.com/edision
+WLAN_QCOM_FIRMWARE_VERSION = qca6174_v2
+WLAN_QCOM_FIRMWARE_DIR = $(empty)
+WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(WLAN_QCOM_FIRMWARE_VERSION).zip
+WLAN_QCOM_FIRMWARE_SITE = https://source.mynonpublic.com/edision
 
 $(D)/wlan-qcom-firmware: | bootstrap
 	$(call PREPARE)
