@@ -74,11 +74,6 @@ NEUTRINO_CFLAGS += -funsigned-char
 NEUTRINO_CFLAGS += -ffunction-sections
 NEUTRINO_CFLAGS += -fdata-sections
 NEUTRINO_CFLAGS += -DVCS
-ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
-NEUTRINO_CFLAGS += -std=gnu17
-else
-NEUTRINO_CFLAGS += -std=c++11
-endif
 ifeq ($(MEDIAFW),gstreamer)
 NEUTRINO_CFLAGS += -DENABLE_GSTREAMER
 endif
@@ -95,11 +90,6 @@ NEUTRINO_CFLAGS += \
 NEUTRINO_CPPFLAGS  = -I$(TARGET_DIR)/usr/include
 NEUTRINO_CPPFLAGS += -I$(KERNEL_HEADERS_DIR)/include
 NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
-ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),15.2.0))
-NEUTRINO_CPPFLAGS += -std=gnu17
-else
-NEUTRINO_CPPFLAGS += -std=c++11
-endif
 
 # -----------------------------------------------------------------------------
 
@@ -156,7 +146,7 @@ NEUTRINO_CONF_OPTS += \
 	--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
 	\
 	CFLAGS="$(NEUTRINO_CFLAGS)" \
-	CXXFLAGS="$(NEUTRINO_CFLAGS)" \
+	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
 	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
 
 NEUTRINO_OMDB_API_KEY ?=
