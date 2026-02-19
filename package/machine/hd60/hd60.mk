@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-HD60_DRIVER_DATE = 20200731
+HD60_DRIVER_DATE = 20220208
 HD60_DRIVER_VERSION = 4.4.35
 HD60_DRIVER_SOURCE = hd60-drivers-$(HD60_DRIVER_VERSION)-$(HD60_DRIVER_DATE).zip
 HD60_DRIVER_SITE = http://source.mynonpublic.com/gfutures
