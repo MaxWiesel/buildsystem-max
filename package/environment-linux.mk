@@ -11,6 +11,8 @@ KERNEL_MODULES_DIR = $(BUILD_DIR)/linux-$(KERNEL_VERSION)-modules/lib/modules/$(
 KERNEL_HEADERS = linux-$(KERNEL_VERSION)-headers
 KERNEL_HEADERS_DIR = $(BUILD_DIR)/$(KERNEL_HEADERS)
 
+KERNEL_PATCH = $($(call UPPERCASE,$(BOXMODEL))_PATCH)
+
 KERNEL_OUTPUT = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/$(KERNEL_IMAGE_TYPE)
 KERNEL_INPUT_DTB = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/dts/$(KERNEL_DTB)
 KERNEL_OUTPUT_DTB = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/zImage_dtb
@@ -24,6 +26,37 @@ else ifeq ($(TARGET_ARCH),aarch64)
 KERNEL_ARCH = arm64
 else ifeq ($(TARGET_ARCH),mips)
 KERNEL_ARCH = mips
+endif
+
+################################################################################
+#
+#
+#
+################################################################################
+
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),14.3.0 15.2.0))
+KBUILD_CFLAGS := \
+	-std=gnu17 \
+	-Wno-attribute-alias
+
+# gcc-15 defaults to -std=gnu23 which introduces build failures.
+# We force "-std=gnu17" for gcc version supporting it. Earlier gcc
+# versions will work, since they are using the older standard.
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuultimo4k vuuno4k))
+KBUILD_CFLAGS += \
+	-Wno-error=incompatible-pointer-types \
+	-Wno-error=address-of-packed-member \
+	-Wno-error=unused-result \
+	-Wno-error=format-overflow \
+	-Wno-error=stringop-overflow \
+	-Wno-error=unused-variable \
+	-Wno-error=int-conversion \
+	-Wno-error=array-parameter \
+	-Wno-error=unused-function \
+	-Wno-error=stringop-overread \
+	-Wno-error=unused-const-variable \
+	-Wno-error=maybe-uninitialized
+endif
 endif
 
 ################################################################################
@@ -42,14 +75,14 @@ endif
 
 ifeq ($(BOXMODEL),hd60)
 KERNEL_VERSION = 4.4.35
-KERNEL_DATE = 20181228
+KERNEL_DATE = 20200219
 MTD_BLACK = mmcblk0
 MTD_BOOTFS = mmcblk0p4
 endif
 
 ifeq ($(BOXMODEL),hd61)
 KERNEL_VERSION = 4.4.35
-KERNEL_DATE = 20181228
+KERNEL_DATE = 20200219
 MTD_BLACK = mmcblk0
 MTD_BOOTFS = mmcblk0p4
 endif
@@ -68,7 +101,7 @@ else
 KERNEL_DTB = hi3798mv200.dtb
 endif
 
-KERNEL_SITE = http://downloads.mutant-digital.net
+KERNEL_SITE = http://source.mynonpublic.com/gfutures
 KERNEL_DIR = linux-$(KERNEL_VERSION)
 
 endif
@@ -136,8 +169,8 @@ endif
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 
-KERNEL_VERSION = 5.9.0
-KERNEL_SOURCE_VERSION = 5.9
+KERNEL_VERSION = 5.15.0
+KERNEL_SOURCE_VERSION = 5.15
 MTD_BLACK = mmcblk1
 MTD_BOOTFS = mmcblk1p1
 
