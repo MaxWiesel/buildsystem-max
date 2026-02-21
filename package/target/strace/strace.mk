@@ -15,7 +15,7 @@ STRACE_CONF_OPTS = \
 define STRACE_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,strace-graph strace-log-merge)
 endef
-STRACE_TARGET_CLEANUP_HOOKS += STRACE_TARGET_CLEANUP
+STRACE_TARGET_FINALIZE_HOOKS += STRACE_TARGET_CLEANUP
 
 $(D)/strace: | bootstrap
 	$(call autotools-package)

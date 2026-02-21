@@ -22,10 +22,9 @@ HARFBUZZ_CONF_OPTS = \
 	--without-icu
 
 define HARFBUZZ_TARGET_CLEANUP
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/usr/bin/,nhlt-dmic-info hb-*)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/usr/lib/,libharfbuzz-subset*)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 endef
-HARFBUZZ_TARGET_CLEANUP_HOOKS += HARFBUZZ_TARGET_CLEANUP
+HARFBUZZ_TARGET_FINALIZE_HOOKS += HARFBUZZ_TARGET_CLEANUP
 
 $(D)/harfbuzz: | bootstrap
 	$(call autotools-package)

@@ -21,7 +21,7 @@ LIBPNG_CONF_OPTS = \
 define LIBPNG_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,libpng-config)
 endef
-LIBPNG_TARGET_CLEANUP_HOOKS += LIBPNG_TARGET_CLEANUP
+LIBPNG_TARGET_FINALIZE_HOOKS += LIBPNG_TARGET_CLEANUP
 
 $(D)/libpng: | bootstrap
 	$(call autotools-package)

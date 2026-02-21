@@ -21,7 +21,7 @@ LIBGCRYPT_CONF_OPTS = \
 define LIBGCRYPT_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_BIN_DIR)/,dumpsexp hmac256 mpicalc)
 endef
-LIBGCRYPT_TARGET_CLEANUP_HOOKS += LIBGCRYPT_TARGET_CLEANUP
+LIBGCRYPT_TARGET_FINALIZE_HOOKS += LIBGCRYPT_TARGET_CLEANUP
 
 $(D)/libgcrypt: | bootstrap
 	$(call autotools-package)

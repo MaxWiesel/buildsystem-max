@@ -17,7 +17,7 @@ SQLITE_CONF_OPTS = \
 define SQLITE_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,sqlite3)
 endef
-SQLITE_TARGET_CLEANUP_HOOKS += SQLITE_TARGET_CLEANUP
+SQLITE_TARGET_FINALIZE_HOOKS += SQLITE_TARGET_CLEANUP
 
 $(D)/sqlite: | bootstrap
 	$(call autotools-package)

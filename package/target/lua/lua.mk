@@ -30,7 +30,7 @@ LUA_MAKE_INSTALL_OPTS = \
 define LUA_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,luac)
 endef
-LUA_TARGET_CLEANUP_HOOKS += LUA_TARGET_CLEANUP
+LUA_TARGET_FINALIZE_HOOKS += LUA_TARGET_CLEANUP
 
 $(D)/lua: | bootstrap
 	$(call generic-package)

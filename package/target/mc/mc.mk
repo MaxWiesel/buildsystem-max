@@ -27,7 +27,7 @@ define MC_TARGET_CLEANUP
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
 endef
-MC_TARGET_CLEANUP_HOOKS += MC_TARGET_CLEANUP
+MC_TARGET_FINALIZE_HOOKS += MC_TARGET_CLEANUP
 
 $(D)/mc: | bootstrap
 	$(call autotools-package)

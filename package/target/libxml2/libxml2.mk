@@ -40,8 +40,9 @@ LIBXML2_POST_INSTALL_HOOKS += LIBXML2_INSTALL_FILES
 define LIBXML2_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,xmlcatalog xmllint)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,xml2Conf.sh)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 endef
-LIBXML2_TARGET_CLEANUP_HOOKS += LIBXML2_TARGET_CLEANUP
+LIBXML2_TARGET_FINALIZE_HOOKS += LIBXML2_TARGET_CLEANUP
 
 $(D)/libxml2: | bootstrap
 	$(call autotools-package)

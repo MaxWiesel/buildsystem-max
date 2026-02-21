@@ -29,7 +29,7 @@ GNUTLS_CONF_OPTS = \
 define GNUTLS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,psktool gnutls-cli-debug certtool srptool ocsptool gnutls-serv gnutls-cli)
 endef
-GNUTLS_TARGET_CLEANUP_HOOKS += GNUTLS_TARGET_CLEANUP
+GNUTLS_TARGET_FINALIZE_HOOKS += GNUTLS_TARGET_CLEANUP
 
 $(D)/gnutls: | bootstrap
 	$(call autotools-package)

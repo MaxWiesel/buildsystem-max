@@ -49,7 +49,7 @@ define NFS_UTILS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,mount.nfs4 umount.nfs umount.nfs4)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,mountstats nfsiostat)
 endef
-NFS_UTILS_TARGET_CLEANUP_HOOKS += NFS_UTILS_TARGET_CLEANUP
+NFS_UTILS_TARGET_FINALIZE_HOOKS += NFS_UTILS_TARGET_CLEANUP
 
 $(D)/nfs-utils: | bootstrap
 	$(call autotools-package)

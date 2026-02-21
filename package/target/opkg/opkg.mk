@@ -15,12 +15,12 @@ OPKG_CONF_OPTS = \
 	--disable-curl \
 	--disable-gpg
 
-define OPKG_INSTALL_FILES
+define OPKG_INSTALL_DIRECTORIES
 	mkdir -p $(TARGET_LIB_DIR)/opkg
 	mkdir -p $(TARGET_DIR)/etc/opkg
 	ln -sf opkg $(TARGET_BIN_DIR)/opkg-cl
 endef
-OPKG_POST_INSTALL_HOOKS += OPKG_INSTALL_FILES
+OPKG_TARGET_FINALIZE_HOOKS += OPKG_INSTALL_DIRECTORIES
 
 $(D)/opkg: | bootstrap
 	$(call autotools-package)

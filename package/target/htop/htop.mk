@@ -31,7 +31,7 @@ HTOP_CONF_OPTS = \
 define HTOP_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 endef
-HTOP_TARGET_CLEANUP_HOOKS += HTOP_TARGET_CLEANUP
+HTOP_TARGET_FINALIZE_HOOKS += HTOP_TARGET_CLEANUP
 
 $(D)/htop: | bootstrap
 	$(call autotools-package)

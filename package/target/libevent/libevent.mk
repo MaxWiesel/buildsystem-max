@@ -14,7 +14,7 @@ LIBEVENT_DEPENDENCIES = openssl
 define LIBEVENT_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,event_rpcgen.py)
 endef
-LIBEVENT_TARGET_CLEANUP_HOOKS += LIBEVENT_TARGET_CLEANUP
+LIBEVENT_TARGET_FINALIZE_HOOKS += LIBEVENT_TARGET_CLEANUP
 
 $(D)/libevent: | bootstrap
 	$(call autotools-package)

@@ -21,10 +21,10 @@ READLINE_CONF_OPTS = \
 	--disable-bracketed-paste-default \
 	--disable-install-examples
 
-define READLINE_INSTALL_FILES
+define READLINE_INSTALL_INPUTRC
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/inputrc $(TARGET_DIR)/etc/inputrc
 endef
-READLINE_POST_INSTALL_HOOKS += READLINE_INSTALL_FILES
+READLINE_TARGET_FINALIZE_HOOKS += READLINE_INSTALL_INPUTRC
 
 $(D)/readline: | bootstrap
 	$(call autotools-package)

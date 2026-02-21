@@ -25,7 +25,7 @@ define BASH_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,bash)
 	rm -f $(addprefix $(TARGET_BASE_BIN_DIR)/,bashbug)
 endef
-BASH_TARGET_CLEANUP_HOOKS += BASH_TARGET_CLEANUP
+BASH_TARGET_FINALIZE_HOOKS += BASH_TARGET_CLEANUP
 
 $(D)/bash: | bootstrap
 	$(call autotools-package)

@@ -21,7 +21,7 @@ define USBUTILS_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pkgconfig)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/hwdata/,usb.ids.gz)
 endef
-USBUTILS_TARGET_CLEANUP_HOOKS += USBUTILS_TARGET_CLEANUP
+USBUTILS_TARGET_FINALIZE_HOOKS += USBUTILS_TARGET_CLEANUP
 
 $(D)/usbutils: | bootstrap
 	$(call autotools-package)

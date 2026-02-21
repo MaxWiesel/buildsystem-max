@@ -15,7 +15,7 @@ SDPARM_CONF_OPTS = \
 define SDPARM_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,sas_disk_blink scsi_ch_swp)
 endef
-SDPARM_TARGET_CLEANUP_HOOKS += SDPARM_TARGET_CLEANUP
+SDPARM_TARGET_FINALIZE_HOOKS += SDPARM_TARGET_CLEANUP
 
 $(D)/sdparm: | bootstrap
 	$(call autotools-package)

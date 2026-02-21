@@ -35,7 +35,7 @@ define GDB_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/gdb/,system-gdbinit)
 	find $(TARGET_SHARE_DIR)/gdb/syscalls -type f -not -name 'arm-linux.xml' -not -name 'gdb-syscalls.dtd' -print0 | xargs -0 rm --
 endef
-GDB_TARGET_CLEANUP_HOOKS += GDB_TARGET_CLEANUP
+GDB_TARGET_FINALIZE_HOOKS += GDB_TARGET_CLEANUP
 
 $(D)/gdb: | bootstrap
 	$(call autotools-package)

@@ -122,7 +122,7 @@ define UTIL_LINUX_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,bits choom col colcrt colrm column enosys exch fadvise fincore flock getopt isosize linux32 linux64 look lscpu lsipc lsclocks lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid setpgid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,ldattach readprofile rtcwake uuidd)
 endef
-UTIL_LINUX_TARGET_CLEANUP_HOOKS += UTIL_LINUX_TARGET_CLEANUP
+UTIL_LINUX_TARGET_FINALIZE_HOOKS += UTIL_LINUX_TARGET_CLEANUP
 
 $(D)/util-linux: | bootstrap
 	$(call autotools-package)

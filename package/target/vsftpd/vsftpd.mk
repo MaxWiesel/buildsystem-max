@@ -28,18 +28,18 @@ define VSFTPD_PATCH_BUILDDEFS_H
 endef
 VSFTPD_POST_PATCH_HOOKS += VSFTPD_PATCH_BUILDDEFS_H
 
-define VSFTPD_INSTALL_INIT_SYSV
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vsftpd.init $(TARGET_DIR)/etc/init.d/vsftpd
-#	$(UPDATE-RC.D) vsftpd start 80 2 3 4 5 . stop 80 0 1 6 .
-	$(UPDATE-RC.D) vsftpd start 20 2 3 4 5 . stop 20 0 1 6 .
-endef
-
 define VSFTPD_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/vsftpd $(TARGET_DIR)/etc/default/vsftpd
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/vsftpd.conf $(TARGET_DIR)/etc/vsftpd.conf
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_vsftpd $(TARGET_DIR)/etc/default/volatiles/99_vsftpd
 endef
-VSFTPD_POST_INSTALL_HOOKS += VSFTPD_INSTALL_FILES
+VSFTPD_TARGET_FINALIZE_HOOKS += VSFTPD_INSTALL_FILES
+
+define VSFTPD_INSTALL_INIT_SYSV
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vsftpd.init $(TARGET_DIR)/etc/init.d/vsftpd
+#	$(UPDATE-RC.D) vsftpd start 80 2 3 4 5 . stop 80 0 1 6 .
+	$(UPDATE-RC.D) vsftpd start 20 2 3 4 5 . stop 20 0 1 6 .
+endef
 
 $(D)/vsftpd: | bootstrap
 	$(call generic-package)

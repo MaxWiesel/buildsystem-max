@@ -20,7 +20,7 @@ JFSUTILS_POST_PATCH_HOOKS += JFSUTILS_POST_PATCH
 define JFSUTILS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,jfs_debugfs jfs_fscklog jfs_logdump)
 endef
-JFSUTILS_TARGET_CLEANUP_HOOKS += JFSUTILS_TARGET_CLEANUP
+JFSUTILS_TARGET_FINALIZE_HOOKS += JFSUTILS_TARGET_CLEANUP
 
 $(D)/jfsutils: | bootstrap
 	$(call autotools-package)

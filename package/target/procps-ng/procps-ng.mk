@@ -35,13 +35,17 @@ PROCPS_NG_CONF_OPTS += \
 PROCPS_NG_BIN = \
 	free pgrep pkill pmap pwdx slabtop skill snice tload top uptime vmstat w
 
-define PROCPS_NG_INSTALL_FILES
+define PROCPS_NG_INSTALL_BINARIES
 	for i in $(PROCPS_NG_BIN); do \
 		mv $(TARGET_DIR)/bin/$$i $(TARGET_BIN_DIR)/$$i; \
 	done
+endef
+PROCPS_NG_TARGET_FINALIZE_HOOKS += PROCPS_NG_INSTALL_BINARIES
+
+define PROCPS_NG_INSTALL_SYSCTL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/sysctl.conf $(TARGET_DIR)/etc/sysctl.conf
 endef
-PROCPS_NG_POST_INSTALL_HOOKS += PROCPS_NG_INSTALL_FILES
+PROCPS_NG_TARGET_FINALIZE_HOOKS += PROCPS_NG_INSTALL_SYSCTL_FILES
 
 $(D)/procps-ng: | bootstrap
 	$(call autotools-package)

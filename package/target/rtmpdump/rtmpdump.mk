@@ -24,7 +24,7 @@ RTMPDUMP_MAKE_OPTS = \
 define RTMPDUMP_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,rtmpgw rtmpsrv rtmpsuck)
 endef
-RTMPDUMP_TARGET_CLEANUP_HOOKS += RTMPDUMP_TARGET_CLEANUP
+RTMPDUMP_TARGET_FINALIZE_HOOKS += RTMPDUMP_TARGET_CLEANUP
 
 $(D)/rtmpdump: | bootstrap
 	$(call generic-package)

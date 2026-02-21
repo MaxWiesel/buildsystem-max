@@ -23,7 +23,7 @@ FONTCONFIG_CONF_OPTS = \
 define FONTCONFIG_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,fontconfig gettext xml)
 endef
-FONTCONFIG_TARGET_CLEANUP_HOOKS += FONTCONFIG_TARGET_CLEANUP
+FONTCONFIG_TARGET_FINALIZE_HOOKS += FONTCONFIG_TARGET_CLEANUP
 
 $(D)/fontconfig: | bootstrap
 	$(call autotools-package)

@@ -31,7 +31,7 @@ define LIBAACS_INSTALL_FILES
 	$(INSTALL) -d $(TARGET_DIR)/.cache/aacs/vuk
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/KEYDB.cfg $(TARGET_DIR)/.config/aacs/KEYDB.cfg
 endef
-LIBAACS_POST_INSTALL_HOOKS += LIBAACS_INSTALL_FILES
+LIBAACS_TARGET_FINALIZE_HOOKS += LIBAACS_INSTALL_FILES
 
 $(D)/libaacs: | bootstrap
 	$(call autotools-package)

@@ -59,7 +59,7 @@ AUTOFS_POST_INSTALL_HOOKS += AUTOFS_INSTALL_FILES
 define AUTOFS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
 endef
-AUTOFS_TARGET_CLEANUP_HOOKS += AUTOFS_TARGET_CLEANUP
+AUTOFS_TARGET_FINALIZE_HOOKS += AUTOFS_TARGET_CLEANUP
 
 $(D)/autofs: | bootstrap
 	$(call autotools-package)

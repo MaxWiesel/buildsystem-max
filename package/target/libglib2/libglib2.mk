@@ -30,7 +30,7 @@ define LIBGLIB2_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
 endef
-LIBGLIB2_TARGET_CLEANUP_HOOKS += LIBGLIB2_TARGET_CLEANUP
+LIBGLIB2_TARGET_FINALIZE_HOOKS += LIBGLIB2_TARGET_CLEANUP
 
 $(D)/libglib2: | bootstrap
 	$(call meson-package)

@@ -18,7 +18,7 @@ FRIBIDI_CONF_OPTS = \
 define FRIBIDI_TARGET_CLEANUP
 	cd $(TARGET_DIR) && rm usr/bin/fribidi
 endef
-FRIBIDI_TARGET_CLEANUP_HOOKS += FRIBIDI_TARGET_CLEANUP
+FRIBIDI_TARGET_FINALIZE_HOOKS += FRIBIDI_TARGET_CLEANUP
 
 $(D)/fribidi: | bootstrap
 	$(call autotools-package)

@@ -27,10 +27,10 @@ STREAMRIPPER_MAKE_OPTS += \
 	CFLAGS="$(TARGET_CFLAGS) -Wno-error=implicit-function-declaration -std=gnu17"
 endif
 
-define STREAMRIPPER_INSTALL_FILES
+define STREAMRIPPER_INSTALL_SCRIPT
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/streamripper.sh $(TARGET_DIR)/bin/
 endef
-STREAMRIPPER_POST_INSTALL_HOOKS += STREAMRIPPER_INSTALL_FILES
+STREAMRIPPER_TARGET_FINALIZE_HOOKS += STREAMRIPPER_INSTALL_SCRIPT
 
 $(D)/streamripper: | bootstrap
 	$(call autotools-package)

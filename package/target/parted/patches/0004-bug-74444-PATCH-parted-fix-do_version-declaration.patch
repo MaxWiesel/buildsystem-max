@@ -30,7 +30,7 @@ diff --git a/parted/parted.c b/parted/parted.c
 index 3abb52f..fc2aeba 100644
 --- a/parted/parted.c
 +++ b/parted/parted.c
-@@ -2172,7 +2172,7 @@ do_unit (PedDevice** dev, PedDisk** diskp)
+@@ -1782,7 +1782,7 @@ do_unit (PedDevice** dev, PedDisk** diskp)
  }
  
  static int

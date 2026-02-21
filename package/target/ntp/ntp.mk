@@ -23,7 +23,7 @@ define NTP_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,calc_tickadj ntp-keygen ntp-wait ntpd ntptime tickadj update-leap)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,ntp)
 endef
-NTP_TARGET_CLEANUP_HOOKS += NTP_TARGET_CLEANUP
+NTP_TARGET_FINALIZE_HOOKS += NTP_TARGET_CLEANUP
 
 $(D)/ntp: | bootstrap
 	$(call autotools-package)

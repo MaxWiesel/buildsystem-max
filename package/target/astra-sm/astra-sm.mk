@@ -20,7 +20,7 @@ ASTRA_SM_CONF_OPTS = \
 define ASTRA_SM_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
 endef
-ASTRA_SM_TARGET_CLEANUP_HOOKS += ASTRA_SM_TARGET_CLEANUP
+ASTRA_SM_TARGET_FINALIZE_HOOKS += ASTRA_SM_TARGET_CLEANUP
 
 $(D)/astra-sm: | bootstrap
 	$(call autotools-package)

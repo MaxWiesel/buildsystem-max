@@ -20,17 +20,17 @@ NTFS_3G_CONF_OPTS = \
 	--disable-library \
 	--with-fuse=external
 
-define NTFS_3G_INSTALL_FILES
-	ln -sf mount.ntfs-3g $(TARGET_BASE_SBIN_DIR)/mount.ntfs
-endef
-NTFS_3G_POST_INSTALL_HOOKS += NTFS_3G_INSTALL_FILES
-
 define NTFS_3G_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,lowntfs-3g ntfs-3g.probe)
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,mount.lowntfs-3g)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,ntfs-3g)
 endef
-NTFS_3G_TARGET_CLEANUP_HOOKS += NTFS_3G_TARGET_CLEANUP
+NTFS_3G_TARGET_FINALIZE_HOOKS += NTFS_3G_TARGET_CLEANUP
+
+define NTFS_3G_SYMLINK_MOUNT_NTFS
+	ln -sf mount.ntfs-3g $(TARGET_BASE_SBIN_DIR)/mount.ntfs
+endef
+NTFS_3G_TARGET_FINALIZE_HOOKS += NTFS_3G_SYMLINK_MOUNT_NTFS
 
 $(D)/ntfs-3g: | bootstrap
 	$(call autotools-package)

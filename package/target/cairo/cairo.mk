@@ -34,7 +34,7 @@ define CAIRO_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/,cairo-fdr* cairo-sphinx*)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/.debug/,cairo-fdr* cairo-sphinx*)
 endef
-CAIRO_TARGET_CLEANUP_HOOKS += CAIRO_TARGET_CLEANUP
+CAIRO_TARGET_FINALIZE_HOOKS += CAIRO_TARGET_CLEANUP
 
 $(D)/cairo: | bootstrap
 	$(call autotools-package)

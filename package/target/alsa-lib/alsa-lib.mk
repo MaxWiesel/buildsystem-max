@@ -32,7 +32,7 @@ define ALSA_LIB_TARGET_CLEANUP
 	find $(TARGET_SHARE_DIR)/alsa/cards/ -not -name 'aliases.conf' -name '*.conf' -print0 | xargs -0 rm -f
 	find $(TARGET_SHARE_DIR)/alsa/pcm/ -not -name 'default.conf' -not -name 'dmix.conf' -name '*.conf' -print0 | xargs -0 rm -f
 endef
-ALSA_LIB_TARGET_CLEANUP_HOOKS += ALSA_LIB_TARGET_CLEANUP
+ALSA_LIB_TARGET_FINALIZE_HOOKS += ALSA_LIB_TARGET_CLEANUP
 
 $(D)/alsa-lib: | bootstrap
 	$(call autotools-package)

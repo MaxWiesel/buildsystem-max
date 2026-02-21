@@ -25,7 +25,7 @@ define VALGRIND_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_LIBEXEC_DIR)/,valgrind)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,cg_* callgrind_* ms_print valgrind-* vgdb)
 endef
-VALGRIND_TARGET_CLEANUP_HOOKS += VALGRIND_TARGET_CLEANUP
+VALGRIND_TARGET_FINALIZE_HOOKS += VALGRIND_TARGET_CLEANUP
 
 $(D)/valgrind: | bootstrap
 	$(call autotools-package)

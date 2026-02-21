@@ -29,16 +29,16 @@ define USHARE_LINK_CONFIG_H
 endef
 USHARE_POST_PATCH_HOOKS += USHARE_LINK_CONFIG_H
 
+define USHARE_INSTALL_CONF
+	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/ushare.conf $(TARGET_DIR)/etc/ushare.conf
+	$(SED) 's|%(BOXTYPE)|$(BOXTYPE)|; s|%(BOXMODEL)|$(BOXMODEL)|' $(TARGET_DIR)/etc/ushare.conf
+endef
+USHARE_TARGET_FINALIZE_HOOKS += USHARE_INSTALL_CONF
+
 define USHARE_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/ushare.init $(TARGET_DIR)/etc/init.d/ushare
 	$(UPDATE-RC.D) ushare defaults 75 25
 endef
-
-define USHARE_INSTALL_FILES
-	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/ushare.conf $(TARGET_DIR)/etc/ushare.conf
-	$(SED) 's|%(BOXTYPE)|$(BOXTYPE)|; s|%(BOXMODEL)|$(BOXMODEL)|' $(TARGET_DIR)/etc/ushare.conf
-endef
-USHARE_POST_INSTALL_HOOKS += USHARE_INSTALL_FILES
 
 $(D)/ushare: | bootstrap
 	$(call generic-package)

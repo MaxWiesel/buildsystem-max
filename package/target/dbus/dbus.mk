@@ -35,8 +35,9 @@ endif
 define DBUS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,dbus-cleanup-sockets dbus-daemon dbus-launch dbus-monitor)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,xml)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 endef
-DBUS_TARGET_CLEANUP_HOOKS += DBUS_TARGET_CLEANUP
+DBUS_TARGET_FINALIZE_HOOKS += DBUS_TARGET_CLEANUP
 
 $(D)/dbus: | bootstrap
 	$(call autotools-package)

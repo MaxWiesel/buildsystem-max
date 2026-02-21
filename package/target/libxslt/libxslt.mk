@@ -26,9 +26,9 @@ LIBXSLT_CONF_OPTS = \
 	-DLIBXSLT_WITH_XSLT_DEBUG=OFF
 
 define LIBXSLT_TARGET_CLEANUP
-	rm -rf $(addprefix $(TARGET_LIB_DIR)/,xsltConf.sh)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,xsltConf.sh cmake)
 endef
-LIBXSLT_TARGET_CLEANUP_HOOKS += LIBXSLT_TARGET_CLEANUP
+LIBXSLT_TARGET_FINALIZE_HOOKS += LIBXSLT_TARGET_CLEANUP
 
 $(D)/libxslt: | bootstrap
 	$(call cmake-package)

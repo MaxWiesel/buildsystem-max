@@ -138,7 +138,7 @@ SAMBA_POST_INSTALL_HOOKS += SAMBA_INSTALL_FILES
 define SAMBA_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_BIN_DIR)/,testparm findsmb smbtar smbclient smbpasswd)
 endef
-SAMBA_TARGET_CLEANUP_HOOKS += SAMBA_TARGET_CLEANUP
+SAMBA_TARGET_FINALIZE_HOOKS += SAMBA_TARGET_CLEANUP
 
 $(D)/samba: | bootstrap
 	$(call autotools-package)

@@ -51,7 +51,7 @@ define E2FSPROGS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
 endef
-E2FSPROGS_TARGET_CLEANUP_HOOKS += E2FSPROGS_TARGET_CLEANUP
+E2FSPROGS_TARGET_FINALIZE_HOOKS += E2FSPROGS_TARGET_CLEANUP
 
 $(D)/e2fsprogs: | bootstrap
 	$(call autotools-package)
@@ -64,4 +64,3 @@ HOST_E2FSPROGS_CONF_OPTS = \
 
 $(HD)/host-e2fsprogs: | bootstrap
 	$(call host-autotools-package)
-
