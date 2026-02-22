@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBXML2_VERSION = 2.12.10
+LIBXML2_VERSION = 2.15.1
 LIBXML2_DIR = libxml2-$(LIBXML2_VERSION)
 LIBXML2_SOURCE = libxml2-$(LIBXML2_VERSION).tar.xz
 LIBXML2_SITE = https://download.gnome.org/sources/libxml2/$(basename $(LIBXML2_VERSION))
@@ -16,7 +16,7 @@ LIBXML2_CONFIG_SCRIPTS = xml2-config
 LIBXML2_AUTORECONF = YES
 
 LIBXML2_CONF_OPTS = \
-	--docdir=$(REMOVE_docdir) \
+	--datarootdir=$(REMOVE_datarootdir) \
 	--enable-shared \
 	--disable-static \
 	--without-iconv \
@@ -25,9 +25,6 @@ LIBXML2_CONF_OPTS = \
 	--without-c14n \
 	--without-legacy \
 	--without-catalog \
-	--without-docbook \
-	--without-mem-debug \
-	--without-lzma \
 	--with-zlib=$(TARGET_DIR)/usr
 
 define LIBXML2_INSTALL_FILES
